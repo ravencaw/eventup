@@ -2,3 +2,21 @@
 target/classes/META-INF/maven/es.eventup/eventup/pom.properties
 
 .project
+
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+
+target/test-classes/es/eventup/app/EventupApplicationTests.class
+
+target/surefire-reports/TEST-es.eventup.app.EventupApplicationTests.xml
+
+target/surefire-reports/es.eventup.app.EventupApplicationTests.txt
+
+target/classes/es/eventup/app/controllers/HomeController.class
+
+target/classes/es/eventup/app/EventupApplication.class
+
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
