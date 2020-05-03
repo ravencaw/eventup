@@ -3,14 +3,17 @@ package es.eventup.app.models.service;
 import java.util.List;
 import java.util.Optional;
 
-import es.eventup.app.models.entity.Usuario;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import es.eventup.app.models.entity.User;
 
 public interface UsuarioService{
-	public List<Usuario> findAll();
+	public List<User> findAll();
 	
-	public void save(Usuario entity);
+	public void save(User entity);
 	
-	public Optional<Usuario> findOne(Long id);
+	public Optional<User> findOne(Long id);
 	
 	public void delete(Long id);
+	
 }

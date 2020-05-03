@@ -9,7 +9,10 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+<link rel="stylesheet" th:href="@{/css/footer/styles.min.css}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 	crossorigin="anonymous"></script>
 <script
@@ -24,7 +27,7 @@
 <body>
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">Prototipo</a>
+			<a class="navbar-brand" th:href="@{/}">Eventup</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -34,21 +37,21 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" th:href="@{/}">Home
-							<span class="sr-only">(current)</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/cliente/listar}">Clientes
-					</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/usuario/listar}">Usuarios</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/evento/listar}">Eventos</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/mail/enviar}">Email</a></li>
+					<!-- 					<li class="nav-item active"><a class="nav-link" >Home -->
+					<!-- 							<span class="sr-only">(current)</span> -->
+					<!-- 					</a></li> -->
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Plugins </a>
+						aria-expanded="false"> Inicio sesión </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Maps</a> <a
-								class="dropdown-item" href="#">Calendario</a>
+							<a class="dropdown-item btn btn-light" th:href="@{/login}">Login</a>
+							<a class="dropdown-item btn btn-light" th:href="@{/login}">Perfil</a>
+							<!-- 							<a class="dropdown-item" href="@{/logout}">Logout</a> -->
+							<form th:action="@{/logout}" method="post">
+								<input class="dropdown-item btn btn-light" type="submit"
+									value="Cerrar Sesion" />
+							</form>
 						</div></li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
@@ -60,10 +63,25 @@
 		</nav>
 	</header>
 	<div class="container"></div>
+	<div class="footer-basic" th:fragment="footer">
+	<hr>
+		<footer>
+			<div class="social">
+				<a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+					class="icon ion-social-snapchat"></i></a><a href="#"><i
+					class="icon ion-social-twitter"></i></a><a href="#"><i
+					class="icon ion-social-facebook"></i></a>
+			</div>
+			<ul class="list-inline">
+				<li class="list-inline-item"><a href="#">Home</a></li>
+				<li class="list-inline-item"><a href="#">Services</a></li>
+				<li class="list-inline-item"><a href="#">About</a></li>
+				<li class="list-inline-item"><a href="#">Terms</a></li>
+				<li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+			</ul>
+			<p class="copyright">Eventup © 2020</p>
+		</footer>
+	</div>
 
-	<footer th:fragment="footer" class="container">
-		<hr>
-		<p>&copy; TusMuelasCompany 2020</p>
-	</footer>
 </body>
 </html>

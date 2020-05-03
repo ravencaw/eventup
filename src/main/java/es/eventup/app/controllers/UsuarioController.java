@@ -2,6 +2,7 @@ package es.eventup.app.controllers;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import es.eventup.app.models.service.AuthorityService;
 import es.eventup.app.models.service.UsuarioService;
-import es.eventup.app.models.entity.Usuario;
+import es.eventup.app.models.entity.Authority;
+import es.eventup.app.models.entity.User;
 
 @Controller
 @SessionAttributes("usuario")
@@ -24,6 +27,8 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService service;
+	@Autowired
+	private AuthorityService authorityService;
 	
 	@RequestMapping(value="/usuario/listar", method=RequestMethod.GET)
 	public String listar(Model model) {
@@ -35,17 +40,17 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/usuario/nuevo", method=RequestMethod.GET)
 	public String crear(Map<String, Object> model) {
-		Usuario usuario = new Usuario();
+		User usuario = new User();
 		model.put("usuario", usuario);
-		model.put("tituloWeb", "Usuario: Crear");
-		model.put("titulo", "Formulario de Usuario");
+		model.put("tituloWeb", "Registrate");
+		model.put("titulo", "Formulario de User");
 		return "usuario/nuevo";
 	}
 	
 	@RequestMapping(value="/usuario/form/{id}")
 	public String editar(@PathVariable(value="id") Long id, Map<String, Object> model) {
 		
-		Optional<Usuario> usu = null;
+		Optional<User> usu = null;
 		
 		if(id>0) {
 			usu = service.findOne(id);
@@ -54,20 +59,29 @@ public class UsuarioController {
 		}
 		
 		model.put("usuario", usu);
-		model.put("tituloWeb", "Usuario: Editar");
-		model.put("titulo", "Edicion de Usuario");
+		model.put("tituloWeb", "User: Editar");
+		model.put("titulo", "Edicion de User");
 		
 		return "usuario/nuevo";
 	}
 	
 	@RequestMapping(value="/usuario/nuevo", method=RequestMethod.POST)
-	public String guardar(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus stat) {
+	public String guardar(@Valid User usuario, BindingResult result, Model model, SessionStatus stat) {
+		
+		Set<Authority> authoritySet=null;
 		
 		if(result.hasErrors()) {
 			return "usuario/nuevo";
 		}
 		
+		authoritySet.add(authorityService.findOne(Long.parseLong("2")).get());
+		
+		usuario.setAuthority(authoritySet);
+		usuario.setEnabled(true);
+		
 		service.save(usuario);
+		
+		System.out.println(usuario.getId());
 		stat.setComplete();
 		return "redirect:/usuario/listar";
 	}

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head>
+<th:block th:include="layout/layout :: head">
+        </th:block>
+</head>
 <body>
 	<header  th:replace="layout/layout :: header"></header>
 	<div class="container">
@@ -8,19 +11,19 @@
 
 		<table class="table table-striped">
 			<tr>
-				<th>Id</th>
 				<th>Username</th>
-				<th>Password</th>
 				<th>Correo</th>
-				<th>Tipo</th>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Fecha de nacimiento</th>
 				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/usuario/nuevo}">Añadir</a></th>
 			</tr>
 			<tr th:each="usuario: ${usuarios}">
-				<td th:text="${usuario.id}"></td>
 				<td th:text="${usuario.username}"></td>
-				<td th:text="${usuario.password}"></td>
 				<td th:text="${usuario.email}"></td>
-				<td th:text="${usuario.tipo}"></td>
+				<td th:text="${usuario.nombre}"></td>
+				<td th:text="${usuario.apellidos}"></td>
+				<td th:text="${usuario.fechaNac}"></td>
 				<td>
 					<a class="btn btn-success btn-xs col-md-12" th:href="@{/usuario/form/}+${usuario.id}">Editar</a>
 				</td>
