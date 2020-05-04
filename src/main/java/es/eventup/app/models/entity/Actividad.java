@@ -1,19 +1,20 @@
 package es.eventup.app.models.entity;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.Table;
+import javax.persistence.Table;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 
 import com.sun.istack.NotNull;
 
 @Entity
-//@Table(name="actividades") FALTA HACER LA BBDD
+@Table(name ="actividades")
 public class Actividad implements Serializable{
 	
 	private static final long serialVersionUID =1L;
@@ -38,10 +39,10 @@ public class Actividad implements Serializable{
 	private String lugar;
 	
 	public Actividad() {
-		
+		super();
 	}
 	
-	public Actividad(Long id, String nombre, String descripcion, String ponentes, int capacidad, String lugar) {
+	public Actividad(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, @NotEmpty String ponentes, @NotNull int capacidad, @NotEmpty String lugar) {
 		super();
 		this.id=id;
 		this.nombre=nombre;
