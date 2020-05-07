@@ -1,6 +1,8 @@
 package es.eventup.app.models.entity;
 
 import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -38,11 +40,14 @@ public class Actividad implements Serializable{
 	@NotEmpty
 	private String lugar;
 	
+	@Column(name="id_evento")
+	private Long idEvento;
+	
 	public Actividad() {
 		super();
 	}
 	
-	public Actividad(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, @NotEmpty String ponentes, @NotNull int capacidad, @NotEmpty String lugar) {
+	public Actividad(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, @NotEmpty String ponentes, @NotNull int capacidad, @NotEmpty String lugar, Long idEvento) {
 		super();
 		this.id=id;
 		this.nombre=nombre;
@@ -50,6 +55,7 @@ public class Actividad implements Serializable{
 		this.ponentes=ponentes;
 		this.capacidad=capacidad;
 		this.lugar=lugar;
+		this.idEvento = idEvento;
 	
 	}
 	
@@ -99,6 +105,13 @@ public class Actividad implements Serializable{
 	
 	public void setLugar() {
 		this.lugar=lugar;
+	}
+	
+	public Long getIdEvento() {
+		return idEvento;
+	}
+	public void setIdEvento(Long idEvento) {
+		this.idEvento=idEvento;
 	}
 
 }
