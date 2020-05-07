@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header  th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Empresa</th>
+				<th>Capacidad</th>
+				<th>Coordenada Inicio</th>
+				<th>Coordenada Final</th>
+				<th>Precio</th>
+				<th>Tipo </th>
+				<th>Hora salida</th>
+				<th>Hora llegada</th>
+				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/transporte/nuevo}">Añadir</a></th>
+			</tr>
+			<tr th:each="transporte: ${transportes}">
+				<td th:text="${transporte.id}"></td>
+				<td th:text="${transporte.empresa}"></td>
+				<td th:text="${transporte.capacidad}"></td>
+				<td th:text="${transporte.coordenadaInicio}"></td>
+				<td th:text="${transporte.coordenadaFinal}"></td>
+				<td th:text="${transporte.precio}"></td>
+				<td th:text="${transporte.tipo}"></td>
+				<td th:text="${transporte.horaSalida}"></td>
+				<td th:text="${transporte.horaLlegada}"></td>
+				<td>
+					<a class="btn btn-success btn-xs col-md-12" th:href="@{/transporte/form/}+${transporte.id}">Editar</a>
+				</td>
+				<td>
+					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/transporte/delete/}+${transporte.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
