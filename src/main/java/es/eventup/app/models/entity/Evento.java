@@ -29,7 +29,7 @@ public class Evento implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	Integer id;
+	Long id;
 	
 	@NotEmpty
 	@Column(name="nombre")
@@ -90,7 +90,7 @@ public class Evento implements Serializable{
 	
 	
 
-	public Evento(Integer id, @NotEmpty String nombre, @NotEmpty String descripcion, String foto, String organizador,
+	public Evento(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, String foto, String organizador,
 			String ciudad,String direccion,String latitud,String longitud,
 			@NotNull Date fecha, @NotNull Time hora, Double precio, @NotEmpty Integer cantidadEntradas) {
 		super();
@@ -111,11 +111,11 @@ public class Evento implements Serializable{
 
 
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
