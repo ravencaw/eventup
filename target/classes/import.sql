@@ -7,7 +7,7 @@ INSERT INTO actividades(id, nombre, descripcion, ponentes, capacidad, lugar,id_e
 
 /*TABLA TRANSPORTE*/
 
-INSERT INTO transporte(empresa, capacidad,coor_inicio, coor_final, precio, tipo, hora_salida, hora_llegada) VALUES('Renfe', '200', '', '', '35', '12:00', '20:00');
+INSERT INTO transporte(id,empresa, capacidad,coor_inicio, coor_final, precio, tipo, hora_salida, hora_llegada) VALUES('1','Renfe', '200', '85-15', '56-89', '35', '12:00', '20:00');
 
 
 /*TABLA VALORACION*/

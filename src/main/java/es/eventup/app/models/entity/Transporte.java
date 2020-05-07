@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name="transporte")
@@ -55,12 +55,12 @@ public class Transporte implements Serializable{
 	
 	@NotNull
 	@Column(name="hora_salida")
-	@Temporal(TemporalType.TIME)
+	//@Temporal(TemporalType.TIME)
 	private Date horaSalida;
 	
 	@NotNull
 	@Column(name="hora_llegada")
-	@Temporal(TemporalType.TIME)
+	//@Temporal(TemporalType.TIME)
 	private Date horaLlegada;
 	
 	
