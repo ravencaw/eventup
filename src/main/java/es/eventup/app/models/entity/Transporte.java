@@ -37,12 +37,10 @@ public class Transporte implements Serializable{
 	private int capacidad;
 	
 	
-	@NotEmpty
 	@Column(name="coor_inicio")
 	private String coordenadaInicio;
 	
 	
-	@NotEmpty
 	@Column(name="coor_final")
 	private String coordenadaFinal;
 	
@@ -56,11 +54,13 @@ public class Transporte implements Serializable{
 	@NotNull
 	@Column(name="hora_salida")
 	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern="HH:mm")
 	private Date horaSalida;
 	
 	@NotNull
 	@Column(name="hora_llegada")
 	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern="HH:mm")
 	private Date horaLlegada;
 	
 	

@@ -13,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.apache.tomcat.jni.Time;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,7 +38,6 @@ public class Evento implements Serializable{
 	@Column(name="descripcion")
 	String descripcion;
 	
-	@NotEmpty
 	@Column(name="foto")
 	String foto;
 	
@@ -56,11 +54,9 @@ public class Evento implements Serializable{
 	@Column(name="direccion")
 	String direccion;
 	
-	@NotEmpty
 	@Column(name="latitud")
 	String latitud;
 	
-	@NotEmpty
 	@Column(name="longitud")
 	String longitud;
 	
@@ -73,14 +69,13 @@ public class Evento implements Serializable{
 	@NotNull
 	@Column(name="hora")
 	@Temporal(TemporalType.TIME)
-	//REVISAR EL FORMATO SI HA QUE ESPECIFICAR CON @DateTimeFormat 
-	Time hora;
+	@DateTimeFormat(pattern="HH:mm:ss")
+	Date hora;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="precio")
 	Double precio;
 	
-	@NotEmpty
 	@Column(name="cantidad_entradas")
 	Integer cantidadEntradas;
 
@@ -92,7 +87,7 @@ public class Evento implements Serializable{
 
 	public Evento(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, String foto, String organizador,
 			String ciudad,String direccion,String latitud,String longitud,
-			@NotNull Date fecha, @NotNull Time hora, Double precio, @NotEmpty Integer cantidadEntradas) {
+			@NotNull Date fecha, @NotNull Date hora, @NotNull Double precio, Integer cantidadEntradas) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -223,13 +218,13 @@ public class Evento implements Serializable{
 	}
 
 
-	public Time getHora() {
+	public Date getHora() {
 		return hora;
 	}
 
 
 
-	public void setHora(Time hora) {
+	public void setHora(Date hora) {
 		this.hora = hora;
 	}
 
