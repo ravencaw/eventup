@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head">
+<script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
+</head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+
+		<form th:action="@{/transporte/nuevo}" th:object="${transporte}"
+			method="post">
+			<div class="form-group">
+				<div class="form-group">
+					<label for="empresa">Empresa</label> <input type="text"
+						class="form-control" id="empresa"
+						placeholder="Introduzca la empresa:" th:field="*{empresa}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></small>
+				</div>
+				<div class="form-group">
+					<label for="capacidad">Capacidad</label> <input type="number"
+						class="form-control" id="capacidad"
+						placeholder="Introduzca la capacidad:" th:field="*{capacidad}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('capacidad')}" th:errors="*{capacidad}"></small>
+				</div>
+				<div class="form-group">
+					<label for="coordenadaInicio">Coordenada de Inicio</label> <input
+						type="text" class="form-control" id="coordenadaInicio"
+						placeholder="Introduzca el inicio: "
+						th:field="*{coordenadaInicio}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('coordenadaInicio')}"
+						th:errors="*{coordenadaInicio}"></small>
+				</div>
+				<div class="form-group">
+					<label for="coordenadaFinal">Coordenada de Fin</label> <input
+						type="number" class="form-control" id="coordenadaFinal"
+						placeholder="Seleccione el final" th:field="*{coordenadaFinal}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('coordenadaFinal')}"
+						th:errors="*{coordenadaFinal}"></small>
+				</div>
+
+				<div class="form-group">
+					<label for="precio">Precio</label> <input type="number"
+						class="form-control" id="precio"
+						placeholder="Introduzca el precio:" th:field="*{precio}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
+				</div>
+
+				<div class="form-group">
+					<label for="tipo">Tipo</label> <input type="text"
+						class="form-control" id="tipo"
+						placeholder="Introduzca el tipo de transporte:" th:field="*{tipo}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('tipo')}"
+						th:errors="*{tipo}"></small>
+				</div>
+
+				<div class="form-group">
+					<label for="horaSalida">Hora de salida</label> <input type="text"
+						class="form-control" id="horaSalida"
+						placeholder="Introduzca la hora de salida" th:field="*{horaSalida}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('horaSalida')}"
+						th:errors="*{horaSalida}"></small>
+				</div>
+
+				<div class="form-group">
+					<label for="horaLlegada">Hora de llegada</label> <input type="text"
+						class="form-control" id="horaLlegada"
+						placeholder="Introduzca la hora de llegada" th:field="*{horaLlegada}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('horaLlegada')}"
+						th:errors="*{horaLlegada}"></small>
+				</div>
+
+				<hr>
+				<input type="submit" class="btn btn-primary" value="Add new">
+			</div>
+		</form>
+
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
