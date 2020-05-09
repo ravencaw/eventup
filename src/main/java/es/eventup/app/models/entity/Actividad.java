@@ -5,11 +5,10 @@ import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Id;
 
 import com.sun.istack.NotNull;
 
@@ -33,7 +32,7 @@ public class Actividad implements Serializable {
 	private String ponentes;
 
 	@NotNull
-	private int capacidad;
+	private Integer capacidad;
 
 	@NotEmpty
 	private String lugar;
@@ -43,7 +42,7 @@ public class Actividad implements Serializable {
 	}
 
 	public Actividad(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, @NotEmpty String ponentes,
-			@NotNull int capacidad, @NotEmpty String lugar) {
+			@NotNull Integer capacidad, @NotEmpty String lugar) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -74,7 +73,7 @@ public class Actividad implements Serializable {
 		return descripcion;
 	}
 
-	public void setDescripcion() {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
@@ -82,15 +81,15 @@ public class Actividad implements Serializable {
 		return ponentes;
 	}
 
-	public void setPonentes() {
+	public void setPonentes(String ponentes) {
 		this.ponentes = ponentes;
 	}
 
-	public int getCapacidad() {
+	public Integer getCapacidad() {
 		return capacidad;
 	}
 
-	public void setCapacidad() {
+	public void setCapacidad(Integer capacidad) {
 		this.capacidad = capacidad;
 	}
 
@@ -98,7 +97,7 @@ public class Actividad implements Serializable {
 		return lugar;
 	}
 
-	public void setLugar() {
+	public void setLugar(String lugar) {
 		this.lugar = lugar;
 	}
 

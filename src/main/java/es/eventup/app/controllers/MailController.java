@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import es.eventup.app.models.entity.Mail;
-import es.eventup.app.models.paginator.MailSend;
+import es.eventup.app.util.mail.MailSend;
 
 
 

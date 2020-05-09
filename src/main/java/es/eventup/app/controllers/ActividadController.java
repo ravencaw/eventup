@@ -1,9 +1,5 @@
 package es.eventup.app.controllers;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,10 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 
 
 import es.eventup.app.models.entity.Actividad;
@@ -37,14 +31,14 @@ public class ActividadController {
 	public String listar(Model model) {
 		model.addAttribute("tituloWeb", "Actividad: Lista");
 		model.addAttribute("titulo", "Listado de actividades");
-		model.addAttribute("actividad", service.findAll());
+		model.addAttribute("actividades", service.findAll());
 		return "actividad/listar";
 	}
 	
 	@RequestMapping(value="/actividad/nuevo", method=RequestMethod.GET)
 	public String crear(Map<String, Object> model) {
 		Actividad actividad = new Actividad();
-		model.put("evento", actividad);
+		model.put("actividad", actividad);
 		model.put("tituloWeb", "Actividad: Crear");
 		model.put("titulo", "Formulario de Actividad");
 		return "actividad/nuevo";
