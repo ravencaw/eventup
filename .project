@@ -7,6 +7,14 @@
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.wst.common.project.facet.core.builder</name>
+<<<<<<< Updated upstream
+=======
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+>>>>>>> Stashed changes
 			<arguments>
 			</arguments>
 		</buildCommand>
