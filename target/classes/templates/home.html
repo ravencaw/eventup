@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head">
-
+<head>
+<th:block th:include="layout/layout :: head"></th:block>
+        <meta charset="utf-8">
+        <link rel="stylesheet" th:href="@{/css/home/styles.min.css}">
+        <script th:src="@{/js/home/script.min.js}"></script>
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
@@ -39,6 +42,89 @@
 			</ol>
 		</div>
 	</div>
+	<section class="features-icons bg-light text-center">
+	<br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-screen-desktop m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Nos adaptamos a ti</h3>
+                        <p class="lead mb-0">Eventup esta diseñado para adaptarse a tus necesidades, llevanos en tu smartphone, tablet o PC, nosotros nos amoldaremos ;)</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-layers m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Diseño robusto</h3>
+                        <p class="lead mb-0">Nuestro sistema provee a nuestros clientes de una forma segura para organizar y gestionar de manera segura todo lo relacionado con sus eventos. La satisfacción de nuestros clientes es nuestra mejor recompensa.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-check m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Facil de utilizar</h3>
+                        <p class="lead mb-0">En Eventup creemos que para que algo sea bueno debe ser facil de usar, por ello hemos diseñado nuestro sistema para que no tengas ninguna dificultad desde el principio. A nadie le gusta tener que pelearse con una aplicación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </section>
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image:url(&quot;../images/home/bg-showcase-1.jpg&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Accede a los mejores eventos de tu ciudad</h2>
+                    <p class="lead mb-0">Eventup te proporcionará los eventos más cercanos a ti para que puedas estar al tanto de lo que se cuece por tu zona. El mejor plan está en tus manos.</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img" style="background-image:url(&quot;../images/home/bg-showcase-2.jpg&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Tus eventos más vivos</h2>
+                    <p class="lead mb-0">Comparte tus opiniones directamente con los creadores de los eventos a través de los blogs y habla con otros asistentes. Visualiza los videos y fotos realizados durante el evento ¡No te pierdas nada!</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image:url(&quot;../images/home/bg-showcase-3.jpg&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Te guiamos hasta tu destino</h2>
+                    <p class="lead mb-0">La integración de Google Maps en nuestro sistema nos permite conocer exactamente la localizacion de tus eventos. No te preocupes por nada, te ponemos en ruta.</p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </section>
+    <div class="team-clean">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">¿Quienes somos?</h2>
+                <p class="text-center">Semarad Software es una empresa dedicada al desarrollo web que provee soluciones para todo tipo de clientes y que posee años de experiencia en el sector.</p>
+            </div>
+            <div class="row people">
+                <div class="col-md-6 col-lg-4 item"><img class="rounded-circle" th:src="@{/images/home/1.jpg}">
+                    <h3 class="name">Sebastián Pedrosa Granados</h3>
+                    <p class="title">Software architect</p>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+                <div class="col-md-6 col-lg-4 item"><img class="rounded-circle" th:src="@{/images/home/2.jpg}">
+                    <h3 class="name">Maria del Carmen Lozano Espejo</h3>
+                    <p class="title">Project leader</p>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+                <div class="col-md-6 col-lg-4 item"><img class="rounded-circle" th:src="@{/images/home/3.jpg}">
+                    <h3 class="name">Adrián Casado García</h3>
+                    <p class="title">CEO &amp; Bussiness manager</p>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

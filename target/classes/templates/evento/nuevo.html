@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head">
+<script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
+</head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+
+		<form th:action="@{/evento/nuevo}" th:object="${evento}" method="post"
+			enctype="multipart/form-data">
+			<div class="form-group">
+				<div class="form-group">
+					<label for="nombre">Nombre</label> <input type="text"
+						class="form-control" id="nombre"
+						placeholder="Introduzca su nombre aqui" th:field="*{nombre}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+				</div>
+				<div class="form-group">
+					<label for="descripcion">Descripcion</label> <input type="text"
+						class="form-control" id="descripcion"
+						placeholder="Introduzca la descripcion aqui"
+						th:field="*{descripcion}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('descripcion')}"
+						th:errors="*{descripcion}"></small>
+				</div>
+				<div class="form-group">
+					<label for="foto">Foto</label> <input type="file"
+						class="form-control" id="foto" th:field="*{foto}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('foto')}"
+						th:errors="*{foto}"></small>
+				</div>
+				<div class="form-group">
+					<label for="organizador">Organizador</label> <input type="text"
+						class="form-control" id="organizador"
+						placeholder="Organizador del evento" th:field="*{organizador}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('organizador')}"
+						th:errors="*{organizador}"></small>
+				</div>
+				<div class="form-group">
+					<label for="ciudad">Ciudad</label> <input type="text"
+						class="form-control" id="ciudad" placeholder="ciudad del evento"
+						th:field="*{ciudad}" th:errorclass="'form-control alert-danger'">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}"></small>
+				</div>
+				<div class="form-group">
+					<label for="direccion">Direccion</label> <input type="text"
+						class="form-control" id="direccion"
+						placeholder="direccion del evento" th:field="*{direccion}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small>
+				</div>
+				<div class="form-group">
+					<label for="latitud">Latitud</label> <input type="text"
+						class="form-control" id="latitud" placeholder="latitud del evento"
+						th:field="*{latitud}" th:errorclass="'form-control alert-danger'">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('latitud')}" th:errors="*{latitud}"></small>
+				</div>
+				<div class="form-group">
+					<label for="longitud">Longitud</label> <input type="text"
+						class="form-control" id="longitud"
+						placeholder="longitud del evento" th:field="*{longitud}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('longitud')}" th:errors="*{longitud}"></small>
+				</div>
+				<div class="form-group">
+					<label for="fecha">Fecha</label> <input type="text"
+						class="form-control" id="fecha" placeholder="DD/MM/YYYY"
+						th:field="*{fecha}" th:errorclass="'form-control alert-danger'">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></small>
+				</div>
+				<div class="form-group">
+					<label for="hora">Hora</label> <input type="text"
+						class="form-control" id="hora" placeholder="HH:MM"
+						th:field="*{hora}" th:errorclass="'form-control alert-danger'">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('hora')}" th:errors="*{hora}"></small>
+				</div>
+				<div class="form-group">
+					<label for="precio">Precio</label> <input type="text"
+						class="form-control" id="precio"
+						placeholder="Introduzca un precio (XX.YY)" th:field="*{precio}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
+				</div>
+				<div class="form-group">
+					<label for="precio">Cantidad de entradas</label> <input type="text"
+						class="form-control" id="cantidadEntradas"
+						placeholder="Introduzca el numero de entradas disponibles" th:field="*{cantidadEntradas}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('cantidadEntradas')}" th:errors="*{cantidadEntradas}"></small>
+				</div>
+
+				<hr>
+				<input type="submit" class="btn btn-primary" value="Add new">
+			</div>
+		</form>
+
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

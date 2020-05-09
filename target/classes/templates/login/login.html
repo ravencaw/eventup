@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="layout/layout :: head"></th:block>
+<link rel="stylesheet" th:href="@{/css/login/styles.min.css}">
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="login-card">
+		<img class="profile-img-card" th:src="@{/images/login/avatar_2x.png}">
+		<p class="profile-name-card"></p>
+		<form class="form-signin" th:action="@{/login}" method="post">
+			<span class="reauth-email"> </span>
+			<input class="form-control" type="text" id="inputEmail" required="" placeholder="Username" autofocus="" name="username">
+			<input class="form-control" type="password" id="inputPassword" required="" placeholder="Password" name="password">
+			<div class="checkbox">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="formCheck-1">
+					<label class="form-check-label" for="formCheck-1">Remember me</label>
+				</div>
+			</div>
+			<button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Sign in</button>
+		</form>
+		<a class="forgot-password" href="#">Forgot your password?</a>
+		<a class="nav-link" th:href="@{/usuario/nuevo}">Not registered? Sign in now!</a>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
