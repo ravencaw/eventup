@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="valoracion")
+@Table(name = "valoraciones")
 public class Valoracion implements Serializable{
 
 	
@@ -22,7 +22,7 @@ public class Valoracion implements Serializable{
 	
 	private String comentario;
 	
-	private int like;
+	private Integer like;
 	
 	@Column(name="id_blog")
 	private Long idBlog;
@@ -35,7 +35,7 @@ public class Valoracion implements Serializable{
 		
 	}
 	
-	public Valoracion(Long id, String comentario, int like, Long idBlog, Long idUsuario ) {
+	public Valoracion(Long id, String comentario, Integer like, Long idBlog, Long idUsuario ) {
 		this.id=id;
 		this.comentario=comentario;
 		this.like=like;
@@ -58,11 +58,11 @@ public class Valoracion implements Serializable{
 		this.comentario=comentario;
 	}
 	
-	public int getLike() {
+	public Integer getLike() {
 		return like;
 	}
 	
-	public void setLike(int like) {
+	public void setLike(Integer like) {
 		this.like=like;
 	}
 	

@@ -17,3 +17,5 @@ INSERT INTO actividades(nombre, descripcion, ponentes, capacidad, lugar) VALUES(
 INSERT INTO transporte(empresa, capacidad,coor_inicio, coor_final, precio, tipo, hora_salida, hora_llegada) VALUES('Renfe', '200', '', '', '35', 'tren', '12:00', '20:00');
 
 INSERT INTO evento(nombre, descripcion, foto, organizador, ciudad, direccion, latitud, longitud, fecha, hora, precio, cantidad_entradas) VALUES ('Concierto Strad', 'Concierto presentacion Mundos Opuestos', null, 'Vuvuzela', 'Madrid', 'Calle Meloinvento 12', null, null, '2020-05-09', '20:15', 7.95, 300);
+
+INSERT INTO valoraciones(comentario, like, id_blog, id_usuario) VALUES('Me lo pase muy bien', '1' , 1, 1);

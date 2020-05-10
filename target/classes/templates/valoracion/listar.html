@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<head th:replace="layout/layout :: head"></head>
+<th:block th:include="layout/layout :: head">
+        </th:block>
+</head>
 <body>
 	<header  th:replace="layout/layout :: header"></header>
 	<div class="container">
@@ -14,14 +16,16 @@
 				<th>Like</th>
 				<th>Blog</th>
 				<th>Usuario</th>
+			
 				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/valoracion/nuevo}">Añadir</a></th>
 			</tr>
 			<tr th:each="valoracion: ${valoraciones}">
 				<td th:text="${valoracion.id}"></td>
 				<td th:text="${valoracion.comentario}"></td>
 				<td th:text="${valoracion.like}"></td>
-				<td th:text="${valoracion.idBlog}"></td>
-				<td th:text="${valoracion.idUsuario}"></td>
+				<td th:text="${valoracion.id_blog}"></td>
+				<td th:text="${valoracion.id_usuario}"></td>
+				
 				<td>
 					<a class="btn btn-success btn-xs col-md-12" th:href="@{/valoracion/form/}+${valoracion.id}">Editar</a>
 				</td>
@@ -30,7 +34,6 @@
 				</td>
 			</tr>
 		</table>
-		<nav th:replace="paginator-nav :: paginator"></nav>
 	</div>
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
