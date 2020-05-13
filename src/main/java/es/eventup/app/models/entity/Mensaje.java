@@ -8,12 +8,13 @@ import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.apache.tomcat.jni.Time;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.sun.istack.NotNull;
 
@@ -29,10 +30,14 @@ public class Mensaje implements Serializable {
 
 	@NotEmpty
 	@Column(name="hora")
-	private Time hora;
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern="HH:mm:ss")
+	private Date hora;
 
 	@NotEmpty
 	@Column(name="fecha")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fecha;
 
 	@NotEmpty
@@ -58,7 +63,7 @@ public class Mensaje implements Serializable {
 	}
 
 
-	public Mensaje(Long id, Time hora, Date fecha, @NotEmpty String contenido, @NotEmpty String tipo,
+	public Mensaje(Long id, Date hora, Date fecha, @NotEmpty String contenido, @NotEmpty String tipo,
 			@NotEmpty String estado) {
 		super();
 		this.id = id;
@@ -81,13 +86,13 @@ public class Mensaje implements Serializable {
 
 
 
-	public Time getHora() {
+	public Date getHora() {
 		return hora;
 	}
 
 
 
-	public void setHora(Time hora) {
+	public void setHora(Date hora) {
 		this.hora = hora;
 	}
 
