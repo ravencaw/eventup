@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "valoraciones")
+@Table(name = "valoracion")
 public class Valoracion implements Serializable{
 
 	
@@ -22,7 +22,7 @@ public class Valoracion implements Serializable{
 	
 	private String comentario;
 	
-	private Integer like;
+	private Integer opinion;
 	
 	@Column(name="id_blog")
 	private Long idBlog;
@@ -32,52 +32,72 @@ public class Valoracion implements Serializable{
 	private Long idUsuario;
 	
 	public Valoracion() {
-		
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public Valoracion(Long id, String comentario, Integer like, Long idBlog, Long idUsuario ) {
-		this.id=id;
-		this.comentario=comentario;
-		this.like=like;
-		this.idBlog=idBlog;
-		this.idUsuario=idUsuario;
+
+
+	public Valoracion(Long id, String comentario, Integer opinion, Long idBlog, Long idUsuario) {
+		super();
+		this.id = id;
+		this.comentario = comentario;
+		this.opinion = opinion;
+		this.idBlog = idBlog;
+		this.idUsuario = idUsuario;
 	}
-	
+
+
 	public Long getId() {
 		return id;
 	}
+
+
 	public void setId(Long id) {
-		this.id=id;
+		this.id = id;
 	}
-	
+
+
 	public String getComentario() {
 		return comentario;
 	}
-	
+
+
 	public void setComentario(String comentario) {
-		this.comentario=comentario;
+		this.comentario = comentario;
 	}
-	
-	public Integer getLike() {
-		return like;
+
+
+	public Integer getOpinion() {
+		return opinion;
 	}
-	
-	public void setLike(Integer like) {
-		this.like=like;
+
+
+	public void setOpinion(Integer opinion) {
+		this.opinion = opinion;
 	}
-	
+
+
 	public Long getIdBlog() {
 		return idBlog;
 	}
-	
+
+
 	public void setIdBlog(Long idBlog) {
-		this.idBlog=idBlog;
+		this.idBlog = idBlog;
 	}
-	
+
+
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
+
+
 	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario=idUsuario;
+		this.idUsuario = idUsuario;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

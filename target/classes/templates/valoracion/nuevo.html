@@ -22,12 +22,12 @@
 						th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></small>
 				</div>
 				<div class="form-group">
-					<label for="like">Like/Dislike</label> <input type="number"
-						class="form-control" id="like"
-						placeholder="Like o dislike" th:field="*{like}"
+					<label for="opinion">Like/Dislike</label> <input type="number"
+						class="form-control" id="opinion"
+						placeholder="Like o dislike" th:field="*{opinion}"
 						th:errorclass="'form-control alert-danger'"> <small
 						class="form-text text-danger"
-						th:if="${#fields.hasErrors('like')}" th:errors="*{like}"></small>
+						th:if="${#fields.hasErrors('opinion')}" th:errors="*{opinion}"></small>
 				</div>
 				<div class="form-group">
 					<label for="idBlog">Blog</label> <input
