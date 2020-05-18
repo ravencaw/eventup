@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header  th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Fotos</th>
+				<th>Videos</th>
+<!--			<th>Ponentes</th>
+				<th>Capacidad</th>
+				<th>Lugar</th> -->
+				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/blog/nuevo}">Añadir</a></th>
+			</tr>
+			<tr th:each="blog: ${blogs}">
+				<td th:text="${blog.id}"></td>
+				<td th:text="${blog.fotos}"></td>
+				<td th:text="${blog.videos}"></td>
+<!--			<td th:text="${blog.capacidad}"></td>
+				<td th:text="${blog.lugar}"></td> -->
+				<td>
+					<a class="btn btn-success btn-xs col-md-12" th:href="@{/blog/form/}+${blog.id}">Editar</a>
+				</td>
+				<td>
+					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/blog/delete/}+${blog.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

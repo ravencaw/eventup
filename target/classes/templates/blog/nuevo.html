@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head">
+<script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
+</head>
+
+<body>
+	<header  th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+
+		<form th:action="@{/blog/nuevo}" th:object="${blog}" method="post">
+			<div class="form-group">
+<!--				<div class="form-group">
+					<label for="nombre">Nombre</label>
+					 <input type="text" class="form-control" id="nombre" placeholder="Introduzca el nombre de la actividad aquí:" th:field="*{nombre}" th:errorclass="'form-control alert-danger'">
+					 <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+				</div> -->
+				<div class="form-group">
+					<label for="id">id</label> 
+					<input type="text" class="form-control" id="id" placeholder="Introduzca la descripción aquí:" th:field="*{id}" th:errorclass="'form-control alert-danger'">
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></small>
+				</div>
+				<div class="form-group">
+					<label for="fotos">fotos</label> 
+					<input type="text" class="form-control" id="fotos" placeholder="Introduzca los fotos aquí: " th:field="*{fotos}" th:errorclass="'form-control alert-danger'">
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('fotos')}" th:errors="*{fotos}"></small>
+				</div>
+				<div class="form-group">
+					<label for="videos">videos</label> 
+					<input type="text" class="form-control" id="videos" placeholder="Introduzca los videos aquí: " th:field="*{videos}" th:errorclass="'form-control alert-danger'">
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('videos')}" th:errors="*{videos}"></small>
+				</div>
+				
+				<hr>
+				<input type="submit" class="btn btn-primary" value="Add new">
+			</div>
+		</form>
+
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
