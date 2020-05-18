@@ -1,10 +1,13 @@
 package es.eventup.app.controllers;
 
+import java.security.Principal;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,10 +17,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import es.eventup.app.models.entity.Entrada;
 import es.eventup.app.models.entity.Evento;
+import es.eventup.app.models.entity.User;
 import es.eventup.app.models.entity.Venta;
+import es.eventup.app.models.repository.UserRepository;
+import es.eventup.app.models.service.EntradaService;
 import es.eventup.app.models.service.EventoService;
+import es.eventup.app.models.service.TransporteService;
+import es.eventup.app.models.service.UsuarioService;
 import es.eventup.app.models.service.VentaService;
 
 @Controller
@@ -30,6 +41,15 @@ public class VentaController {
 	
 	@Autowired
 	private EventoService eventoService;
+	
+	@Autowired
+	private TransporteService transporteService;
+	
+	@Autowired
+	private UserRepository userService;
+	
+	@Autowired
+	private EntradaService entradaService;
 	
 	@RequestMapping(value="/venta/listar", method=RequestMethod.GET)
 	public String listar(Model model) {
@@ -69,24 +89,34 @@ public class VentaController {
 //	}
 	
 	@RequestMapping(value="/venta/nuevo/{id_evento}", method=RequestMethod.POST)
-	public String guardar(Venta venta, BindingResult result, Model model,SessionStatus stat,@PathVariable(value="id_evento") Long id_evento) {
+	public String guardar(Venta venta, BindingResult result, Model model,SessionStatus stat,@PathVariable(value="id_evento") Long id_evento, Authentication authentication) {
 		
-		if(venta.getCantidadEntradas()==null) {
-			return "redirect:/venta/nuevo/{id_evento}";
-		}
 		
 		Double total;
 		
 		Evento evento = eventoService.findOne(id_evento).get();
 		
-		total = evento.getPrecio()*venta.getCantidadEntradas();
+		total = evento.getPrecio();
 		
 		venta.prePersist();
-		venta.setIdEvento(id_evento);
+		venta.setEvento(evento);
 		venta.setTotal(total);
 		
 		
 		service.save(venta);
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		
+		Entrada entrada = new Entrada();
+		
+		entrada.setVenta(venta);
+		entrada.setTipo("normal");
+		entrada.setNumAsiento("23");
+		entrada.setTransporte(transporteService.findOne((long) 1).get());
+		entrada.setUsuario(userService.findByUsername(userDetails.getUsername()).get());
+		
+		entradaService.save(entrada);
+		
 		stat.setComplete();
 		return "redirect:/venta/listar";
 	}

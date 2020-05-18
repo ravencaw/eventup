@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<head th:replace="layout/layout :: head"></head>
+<th:block th:include="layout/layout :: head"></th:block>
+<meta charset="utf-8">
+</head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
@@ -15,16 +17,16 @@
 				<th>Foto</th>
 				<th>Organizador</th>
 				<th>Ciudad</th>
-				<th>Dirección</th>
+				<th>DirecciÃ³n</th>
 				<th>Latitud</th>
 				<th>Longitud</th>
 				<th>Fecha</th>
 				<th>Hora</th>
 				<th>Precio</th>
-				<th>Nº Entradas</th>
+				<th>NÂº Entradas</th>
 
-				<th colspan="2"><a class="btn btn-primary col-md-12"
-					th:href="@{/evento/nuevo}">Añadir</a></th>
+				<th colspan="4"><a class="btn btn-primary col-md-12"
+					th:href="@{/evento/nuevo}">AÃ±adir</a></th>
 			</tr>
 			<tr th:each="evento: ${eventos}">
 				<td th:text="${evento.id}"></td>
@@ -44,9 +46,11 @@
 					th:href="@{/evento/form/}+${evento.id}">Editar</a></td>
 				<td><a class="btn btn-light btn-xs col-md-12"
 					th:href="@{/venta/nuevo/}+${evento.id}">Comprar</a></td>
+				<td><a class="btn btn-light btn-xs col-md-12"
+					th:href="@{/asistencia/listar/}+${evento.id}">Asistencia</a></td>
 				<td><a class="btn btn-danger btn-xs col-md-12"
 					th:href="@{/evento/delete/}+${evento.id}"
-					onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+					onclick="return confirm('Â¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				</td>
 			</tr>
 		</table>

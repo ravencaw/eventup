@@ -3,6 +3,8 @@ package es.eventup.app.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +24,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="user", uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"}))
@@ -70,7 +76,15 @@ public class User implements Serializable{
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fechaNac;
 	
+	@NotNull
 	private String dni;
+	
+//	@OneToMany(mappedBy = "eventos",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+//	Evento evento;
+	
+//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@OneToMany(mappedBy = "usuario",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	Set<Entrada> entrada;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "authorities_users", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
@@ -81,11 +95,10 @@ public class User implements Serializable{
 		super();
 	}
 
-	public User(Long id, @NotEmpty String username, @NotEmpty String password, @NotEmpty boolean enabled,
-			@NotEmpty @Email String email, @NotEmpty String nombre, @NotEmpty String apellidos, String provincia,
-			String localidad, String pais, String sexo, @NotNull Date fechaNac, String dni, Set<Authority> authority) {
+	public User(@NotEmpty String username, @NotEmpty String password, boolean enabled, @NotEmpty @Email String email,
+			@NotEmpty String nombre, @NotEmpty String apellidos, String provincia, String localidad, String pais,
+			String sexo, @NotNull Date fechaNac, @NotNull String dni, Set<Entrada> entrada, Set<Authority> authority) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
@@ -98,6 +111,7 @@ public class User implements Serializable{
 		this.sexo = sexo;
 		this.fechaNac = fechaNac;
 		this.dni = dni;
+		this.entrada = entrada;
 		this.authority = authority;
 	}
 
@@ -213,6 +227,16 @@ public class User implements Serializable{
 
 	public void setAuthority(Set<Authority> authority) {
 		this.authority = authority;
+	}
+	
+	
+
+	public Set<Entrada> getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(Set<Entrada> entrada) {
+		this.entrada = entrada;
 	}
 
 	@Override

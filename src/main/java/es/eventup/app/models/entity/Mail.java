@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-@Entity
+
 public class Mail implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

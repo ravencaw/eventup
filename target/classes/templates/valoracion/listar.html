@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="layout/layout :: head">
+        </th:block>
+</head>
+<body>
+	<header  th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Comentario</th>
+				<th>Opinion(Like/Dislike)</th>
+				<th>Blog</th>
+				<th>Usuario</th>
+			
+				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/valoracion/nuevo}">Añadir</a></th>
+			</tr>
+			<tr th:each="valoracion: ${valoraciones}">
+				<td th:text="${valoracion.id}"></td>
+				<td th:text="${valoracion.comentario}"></td>
+				<td th:text="${valoracion.opinion}"></td>
+				<td th:text="${valoracion.idBlog}"></td>
+				<td th:text="${valoracion.idUsuario}"></td>
+				
+				<td>
+					<a class="btn btn-success btn-xs col-md-12" th:href="@{/valoracion/form/}+${valoracion.id}">Editar</a>
+				</td>
+				<td>
+					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/valoracion/delete/}+${valoracion.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

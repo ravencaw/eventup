@@ -2,12 +2,16 @@ package es.eventup.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,8 +20,11 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-@Table(name="evento")
+@Table(name="eventos")
 public class Evento implements Serializable{
 
 	/**
@@ -78,18 +85,25 @@ public class Evento implements Serializable{
 	
 	@Column(name="cantidad_entradas")
 	Integer cantidadEntradas;
+	
+	@OneToMany(mappedBy = "evento",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	Set<Actividad> actividad;
+	
+	@OneToMany(mappedBy = "evento",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	Set<Venta> venta;
+	
+	@OneToMany(mappedBy = "evento",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	Set<Transporte> transporte;
 
 	public Evento() {
 
 	}
 	
-	
-
-	public Evento(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, String foto, String organizador,
-			String ciudad,String direccion,String latitud,String longitud,
-			@NotNull Date fecha, @NotNull Date hora, @NotNull Double precio, Integer cantidadEntradas) {
+	public Evento(@NotEmpty String nombre, @NotEmpty String descripcion, String foto,
+			@NotNull @NotEmpty String organizador, @NotEmpty String ciudad, @NotEmpty String direccion, String latitud,
+			String longitud, @NotNull Date fecha, @NotNull Date hora, @NotNull Double precio, Integer cantidadEntradas,
+			Set<Actividad> actividad, Set<Venta> venta, Set<Transporte> transporte) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.foto = foto;
@@ -102,9 +116,10 @@ public class Evento implements Serializable{
 		this.hora = hora;
 		this.precio = precio;
 		this.cantidadEntradas = cantidadEntradas;
+		this.actividad = actividad;
+		this.venta = venta;
+		this.transporte = transporte;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -155,44 +170,30 @@ public class Evento implements Serializable{
 		this.ciudad = ciudad;
 	}
 
-
-
 	public String getDireccion() {
 		return direccion;
 	}
-
-
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
-
-
 	public String getLatitud() {
 		return latitud;
 	}
-
-
 
 	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 
-
-
 	public String getLongitud() {
 		return longitud;
 	}
-
-
 
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
 
-
-	
 	public Date getFecha() {
 		return fecha;
 	}
@@ -233,6 +234,43 @@ public class Evento implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+
+	public Set<Actividad> getActividad() {
+		return actividad;
+	}
+
+
+
+	public void setActividad(Set<Actividad> actividad) {
+		this.actividad = actividad;
+	}
+
+
+
+	public Set<Venta> getVenta() {
+		return venta;
+	}
+
+
+
+	public void setVenta(Set<Venta> venta) {
+		this.venta = venta;
+	}
+
+
+
+	public Set<Transporte> getTransporte() {
+		return transporte;
+	}
+
+
+
+	public void setTransporte(Set<Transporte> transporte) {
+		this.transporte = transporte;
+	}
+	
 	
 	
 
