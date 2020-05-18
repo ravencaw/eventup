@@ -76,7 +76,7 @@ public class Evento implements Serializable{
 	@NotNull
 	@Column(name="hora")
 	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern="HH:mm:ss")
+	@DateTimeFormat(pattern="HH:mm")
 	Date hora;
 	
 	@NotNull
