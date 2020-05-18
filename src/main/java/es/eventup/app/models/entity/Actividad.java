@@ -1,11 +1,14 @@
 package es.eventup.app.models.entity;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -36,13 +39,16 @@ public class Actividad implements Serializable {
 
 	@NotEmpty
 	private String lugar;
+	
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	Evento evento;
 
 	public Actividad() {
 		super();
 	}
 
 	public Actividad(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, @NotEmpty String ponentes,
-			@NotNull Integer capacidad, @NotEmpty String lugar) {
+			@NotNull Integer capacidad, @NotEmpty String lugar, Evento evento) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -50,7 +56,7 @@ public class Actividad implements Serializable {
 		this.ponentes = ponentes;
 		this.capacidad = capacidad;
 		this.lugar = lugar;
-
+		this.evento = evento;
 	}
 
 	public Long getId() {
@@ -101,4 +107,11 @@ public class Actividad implements Serializable {
 		this.lugar = lugar;
 	}
 
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
 }

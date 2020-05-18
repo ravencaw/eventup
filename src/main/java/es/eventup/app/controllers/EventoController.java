@@ -39,6 +39,12 @@ public class EventoController {
 		model.addAttribute("eventos", service.findAll());
 		return "evento/listar";
 	}
+	@RequestMapping(value="/evento/calendar", method=RequestMethod.GET)
+	public String calendar(Model model) {
+		model.addAttribute("tituloWeb", "Evento: Calendario");
+		model.addAttribute("titulo", "Calendario eventos");
+		return "evento/calendar";
+	}
 	
 	@RequestMapping(value="/evento/nuevo", method=RequestMethod.GET)
 	public String crear(Map<String, Object> model) {

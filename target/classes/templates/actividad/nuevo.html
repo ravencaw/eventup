@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="layout/layout :: head">
-<script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
-<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
+<head>
+<th:block th:include="layout/layout :: head">
+        </th:block>
 </head>
+
 
 <body>
 	<header  th:replace="layout/layout :: header"></header>

@@ -18,7 +18,6 @@
             <h6 class="text-muted card-subtitle mb-2">Fecha: <b th:text="${evento.fecha}"></b> Hora: <b th:text="${evento.hora}"></b></h6>
             <p class="card-text" th:text="${evento.descripcion}">
             <h5>Precio: <b id="precio" th:text="${evento.precio}"></b> €</h5>
-            </p><a class="card-link" href="#">Link</a><a class="card-link" href="#"><i class="fa fa-trash"></i></a>
          </div>
             
     </div>
@@ -57,14 +56,6 @@
           <!-- credit card info-->
           <div id="nav-tab-card" class="tab-pane fade show active">
             <form role="form" th:action="@{/venta/nuevo/}+${evento.id}" th:object="${venta}" method="post">
-            <label for="cantidadEntradas">Cantidad de entradas</label> 
-            <div class="input-group">
-            <input type="number" class="form-control" id="cantidadEntradas" th:field="*{cantidadEntradas}" min="1"> 
-			<div class="input-group-append">
-            <input type="text" class="form-control" id="total" th:field="*{total}" placeholder="0.0 €" disabled> 
-            </div>
-			</div>
-			
               <div class="form-group">
                 <label for="username">Full name (on the card)</label>
                 <input type="text" name="username" placeholder="Jeff Doe" required class="form-control">
@@ -141,21 +132,6 @@
           <!-- End -->
         </div>
         <!-- End -->
-		<script>
-		$(document).ready(function(){
-					$("#cantidadEntradas").on("change", function(){
-						var precio = $("#precio").html();
-						var total = 0;
-						var cantidad = $("#cantidadEntradas").val();
-						
-						precio = parseFloat(precio);
-						cantidad = parseInt(cantidad);
-						
-						total = precio*cantidad;
-						$("#total").val(total);
-					});
-				});
-		</script>
       </div>
     </div>
   </div>

@@ -3,11 +3,16 @@ package es.eventup.app.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,7 +22,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="venta")
+@Table(name="ventas")
 public class Venta implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -39,31 +44,28 @@ public class Venta implements Serializable{
 	Date hora;
 	
 	@NotNull
-	@Column(name="cantidad_entradas")
-	Integer cantidadEntradas;
-	
-	@NotNull
 	Double total;
 	
 	@NotNull
-	@Column(name="id_evento")
-	Long idEvento;
-
-	public Venta(Long id, @NotNull Date fecha, @NotNull Date hora, @NotNull Integer cantidadEntradas,
-			@NotNull Double total, @NotNull Long idEvento) {
-		super();
-		this.id = id;
-		this.fecha = fecha;
-		this.hora = hora;
-		this.cantidadEntradas = cantidadEntradas;
-		this.total = total;
-		this.idEvento = idEvento;
-	}
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	Evento evento;
+	
+//	@OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_entrada", referencedColumnName = "id")
+//	Entrada entrada;
 
 	public Venta() {
 
 	}
-	
+
+	public Venta(@NotNull Date fecha, @NotNull Date hora, @NotNull Double total, @NotNull Evento evento) {
+		super();
+		this.fecha = fecha;
+		this.hora = hora;
+		this.total = total;
+		this.evento = evento;
+	}
+
 	@PrePersist
 	public void prePersist() {
 		Date fecha = new Date();
@@ -96,20 +98,12 @@ public class Venta implements Serializable{
 		this.hora = hora;
 	}
 
-	public Long getIdEvento() {
-		return idEvento;
+	public Evento getEvento() {
+		return evento;
 	}
 
-	public void setIdEvento(Long idEvento) {
-		this.idEvento = idEvento;
-	}
-
-	public Integer getCantidadEntradas() {
-		return cantidadEntradas;
-	}
-
-	public void setCantidadEntradas(Integer cantidadEntradas) {
-		this.cantidadEntradas = cantidadEntradas;
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 	public Double getTotal() {
@@ -120,8 +114,4 @@ public class Venta implements Serializable{
 		this.total = total;
 	}
 
-	
-	
-	
-	
 }
