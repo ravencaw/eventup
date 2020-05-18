@@ -4,6 +4,7 @@
 <head th:replace="layout/layout :: head">
 <script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
+<meta charset="utf-8">
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 			<div class="form-group">
 				<div class="form-group">
 					<label for="id">Id</label> <input type="text" class="form-control"
-						id="id" placeholder="Introduzca el id de la mensaje aquí:"
+						id="id" placeholder="Introduzca el id de la mensaje aquÃ­:"
 						th:field="*{id}" th:errorclass="'form-control alert-danger'">
 					<small class="form-text text-danger"
 						th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></small>
@@ -38,7 +39,7 @@
 				<div class="form-group">
 					<label for="contenido">Contenido</label> <input type="text"
 						class="form-control" id="contenido"
-						placeholder="Introduzca el contenido aquí: "
+						placeholder="Introduzca el contenido aquÃ­: "
 						th:field="*{contenido}"
 						th:errorclass="'form-control alert-danger'"> <small
 						class="form-text text-danger"
@@ -48,7 +49,7 @@
 				<div class="form-group">
 					<label for="tipo">Tipo</label> <input type="text"
 						class="form-control" id="tipo"
-						placeholder="Introduzca el tipo de celebración aquí: "
+						placeholder="Introduzca el tipo de celebraciÃ³n aquÃ­: "
 						th:field="*{tipo}" th:errorclass="'form-control alert-danger'">
 					<small class="form-text text-danger"
 						th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></small>
@@ -56,7 +57,7 @@
 				<div class="form-group">
 					<label for="estado">Estado</label> <input type="text"
 						class="form-control" id="estado"
-						placeholder="Introduzca el estado de celebración aquí: "
+						placeholder="Introduzca el estado de celebraciÃ³n aquÃ­: "
 						th:field="*{estado}" th:errorclass="'form-control alert-danger'">
 					<small class="form-text text-danger"
 						th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></small>
