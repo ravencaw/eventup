@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="layout/layout :: head">
+        </th:block>
+</head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+
+		<form th:action="@{/valoracion/nuevo}" th:object="${valoracion}"
+			method="post">
+			<div class="form-group">
+				<div class="form-group">
+					<label for="comentario">Comentario</label> <input type="text"
+						class="form-control" id="comentario"
+						placeholder="Introduzca su comentario" th:field="*{comentario}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></small>
+				</div>
+				<div class="form-group">
+					<label for="opinion">Like/Dislike</label> <input type="number"
+						class="form-control" id="opinion"
+						placeholder="Like o dislike" th:field="*{opinion}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('opinion')}" th:errors="*{opinion}"></small>
+				</div>
+				<div class="form-group">
+					<label for="idBlog">Blog</label> <input
+						type="number" class="form-control" id="idBlog"
+						placeholder="Introduzca el blog al que pertenece:"
+						th:field="*{idBlog}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('idBlog')}"
+						th:errors="*{idBlog}"></small>
+				</div>
+				<div class="form-group">
+					<label for="idUsuario">Usuario</label> <input
+						type="number" class="form-control" id="idUsuario"
+						placeholder="Indique el usuario" th:field="*{idUsuario}"
+						th:errorclass="'form-control alert-danger'"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('idUsuario')}"
+						th:errors="*{idUsuario}"></small>
+				</div>
+
+				<hr>
+				<input type="submit" class="btn btn-primary" value="Add new">
+			</div>
+		</form>
+
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
