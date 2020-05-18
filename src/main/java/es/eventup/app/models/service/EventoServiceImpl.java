@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.eventup.app.models.entity.Evento;
+import es.eventup.app.models.projections.EventoProjection;
 import es.eventup.app.models.repository.EventoRepository;
 
 
@@ -41,5 +42,11 @@ public class EventoServiceImpl implements EventoService {
 	@Transactional
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public List<EventoProjection> findAllProjections() {
+		// TODO Auto-generated method stub
+		return repository.findAllProjectedBy();
 	}
 }

@@ -14,17 +14,21 @@
 				<th>Id</th>
 				<th>Fecha</th>
 				<th>Hora</th>
-				<th>Entradas compradas</th>
 				<th>Evento</th>
 				<th>Total</th>
+				<th colspan="2" style="text-align:center;">Acciones</th>
 			</tr>
 			<tr th:each="venta: ${ventas}">
 				<td th:text="${venta.id}"></td>
 				<td th:text="${venta.fecha}"></td>
 				<td th:text="${venta.hora}"></td>
-				<td th:text="${venta.cantidadEntradas}"></td>
-				<td th:text="${venta.idEvento}"></td>
+				<td th:text="${venta.evento.nombre}"></td>
 				<td th:text="${venta.total}+' €'"></td>
+				<td><a class="btn btn-danger btn-xs col-md-12"
+					th:href="@{/venta/delete/}+${venta.id}"
+					onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+				<td><a class="btn btn-light btn-xs col-md-12"
+					th:href="@{/entrada/listar/}+${venta.id}">Ver entradas</a></td>
 			</tr>
 		</table>
 	</div>
