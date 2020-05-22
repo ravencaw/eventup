@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<th:block th:include="layout/layout :: head"></th:block>
+<meta charset="utf-8">
+<link rel="stylesheet" th:href="@{/css/venta/styles.min.css}">
+<script th:src="@{/js/venta/script.min.js}"></script>
+<!-- <script type="text/javascript" th:src="@{/js/venta/nuevo.js}"></script> -->
+</head>
+
+<body>
+<header  th:replace="layout/layout :: header"></header>
+Hello <b>$name!</b>  Welcome to Velocity!
+<h1> Hello User</h1>
+<br/>
+<br/>
+This file is generated on : $genDateTime
+
+ <div class="card-body">
+            <h4 class="card-title" th:text="${evento.nombre}"></h4>
+            <h6 class="text-muted card-subtitle mb-2">Fecha: <b th:text="${evento.fecha}"></b> Hora: <b th:text="${evento.hora}"></b></h6>
+            <p class="card-text" th:text="${evento.descripcion}">
+            <h5>Precio: <b id="precio" th:text="${evento.precio}"></b> €</h5>
+         </div>
+</body>
+</html>
