@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -94,15 +95,20 @@ public class Evento implements Serializable{
 	
 	@OneToMany(mappedBy = "evento",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	Set<Transporte> transporte;
+	
+	@NotNull
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private User usuario;
 
 	public Evento() {
 
 	}
 	
+	
 	public Evento(@NotEmpty String nombre, @NotEmpty String descripcion, String foto,
 			@NotNull @NotEmpty String organizador, @NotEmpty String ciudad, @NotEmpty String direccion, String latitud,
 			String longitud, @NotNull Date fecha, @NotNull Date hora, @NotNull Double precio, Integer cantidadEntradas,
-			Set<Actividad> actividad, Set<Venta> venta, Set<Transporte> transporte) {
+			Set<Actividad> actividad, Set<Venta> venta, Set<Transporte> transporte, @NotNull User usuario) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -119,7 +125,9 @@ public class Evento implements Serializable{
 		this.actividad = actividad;
 		this.venta = venta;
 		this.transporte = transporte;
+		this.usuario = usuario;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -269,6 +277,16 @@ public class Evento implements Serializable{
 
 	public void setTransporte(Set<Transporte> transporte) {
 		this.transporte = transporte;
+	}
+
+
+	public User getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
 	}
 	
 	

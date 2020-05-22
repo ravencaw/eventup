@@ -85,6 +85,9 @@ public class User implements Serializable{
 //	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "usuario",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	Set<Entrada> entrada;
+	
+	@OneToMany(mappedBy = "usuario",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	Set<Evento> evento;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "authorities_users", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
@@ -95,9 +98,12 @@ public class User implements Serializable{
 		super();
 	}
 
+	
+
 	public User(@NotEmpty String username, @NotEmpty String password, boolean enabled, @NotEmpty @Email String email,
 			@NotEmpty String nombre, @NotEmpty String apellidos, String provincia, String localidad, String pais,
-			String sexo, @NotNull Date fechaNac, @NotNull String dni, Set<Entrada> entrada, Set<Authority> authority) {
+			String sexo, @NotNull Date fechaNac, @NotNull String dni, Set<Entrada> entrada, Set<Evento> evento,
+			Set<Authority> authority) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -112,8 +118,11 @@ public class User implements Serializable{
 		this.fechaNac = fechaNac;
 		this.dni = dni;
 		this.entrada = entrada;
+		this.evento = evento;
 		this.authority = authority;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -238,6 +247,18 @@ public class User implements Serializable{
 	public void setEntrada(Set<Entrada> entrada) {
 		this.entrada = entrada;
 	}
+	
+	public Set<Evento> getEvento() {
+		return evento;
+	}
+
+
+
+	public void setEvento(Set<Evento> evento) {
+		this.evento = evento;
+	}
+
+
 
 	@Override
 	public int hashCode() {

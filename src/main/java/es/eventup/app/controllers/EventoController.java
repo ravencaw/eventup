@@ -11,6 +11,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.eventup.app.models.entity.Evento;
+import es.eventup.app.models.entity.User;
+import es.eventup.app.models.repository.UserRepository;
 import es.eventup.app.models.service.EventoService;
 
 @Controller
@@ -32,6 +36,9 @@ public class EventoController {
 	@Autowired
 	private EventoService service;
 	
+	@Autowired
+	private UserRepository userService;
+	
 	@RequestMapping(value="/evento/listar", method=RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("tituloWeb", "Evento: Lista");
@@ -39,11 +46,46 @@ public class EventoController {
 		model.addAttribute("eventos", service.findAll());
 		return "evento/listar";
 	}
-	@RequestMapping(value="/evento/calendar", method=RequestMethod.GET)
+	@RequestMapping(value="/evento/busqueda", method=RequestMethod.GET)
+	public String busqueda(Model model, Authentication authentication) {
+		
+		UserDetails userDetails = (authentication!=null)?(UserDetails) authentication.getPrincipal():null;
+		
+		User usuario;
+		
+		if (userDetails != null)
+			usuario = userService.findByUsername(userDetails.getUsername()).get();
+		else
+			usuario = null;
+		
+		model.addAttribute("tituloWeb", "Evento: Busqueda");
+		model.addAttribute("eventos", service.findAll());
+		model.addAttribute("user", usuario);
+		return "evento/busqueda";
+	}
+	@RequestMapping(value="/evento/show/{id}", method=RequestMethod.GET)
+	public String show(Model model, @PathVariable(name="id") Long id, Authentication authentication) {
+		
+		UserDetails userDetails = (authentication!=null)?(UserDetails) authentication.getPrincipal():null;
+		
+		User usuario;
+		
+		if (userDetails != null)
+			usuario = userService.findByUsername(userDetails.getUsername()).get();
+		else
+			usuario = null;
+		
+		model.addAttribute("tituloWeb", "Evento: Show");
+		model.addAttribute("titulo", "Datos del evento");
+		model.addAttribute("evento", service.findOne(id).get());
+		model.addAttribute("user", usuario);
+		return "evento/show";
+	}
+	@RequestMapping(value="/perfil/misEventos", method=RequestMethod.GET)
 	public String calendar(Model model) {
 		model.addAttribute("tituloWeb", "Evento: Calendario");
 		model.addAttribute("titulo", "Calendario eventos");
-		return "evento/calendar";
+		return "perfil/misEventos";
 	}
 	
 	@RequestMapping(value="/evento/nuevo", method=RequestMethod.GET)
@@ -74,7 +116,7 @@ public class EventoController {
 	}
 	
 	@RequestMapping(value="/evento/nuevo", method=RequestMethod.POST)
-	public String guardar(@Valid Evento evento, BindingResult result, Model model, @RequestParam("foto") MultipartFile foto, @RequestParam("precio") String precio, SessionStatus stat) {
+	public String guardar(@Valid Evento evento, BindingResult result, Model model, @RequestParam("foto") MultipartFile foto, @RequestParam("precio") String precio, SessionStatus stat, Authentication authentication) {
 		
 		
 		if(result.hasErrors()) {
@@ -95,6 +137,11 @@ public class EventoController {
 			}
 		}
 		
+		UserDetails userDetails = (authentication!=null)?(UserDetails) authentication.getPrincipal():null;
+		
+		User usuario = userService.findByUsername(userDetails.getUsername()).get();
+		
+		evento.setUsuario(usuario);
 		evento.setPrecio(Double.parseDouble(precio));
 		
 		service.save(evento);

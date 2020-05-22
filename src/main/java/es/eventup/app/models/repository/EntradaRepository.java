@@ -1,6 +1,7 @@
 package es.eventup.app.models.repository;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -13,4 +14,5 @@ import es.eventup.app.models.projections.EntradaProjection;
 public interface EntradaRepository<T, PK extends Serializable> extends CrudRepository<Entrada, Long>{
 
 	Optional<EntradaProjection> findByUsuario_DniAndVenta_Evento_Id(String dni, Long id);
+	List<Entrada> findByUsuario_Id(Long id);
 }

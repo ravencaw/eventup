@@ -17,4 +17,12 @@ public interface EventoService{
 	public void delete(Long id);
 	
 	List<EventoProjection> findAllProjections();
+	
+	List<EventoProjection> findByNombreAndCiudad(String nombre, String ciudad);
+	
+	List<EventoProjection> findByNombre(String nombre);
+	
+	List<EventoProjection> findByCiudad(String ciudad);
+
+	List<EventoProjection> findByUser(Long id);
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import es.eventup.app.models.entity.Venta;
+import es.eventup.app.models.projections.VentaProjection;
 
 public interface VentaService {
 	
@@ -15,6 +16,8 @@ public interface VentaService {
 		public Optional<Venta> findOne(Long id);
 		
 		public void delete(Long id);
+		
+		public List<VentaProjection> findByEvento(Long id);
 	}
 
 

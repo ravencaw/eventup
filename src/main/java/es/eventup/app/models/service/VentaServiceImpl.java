@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.eventup.app.models.entity.Venta;
+import es.eventup.app.models.projections.VentaProjection;
 import es.eventup.app.models.repository.VentaRepository;
 
 
@@ -41,6 +42,12 @@ public class VentaServiceImpl implements VentaService {
 	@Transactional
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public List<VentaProjection> findByEvento(Long id) {
+		// TODO Auto-generated method stub
+		return repository.findByEvento_Id(id);
 	}
 	
 }
