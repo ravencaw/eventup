@@ -51,11 +51,11 @@ public class VentaController {
 	@Autowired
 	private EntradaService entradaService;
 	
-	@RequestMapping(value="/venta/listar", method=RequestMethod.GET)
-	public String listar(Model model) {
+	@RequestMapping(value="/venta/listar/{id_evento}", method=RequestMethod.GET)
+	public String listar(Model model, @PathVariable(value="id_evento")Long id_evento) {
 		model.addAttribute("tituloWeb", "Venta: Lista");
 		model.addAttribute("titulo", "Listado de ventas");
-		model.addAttribute("ventas", service.findAll());
+		model.addAttribute("ventas", service.findByEvento(id_evento));
 		return "venta/listar";
 	}
 	
@@ -118,7 +118,7 @@ public class VentaController {
 		entradaService.save(entrada);
 		
 		stat.setComplete();
-		return "redirect:/venta/listar";
+		return "redirect:/perfil/misEntradas";
 	}
 	
 	@RequestMapping(value="/venta/delete/{id_evento}/{id}")

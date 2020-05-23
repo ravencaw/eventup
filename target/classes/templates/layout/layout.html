@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
 <meta charset="utf-8">
 <title th:text="'Spring Boot -' + ${tituloWeb}"></title>
@@ -8,8 +9,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" th:href="@{/css/footer/styles.min.css}">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" th:href="@{/css/header/styles.min.css}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
@@ -29,49 +30,31 @@
 </head>
 <body>
 	<header th:fragment="header">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" th:href="@{/}">Eventup</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<!-- 					<li class="nav-item active"><a class="nav-link" >Home -->
-					<!-- 							<span class="sr-only">(current)</span> -->
-					<!-- 					</a></li> -->
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Inicio sesión </a> <a href="#"
-						class="btn btn-info">Iniciar Sesión <span
-							class="glyphicon glyphicon-user"></span></a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item btn btn-light" th:href="@{/login}">Login</a>
-							<a class="dropdown-item btn btn-light" href="#">Perfil</a>
-							<!-- 							<a class="dropdown-item" href="@{/logout}">Logout</a> -->
-							<form th:action="@{/logout}" method="post">
+	<nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" th:href="@{/}">Eventup</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/evento/busqueda}">Eventos</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/login}" sec:authorize="!isAuthenticated()">Iniciar sesión</a></li>
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#" sec:authentication="name"></a>
+                        <div class="dropdown-menu" role="menu">
+	                        <a class="dropdown-item" role="presentation" th:href="@{/perfil/miPerfil}">Mi perfil</a>
+	                        <form th:action="@{/logout}" method="post">
 								<input class="dropdown-item btn btn-light" type="submit"
-									value="Cerrar Sesion" />
+									value="Salir" />
 							</form>
-						</div></li>
-					<li><a class="dropdown-item btn btn-light"
-						th:href="@{/evento/listar}">Eventos</a></li>
-				</ul>
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search"
-						placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
-			</div>
-		</nav>
+                       	</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <hr>
 	</header>
 	<div class="container"></div>
 	<div class="footer-basic" th:fragment="footer">
-		<hr>
+	<br>
 		<footer>
 			<div class="social">
 				<a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i

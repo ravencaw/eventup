@@ -49,5 +49,11 @@ public class EntradaServiceImpl implements EntradaService {
 		// TODO Auto-generated method stub
 		return repository.findByUsuario_DniAndVenta_Evento_Id(dni, id);
 	}
+
+	@Override
+	public List<Entrada> findByUsuario(Long id) {
+		// TODO Auto-generated method stub
+		return repository.findByUsuario_Id(id);
+	}
 	
 }

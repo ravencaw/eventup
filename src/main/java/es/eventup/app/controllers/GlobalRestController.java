@@ -6,15 +6,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.eventup.app.models.entity.Entrada;
-import es.eventup.app.models.entity.Evento;
+import es.eventup.app.models.entity.User;
 import es.eventup.app.models.projections.EntradaProjection;
 import es.eventup.app.models.projections.EventoProjection;
+import es.eventup.app.models.repository.UserRepository;
 import es.eventup.app.models.service.EntradaService;
 import es.eventup.app.models.service.EventoService;
 
@@ -26,6 +28,8 @@ public class GlobalRestController {
 	EntradaService service;
 	@Autowired
 	EventoService eventoService;
+	@Autowired
+	private UserRepository userService;
 	
 	@GetMapping(path = "asistencia/{id}/{dni}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EntradaProjection> get(@PathVariable("dni") String dni, @PathVariable("id") Long id) {
@@ -34,8 +38,27 @@ public class GlobalRestController {
         return ResponseEntity.ok(res.orElse(null));
     }
 	@GetMapping(path = "evento/calendar", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public List<EventoProjection> get() {
-		List<EventoProjection> res = eventoService.findAllProjections();
+	public List<EventoProjection> get(Authentication authentication) {
+		
+		UserDetails userDetails = (authentication!=null)?(UserDetails) authentication.getPrincipal():null;
+		
+		User usuario = userService.findByUsername(userDetails.getUsername()).get();
+		
+		List<EventoProjection> res = eventoService.findByUser(usuario.getId());
 		return res;
+	}
+	@GetMapping(path = "evento/busqueda/{nombre}/{ciudad}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public List<EventoProjection> busqueda(@PathVariable("nombre") String nombre, @PathVariable("ciudad") String ciudad) {
+		
+		if(nombre.equals("null") && !ciudad.equals("null")) {
+			return eventoService.findByCiudad(ciudad);
+		}else if(ciudad.equals("null") && !nombre.equals("null")) {
+			return eventoService.findByNombre(nombre);
+		}else if(nombre.equals("null") && ciudad.equals("null")){
+			return eventoService.findAllProjections();
+		}else {
+			return eventoService.findByNombreAndCiudad(nombre, ciudad);
+		}
+		
 	}
 }

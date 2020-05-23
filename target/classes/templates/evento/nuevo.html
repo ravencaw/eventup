@@ -2,9 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout/layout :: head">
+<meta charset="utf-8">
+<meta name="_csrf" th:content="@{_csrf.token}"/>
+<meta name="_csrf_header" th:content="@{_csrf.headerName}"/>
 <script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
 <meta charset="utf-8">
+
 </head>
 
 <body>
@@ -65,14 +69,14 @@
 						th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small>
 				</div>
 				<div class="form-group">
-					<label for="latitud">Latitud</label> <input type="text"
+					<input type="hidden"
 						class="form-control" id="latitud" placeholder="latitud del evento"
 						th:field="*{latitud}" th:errorclass="'form-control alert-danger'">
 					<small class="form-text text-danger"
 						th:if="${#fields.hasErrors('latitud')}" th:errors="*{latitud}"></small>
 				</div>
 				<div class="form-group">
-					<label for="longitud">Longitud</label> <input type="text"
+					<input type="hidden"
 						class="form-control" id="longitud"
 						placeholder="longitud del evento" th:field="*{longitud}"
 						th:errorclass="'form-control alert-danger'"> <small
@@ -117,5 +121,36 @@
 
 	</div>
 	<footer th:replace="layout/layout :: footer"></footer>
+	
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+// 			var token = $("meta[name='_csrf']").attr("content");
+// 			var header = $("meta[name='_csrf_header']").attr("content");
+// 			$(document).ajaxSend(function(e, xhr, options) {
+// 				xhr.setRequestHeader(header, token);
+// 			});
+
+			$("#direccion").on("change", geolocate);
+			$("#ciudad").on("change", geolocate);
+			
+		});
+	
+		function geolocate(){
+			var ciudad = $("#ciudad").val();
+			var direccion = $("#direccion").val();
+			$.ajax({
+				type:"get",
+				url: "https://maps.googleapis.com/maps/api/geocode/json?address="+direccion+"+"+ciudad+"&key=AIzaSyBX1Qy2dFMigK3r7pwgCBFC90exmctPt6g",
+				datatype : "application/json; charset=utf-8",
+				success: function(localizacion){
+					console.log(localizacion);
+					
+					$("#latitud").val(localizacion.results[0].geometry.location.lat);
+					$("#longitud").val(localizacion.results[0].geometry.location.lng);
+				}
+			});
+		}
+	</script>
 </body>
 </html>
