@@ -62,8 +62,9 @@ public class User implements Serializable{
 	@NotEmpty
 	private String apellidos;
 	
+	@NotNull
 	private String provincia;
-	
+	@NotNull
 	private String localidad;
 	
 	private String pais;

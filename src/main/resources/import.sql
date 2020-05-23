@@ -1,6 +1,6 @@
-INSERT INTO user (enabled,password,username,email,nombre,apellidos,fecha_nac,dni) VALUES(true,'$2a$04$N/UFFd6vJpwlYJkOO8j8xu5CsfFdabJKU4k6jfAuwdjWeuRPMlYM.','admin','admin@eventup.com','Sebastian','Pedrosa','1995-02-28','225311456A');
-INSERT INTO user (enabled,password,username,email,nombre,apellidos,fecha_nac,dni, localidad) VALUES(true,'$2a$04$N/UFFd6vJpwlYJkOO8j8xu5CsfFdabJKU4k6jfAuwdjWeuRPMlYM.','user','user@eventup.com','Juan','Alvarez','1993-03-23','23456789P', 'Madrid');
-INSERT INTO user (enabled,password,username,email,nombre,apellidos,fecha_nac,dni) VALUES(true,'$2a$04$N/UFFd6vJpwlYJkOO8j8xu5CsfFdabJKU4k6jfAuwdjWeuRPMlYM.','raven','raven@eventup.com','Sebastian','Pedrosa','1995-02-28','25352523Z');
+INSERT INTO user (enabled,password,username,email,nombre,apellidos,fecha_nac,dni, provincia, localidad) VALUES(true,'$2a$04$N/UFFd6vJpwlYJkOO8j8xu5CsfFdabJKU4k6jfAuwdjWeuRPMlYM.','admin','admin@eventup.com','Sebastian','Pedrosa','1995-02-28','225311456A', 'Malaga', 'Antequera');
+INSERT INTO user (enabled,password,username,email,nombre,apellidos,fecha_nac,dni, provincia, localidad) VALUES(true,'$2a$04$N/UFFd6vJpwlYJkOO8j8xu5CsfFdabJKU4k6jfAuwdjWeuRPMlYM.','user','user@eventup.com','Juan','Alvarez','1993-03-23','23456789P', 'Madrid', 'Madrid');
+INSERT INTO user (enabled,password,username,email,nombre,apellidos,fecha_nac,dni, provincia, localidad) VALUES(true,'$2a$04$N/UFFd6vJpwlYJkOO8j8xu5CsfFdabJKU4k6jfAuwdjWeuRPMlYM.','raven','raven@eventup.com','Sebastian','Pedrosa','1995-02-28','25352523Z', 'Sevilla', 'Sevilla');
 
 INSERT INTO authority (authority) VALUES ('ROLE_ADMIN');
 INSERT INTO authority (authority) VALUES ('ROLE_USER');

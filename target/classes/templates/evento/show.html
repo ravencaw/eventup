@@ -22,7 +22,7 @@
 				            <input type="hidden" th:value="${evento.latitud}" id="latitud">
 				            <input type="hidden" th:value="${evento.longitud}" id="longitud">
 				            <input type="hidden" th:value="${evento.direccion}" id="direccion">
-				            <div th:if="${user!=null}">
+				            <div th:if="${user != null}">
 					            <div class="row" th:if="${user.id==evento.usuario.id}">
 					            	<a class="btn btn-light btn-xs col-md-3" th:href="@{/venta/listar/}+${evento.id}">Ventas</a>
 					            	<a class="btn btn-light btn-xs col-md-3" th:href="@{/asistencia/listar/}+${evento.id}">Asistencia</a>
@@ -35,14 +35,12 @@
             </div>
         </div>
     </div>
-    </div>
-    <div>
     <br>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                 	<div class="row">
-	                    <h1 class="col-md-8">Localización del evento</h1><a th:if="${user.id==evento.usuario.id}" class="btn btn-primary btn-xs col-md-4" th:href="@{/transporte/nuevo/}">Añadir transporte</a>
+	                    <h1 class="col-md-8">Localización del evento</h1><div th:if="${user != null}"><a th:if="${user.id==evento.usuario.id}" class="btn btn-primary btn-xs col-md-4" th:href="@{/transporte/nuevo/}">Añadir transporte</a></div>
                 	</div>
                     <hr>
                     <div id="mapaEvento" style="height: 600px;"></div>
