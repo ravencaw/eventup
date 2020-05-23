@@ -16,7 +16,7 @@
 				<th>Asiento</th>
 				<th>Tipo</th>
 				<th>Transporte</th>
-				<th style="text-align:center">Acciones</th>
+				<th colspan="2" style="text-align:center">Acciones</th>
 			</tr>
 			<tr th:each="entrada: ${entradas}">
 				<td th:text="${entrada.id}"></td>
@@ -24,6 +24,8 @@
 				<td th:text="${entrada.numAsiento}"></td>
 				<td th:text="${entrada.tipo}"></td>
 				<td th:text="${entrada.transporte.tipo}"></td>
+				<td><a class="btn btn-primary btn-xs col-md-12"
+					th:href="@{/entrada/show/}+${entrada.id}">Mostrar</a>
 				<td><a class="btn btn-danger btn-xs col-md-12"
 					th:href="@{/entrada/delete/}+${entrada.id}"
 					onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>

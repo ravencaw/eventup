@@ -42,12 +42,16 @@ public class Transporte implements Serializable{
 	private int capacidad;
 	
 	
-	@Column(name="coor_inicio")
-	private String coordenadaInicio;
+	@Column(name="lat_inicio")
+	private String latInicio;
+	@Column(name="lng_inicio")
+	private String lngInicio;
 	
 	
-	@Column(name="coor_final")
-	private String coordenadaFinal;
+	@Column(name="lat_fin")
+	private String latFin;
+	@Column(name="lng_fin")
+	private String lngFin;
 	
 	
 	@NotNull
@@ -80,22 +84,25 @@ public class Transporte implements Serializable{
 		super();
 	}
 	
-	public Transporte(Long id, @NotEmpty String empresa, @NotNull int capacidad,@NotEmpty String coordenadaInicio, @NotEmpty String coordenadaFinal,
-			@NotNull float precio, @NotNull String tipo,@NotNull Date horaSalida, @NotNull Date horaLLegada) {
-		
+
+	public Transporte(@NotEmpty String empresa, @NotNull int capacidad, String latInicio, String lngInicio,
+			String latFinal, String lngFinal, @NotNull float precio, @NotEmpty String tipo, @NotNull Date horaSalida,
+			@NotNull Date horaLlegada, Evento evento) {
 		super();
-		this.id=id;
-		this.empresa=empresa;
-		this.capacidad=capacidad;
-		this.coordenadaInicio=coordenadaInicio;
-		this.coordenadaFinal=coordenadaFinal;
-		this.precio=precio;
-		this.tipo=tipo;
-		this.horaSalida=horaSalida;
-		this.horaLlegada=horaLLegada;
-		
+		this.empresa = empresa;
+		this.capacidad = capacidad;
+		this.latInicio = latInicio;
+		this.lngInicio = lngInicio;
+		this.latFin = latFinal;
+		this.lngFin = lngFinal;
+		this.precio = precio;
+		this.tipo = tipo;
+		this.horaSalida = horaSalida;
+		this.horaLlegada = horaLlegada;
+		this.evento = evento;
 	}
-	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -120,22 +127,57 @@ public class Transporte implements Serializable{
 		this.capacidad=capacidad;
 	}
 	
-	public String getCoordenadaInicio() {
-		return coordenadaInicio;
-	}
 	
-	public void setCoordenadaInicio(String coordenadaInicio) {
-		this.coordenadaInicio=coordenadaInicio;
+	public String getLatInicio() {
+		return latInicio;
 	}
-	
-	public String getCoordenadaFinal() {
-		return coordenadaFinal;
+
+
+	public void setLatInicio(String latInicio) {
+		this.latInicio = latInicio;
 	}
-	
-	public void setCoordenadaFinal(String coordenadaFinal) {
-		this.coordenadaFinal=coordenadaFinal;
+
+
+	public String getLngInicio() {
+		return lngInicio;
 	}
-	
+
+
+	public void setLngInicio(String lngInicio) {
+		this.lngInicio = lngInicio;
+	}
+
+
+	public String getLatFin() {
+		return latFin;
+	}
+
+
+	public void setLatFin(String latFinal) {
+		this.latFin = latFinal;
+	}
+
+
+	public String getLngFin() {
+		return lngFin;
+	}
+
+
+	public void setLngFin(String lngFinal) {
+		this.lngFin = lngFinal;
+	}
+
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+
 	public float getPrecio() {
 		return precio;
 	}

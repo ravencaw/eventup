@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,7 @@ import es.eventup.app.models.service.AuthorityService;
 import es.eventup.app.models.service.UsuarioService;
 import es.eventup.app.models.entity.Authority;
 import es.eventup.app.models.entity.User;
+import es.eventup.app.models.repository.UserRepository;
 
 @Controller
 @SessionAttributes("usuario")
@@ -29,6 +32,8 @@ public class UsuarioController {
 	private UsuarioService service;
 	@Autowired
 	private AuthorityService authorityService;
+	@Autowired
+	private UserRepository userService;
 	
 	@RequestMapping(value="/usuario/listar", method=RequestMethod.GET)
 	public String listar(Model model) {
@@ -63,6 +68,18 @@ public class UsuarioController {
 		model.put("titulo", "Edicion de User");
 		
 		return "usuario/nuevo";
+	}
+	@RequestMapping(value="/perfil/miPerfil")
+	public String miPerfil(Map<String, Object> model, Authentication authentication) {
+		
+		UserDetails userDetails = (authentication!=null)?(UserDetails) authentication.getPrincipal():null;
+		User usuario = userService.findByUsername(userDetails.getUsername()).get();
+		
+		model.put("usuario", usuario);
+		model.put("tituloWeb", "User: Editar");
+		model.put("titulo", "Edicion de User");
+		
+		return "perfil/miPerfil";
 	}
 	
 	@RequestMapping(value="/usuario/nuevo", method=RequestMethod.POST)

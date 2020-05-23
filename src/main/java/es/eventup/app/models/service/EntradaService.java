@@ -18,6 +18,8 @@ public interface EntradaService {
 		public void delete(Long id);
 		
 		public Optional<EntradaProjection> findByUserAndEvento(String dni, Long id);
+		
+		public List<Entrada> findByUsuario(Long id);
 	}
 
 

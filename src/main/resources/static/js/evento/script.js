@@ -23,11 +23,11 @@ $(document).ready(function(){
 	                var evento = new Object();
 
 	                evento.id=element.id;
-	                evento.name=element.direccion+" "+element.ciudad;
+	                evento.name=element.nombre;
 	                evento.startdate=element.fecha;
 	                evento.starttime=element.hora;
 	                evento.color="#FFB128";
-	                evento.url="#";
+	                evento.url="/evento/show/"+element.id;
 
 	                eventos.push(evento);
 	            });
