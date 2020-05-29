@@ -42,24 +42,24 @@ public class User implements Serializable{
 	private Long id;
 
 	@Column
-	@NotEmpty
+	@NotNull
 	private String username;
 
 	@Column
-	@NotEmpty
+	@NotNull
 	private String password;
 
 	@Column
 	private boolean enabled;
 	
-	@NotEmpty
+	@NotNull
 	@Email
 	private String email;
 	
-	@NotEmpty
+	@NotNull
 	private String nombre;
 	
-	@NotEmpty
+	@NotNull
 	private String apellidos;
 	
 	@NotNull
@@ -85,10 +85,16 @@ public class User implements Serializable{
 	
 //	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "usuario",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	Set<Entrada> entrada;
+	private Set<Entrada> entrada;
 	
 	@OneToMany(mappedBy = "usuario",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	Set<Evento> evento;
+	private Set<Evento> evento;
+	
+	@OneToMany(mappedBy = "user",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private Set<Mensaje> mensaje;
+	
+	@OneToMany(mappedBy = "user",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private Set<Valoracion> valoracion;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "authorities_users", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
@@ -101,8 +107,8 @@ public class User implements Serializable{
 
 	
 
-	public User(@NotEmpty String username, @NotEmpty String password, boolean enabled, @NotEmpty @Email String email,
-			@NotEmpty String nombre, @NotEmpty String apellidos, String provincia, String localidad, String pais,
+	public User(@NotNull String username, @NotNull String password, boolean enabled, @NotNull @Email String email,
+			@NotNull String nombre, @NotNull String apellidos, String provincia, String localidad, String pais,
 			String sexo, @NotNull Date fechaNac, @NotNull String dni, Set<Entrada> entrada, Set<Evento> evento,
 			Set<Authority> authority) {
 		super();

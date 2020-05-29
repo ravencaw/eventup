@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<th:block th:include="layout/layout :: head"></th:block>
-<meta charset="utf-8">
+
 </head>
 
 
@@ -13,11 +12,6 @@
 <br/>
 This file is generated on :
 
- <div class="card-body">
-            <h4 class="card-title" th:text="sadf"></h4>
-            <h6 class="text-muted card-subtitle mb-2">Fecha: <b th:text="asf"></b> Hora: <b th:text="asdf"></b></h6>
-            <p class="card-text" th:text="asdf">
-            <h5>Precio: <b id="precio" th:text="asdf"></b> €</h5>
-         </div>
+
 </body>
 </html>

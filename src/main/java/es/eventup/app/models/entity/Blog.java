@@ -2,12 +2,17 @@ package es.eventup.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,19 +33,22 @@ public class Blog implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	Long id;
+	private Long id;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="fotos")
-	String fotos;
+	private String fotos;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="videos")
-	String videos;
+	private String videos;
 	
-	@Column(name="id_evento")
-	Long idEvento;
+	@OneToMany(mappedBy = "blog",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private Set<Valoracion> valoracion;
 	
+	@NotNull
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Evento evento;
 
 	public Blog() {
 
@@ -48,12 +56,12 @@ public class Blog implements Serializable{
 	
 	
 
-	public Blog(Long id, @NotEmpty String fotos, @NotEmpty String videos, Long idEvento) {
+	public Blog(Long id, @NotNull String fotos, @NotNull String videos, Evento evento) {
 		super();
 		this.id = id;
 		this.fotos = fotos;
 		this.videos = videos;
-		this.idEvento = idEvento;
+		this.evento = evento;
 	}
 
 
@@ -89,15 +97,21 @@ public class Blog implements Serializable{
 		this.videos = videos;
 	}
 
-
-	public Long getIdEvento() {
-		return idEvento;
+	public Set<Valoracion> getValoracion() {
+		return valoracion;
+	}
+	
+	//DUDOSO
+	public void setValoracion(Set<Valoracion> valoracion) {
+		this.valoracion = valoracion;
 	}
 
+	public Evento getEvento() {
+		return evento;
+	}
 
-
-	public void setIdEvento(Long idEvento) {
-		this.idEvento = idEvento;
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 
