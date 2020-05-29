@@ -34,20 +34,23 @@ public class Asistencia implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	@NotNull
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_entrada", referencedColumnName = "id")
-	private Entrada entrada;
+	
 	@NotNull
 	@Column(name="fecha")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fecha;
+	
 	@NotNull
 	@Column(name="hora")
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="HH:mm:ss")
 	private Date hora;
+	
+	@NotNull
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_entrada", referencedColumnName = "id")
+	private Entrada entrada;
 
 	public Asistencia() {
 	}

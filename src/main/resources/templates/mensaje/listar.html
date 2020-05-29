@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <head th:replace="layout/layout :: head"></head>
+<meta charset="utf-8">
 <body>
 	<header  th:replace="layout/layout :: header"></header>
 	<div class="container">
@@ -15,7 +16,7 @@
 				<th>Contenido</th>
 				<th>Tipo</th>
 				<th>Estado</th>
-				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/mensaje/nuevo}">Añadir</a></th>
+				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/mensaje/nuevo}">AÃ±adir</a></th>
 			</tr>
 			<tr th:each="mensaje: ${mensajes}">
 				<td th:text="${mensaje.id}"></td>
@@ -28,7 +29,7 @@
 					<a class="btn btn-success btn-xs col-md-12" th:href="@{/mensaje/form/}+${mensaje.id}">Editar</a>
 				</td>
 				<td>
-					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/mensaje/delete/}+${mensaje.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/mensaje/delete/}+${mensaje.id}" onclick="return confirm('Â¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				</td>
 			</tr>
 		</table>

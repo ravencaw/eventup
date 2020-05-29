@@ -4,6 +4,7 @@
 <head th:replace="layout/layout :: head">
 <script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
+<meta charset="utf-8">
 </head>
 
 <body>
@@ -15,22 +16,22 @@
 			<div class="form-group">
 <!--				<div class="form-group">
 					<label for="nombre">Nombre</label>
-					 <input type="text" class="form-control" id="nombre" placeholder="Introduzca el nombre de la actividad aquí:" th:field="*{nombre}" th:errorclass="'form-control alert-danger'">
+					 <input type="text" class="form-control" id="nombre" placeholder="Introduzca el nombre de la actividad aquÃ­:" th:field="*{nombre}" th:errorclass="'form-control alert-danger'">
 					 <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
 				</div> -->
 				<div class="form-group">
 					<label for="id">id</label> 
-					<input type="text" class="form-control" id="id" placeholder="Introduzca la descripción aquí:" th:field="*{id}" th:errorclass="'form-control alert-danger'">
+					<input type="text" class="form-control" id="id" placeholder="Introduzca la descripciÃ³n aquÃ­:" th:field="*{id}" th:errorclass="'form-control alert-danger'">
 					<small class="form-text text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></small>
 				</div>
 				<div class="form-group">
 					<label for="fotos">fotos</label> 
-					<input type="text" class="form-control" id="fotos" placeholder="Introduzca los fotos aquí: " th:field="*{fotos}" th:errorclass="'form-control alert-danger'">
+					<input type="text" class="form-control" id="fotos" placeholder="Introduzca los fotos aquÃ­: " th:field="*{fotos}" th:errorclass="'form-control alert-danger'">
 					<small class="form-text text-danger" th:if="${#fields.hasErrors('fotos')}" th:errors="*{fotos}"></small>
 				</div>
 				<div class="form-group">
 					<label for="videos">videos</label> 
-					<input type="text" class="form-control" id="videos" placeholder="Introduzca los videos aquí: " th:field="*{videos}" th:errorclass="'form-control alert-danger'">
+					<input type="text" class="form-control" id="videos" placeholder="Introduzca los videos aquÃ­: " th:field="*{videos}" th:errorclass="'form-control alert-danger'">
 					<small class="form-text text-danger" th:if="${#fields.hasErrors('videos')}" th:errors="*{videos}"></small>
 				</div>
 				

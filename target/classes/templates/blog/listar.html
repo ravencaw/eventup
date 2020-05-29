@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <head th:replace="layout/layout :: head"></head>
+<meta charset="utf-8">
 <body>
 	<header  th:replace="layout/layout :: header"></header>
 	<div class="container">
@@ -15,7 +16,7 @@
 <!--			<th>Ponentes</th>
 				<th>Capacidad</th>
 				<th>Lugar</th> -->
-				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/blog/nuevo}">Añadir</a></th>
+				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/blog/nuevo}">AÃ±adir</a></th>
 			</tr>
 			<tr th:each="blog: ${blogs}">
 				<td th:text="${blog.id}"></td>
@@ -27,7 +28,7 @@
 					<a class="btn btn-success btn-xs col-md-12" th:href="@{/blog/form/}+${blog.id}">Editar</a>
 				</td>
 				<td>
-					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/blog/delete/}+${blog.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/blog/delete/}+${blog.id}" onclick="return confirm('Â¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				</td>
 			</tr>
 		</table>
