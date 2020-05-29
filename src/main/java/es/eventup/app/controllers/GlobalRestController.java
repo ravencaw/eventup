@@ -13,24 +13,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.eventup.app.models.entity.Transporte;
 import es.eventup.app.models.entity.User;
 import es.eventup.app.models.projections.EntradaProjection;
 import es.eventup.app.models.projections.EventoProjection;
+import es.eventup.app.models.projections.TransporteProjection;
 import es.eventup.app.models.repository.UserRepository;
 import es.eventup.app.models.service.EntradaService;
 import es.eventup.app.models.service.EventoService;
+import es.eventup.app.models.service.TransporteService;
 
 @RestController
 @RequestMapping(path = "/rest")
 public class GlobalRestController {
 	
 	@Autowired
-	EntradaService service;
+	private EntradaService service;
 	@Autowired
-	EventoService eventoService;
+	private EventoService eventoService;
 	@Autowired
 	private UserRepository userService;
+	@Autowired
+	private TransporteService transporteService;
 	
+	
+	
+	@GetMapping(path = "venta/getTransporte/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TransporteProjection> getTransporte(@PathVariable("id") Long id) {
+		Optional<TransporteProjection> res = transporteService.find(id);
+		assert res.orElse(null) != null;
+		return ResponseEntity.ok(res.orElse(null));
+	}
 	@GetMapping(path = "asistencia/{id}/{dni}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EntradaProjection> get(@PathVariable("dni") String dni, @PathVariable("id") Long id) {
         Optional<EntradaProjection> res = service.findByUserAndEvento(dni, id);

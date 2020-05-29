@@ -39,7 +39,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<td th:text="${entrada.usuario.nombre}+' '+${entrada.usuario.apellidos}"></td>
 									<td th:text="${entrada.numAsiento}"></td>
 									<td th:text="${entrada.tipo}"></td>
-									<td th:text="${entrada.transporte.tipo}"></td>
+									<td th:if="${entrada.transporte!=null}" th:text="${entrada.transporte.tipo}"></td>
+									<td th:if="${entrada.transporte==null}">Propio</td>
 									<td><a class="btn btn-primary btn-xs col-md-12"
 										th:href="@{/entrada/show/}+${entrada.id}">Mostrar</a>
 									<td><a class="btn btn-danger btn-xs col-md-12"
