@@ -34,7 +34,7 @@ public class Transporte implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty
+	@NotNull
 	private String empresa;
 	
 	
@@ -57,7 +57,7 @@ public class Transporte implements Serializable{
 	@NotNull
 	private float precio;
 	
-	@NotEmpty
+	@NotNull
 	private String tipo;
 	
 	@NotNull
@@ -77,7 +77,7 @@ public class Transporte implements Serializable{
 //	Entrada entrada;
 	
 	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	Evento evento;
+	private Evento evento;
 	
 	
 	public Transporte() {
@@ -85,8 +85,8 @@ public class Transporte implements Serializable{
 	}
 	
 
-	public Transporte(@NotEmpty String empresa, @NotNull int capacidad, String latInicio, String lngInicio,
-			String latFinal, String lngFinal, @NotNull float precio, @NotEmpty String tipo, @NotNull Date horaSalida,
+	public Transporte(@NotNull String empresa, @NotNull int capacidad, String latInicio, String lngInicio,
+			String latFinal, String lngFinal, @NotNull float precio, @NotNull String tipo, @NotNull Date horaSalida,
 			@NotNull Date horaLlegada, Evento evento) {
 		super();
 		this.empresa = empresa;

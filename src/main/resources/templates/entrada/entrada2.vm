@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<head>
+
+</head>
+
+
+<body>
+<p>Hello <b>$name!</b>  Welcome to Velocity!</p>
+<h1> Hello User</h1>
+<br/>
+<br/>
+This file is generated on :
+
+
+</body>
+</html>

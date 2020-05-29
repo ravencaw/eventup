@@ -1,13 +1,19 @@
 package es.eventup.app.models.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "valoracion")
@@ -24,12 +30,13 @@ public class Valoracion implements Serializable{
 	
 	private Integer opinion;
 	
-	@Column(name="id_blog")
-	private Long idBlog;
+	@NotNull
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Blog blog;
 	
-	
-	@Column(name="id_usuario")
-	private Long idUsuario;
+	@NotNull
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private User user;
 	
 	public Valoracion() {
 		super();
@@ -37,13 +44,13 @@ public class Valoracion implements Serializable{
 	}
 
 
-	public Valoracion(Long id, String comentario, Integer opinion, Long idBlog, Long idUsuario) {
+	public Valoracion(Long id, String comentario, Integer opinion, Blog blog, User user) {
 		super();
 		this.id = id;
 		this.comentario = comentario;
 		this.opinion = opinion;
-		this.idBlog = idBlog;
-		this.idUsuario = idUsuario;
+		this.user = user;
+		this.blog = blog;
 	}
 
 
@@ -76,24 +83,25 @@ public class Valoracion implements Serializable{
 		this.opinion = opinion;
 	}
 
+	
 
-	public Long getIdBlog() {
-		return idBlog;
+	public Blog getBlog() {
+		return blog;
 	}
 
 
-	public void setIdBlog(Long idBlog) {
-		this.idBlog = idBlog;
+	public void setBlog(Blog blog) {
+		this.blog = blog;
 	}
 
 
-	public Long getIdUsuario() {
-		return idUsuario;
+	public User getUser() {
+		return user;
 	}
 
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 

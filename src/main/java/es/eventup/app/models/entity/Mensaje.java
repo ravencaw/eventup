@@ -2,13 +2,17 @@ package es.eventup.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,43 +32,45 @@ public class Mensaje implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty
+	@NotNull
 	@Column(name="hora")
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="HH:mm:ss")
 	private Date hora;
 
-	@NotEmpty
+	@NotNull
 	@Column(name="fecha")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fecha;
 
-	@NotEmpty
+	@NotNull
 	@Column(name="contenido")
 	private String contenido;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="tipo")
 	private String tipo;
 
-	@NotEmpty
+	@NotNull
 	@Column(name="estado")
 	private String estado;
 	
-	@Column(name="id_evento")
-	Long idEvento;
+	@NotNull
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Evento evento;
 	
-	@Column(name="id_usuario")
-	Long idUsuario;
-
+	@NotNull
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private User user;
+	
 	public Mensaje() {
 		super();
 	}
 
 
-	public Mensaje(Long id, Date hora, Date fecha, @NotEmpty String contenido, @NotEmpty String tipo,
-			@NotEmpty String estado) {
+	public Mensaje(Long id, Date hora, Date fecha, @NotNull String contenido, @NotNull String tipo,
+			@NotNull String estado, @NotNull User user, @NotNull Evento evento) {
 		super();
 		this.id = id;
 		this.hora = hora;
@@ -72,6 +78,8 @@ public class Mensaje implements Serializable {
 		this.contenido = contenido;
 		this.tipo = tipo;
 		this.estado = estado;
+		this.user = user;
+		this.evento = evento;
 	}
 
 	public Long getId() {
@@ -79,17 +87,14 @@ public class Mensaje implements Serializable {
 	}
 
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 
-
 	public Date getHora() {
 		return hora;
 	}
-
 
 
 	public void setHora(Date hora) {
@@ -144,30 +149,26 @@ public class Mensaje implements Serializable {
 		this.estado = estado;
 	}
 
+	
 
-
-	public Long getIdEvento() {
-		return idEvento;
+	public Evento getEvento() {
+		return evento;
 	}
 
 
-
-	public void setIdEvento(Long idEvento) {
-		this.idEvento = idEvento;
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 
-
-	public Long getIdUsuario() {
-		return idUsuario;
+	public User getUser() {
+		return user;
 	}
 
 
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
 
 
 	public static long getSerialversionuid() {

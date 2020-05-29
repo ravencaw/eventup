@@ -7,7 +7,7 @@
 <meta name="_csrf_header" th:content="@{_csrf.headerName}"/>
 <script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
-
+<meta charset="utf-8">
 </head>
 
 <body>
@@ -37,9 +37,10 @@
 						th:errors="*{descripcion}"></small>
 				</div>
 				<div class="form-group">
-					<label for="foto">Foto</label> <input type="file"
-						class="form-control" id="foto" th:field="*{foto}"
-						th:errorclass="'form-control alert-danger'"> <small
+					<label for="foto">Foto</label> <input type="file" name="foto"
+						class="form-control"  
+						th:errorclass="form-control alert alert-danger" 
+						accept="image/x-png,image/x-jpg,image/x-jpeg"> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('foto')}"
 						th:errors="*{foto}"></small>
 				</div>
