@@ -48,7 +48,7 @@ public class Asistencia implements java.io.Serializable {
 	private Date hora;
 	
 	@NotNull
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_entrada", referencedColumnName = "id")
 	private Entrada entrada;
 
