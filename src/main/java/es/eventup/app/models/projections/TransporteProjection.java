@@ -1,5 +1,7 @@
 package es.eventup.app.models.projections;
 
+import java.util.Date;
+
 public interface TransporteProjection {
 	Long getId();
 	
@@ -8,6 +10,10 @@ public interface TransporteProjection {
 	String getEmpresa();
 	
 	Integer getCapacidad();
+	
+	Date getHoraSalida();
+	
+	Date getHoraLlegada();
 	
 	Float getPrecio();
 }

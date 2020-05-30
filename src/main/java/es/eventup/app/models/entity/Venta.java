@@ -47,7 +47,7 @@ public class Venta implements Serializable{
 	Double total;
 	
 	@NotNull
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	Evento evento;
 	
 //	@OneToOne(cascade = CascadeType.ALL)

@@ -8,4 +8,5 @@ public interface AsistenciaProjection {
 	Date getFecha();
 	
 	Date getHora();
+	
 }

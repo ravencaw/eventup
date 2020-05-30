@@ -82,7 +82,7 @@ public class UsuarioController {
 		model.put("tituloWeb", "User: Editar");
 		model.put("titulo", "Edicion de User");
 		
-		return "perfil/miPerfil";
+		return "/perfil/miPerfil";
 	}
 	
 	@RequestMapping(value="/usuario/nuevo", method=RequestMethod.POST)
@@ -106,7 +106,7 @@ public class UsuarioController {
 		service.save(usuario);
 		
 		stat.setComplete();
-		return "redirect:/perfil/miPerfil";
+		return "/perfil/miPerfil";
 	}
 	
 	@RequestMapping(value="/usuario/editar", method=RequestMethod.POST)

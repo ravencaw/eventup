@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.eventup.app.models.entity.Asistencia;
+import es.eventup.app.models.projections.AsistenciaProjection;
+import es.eventup.app.models.projections.AsistenciaProjection_Lista;
 import es.eventup.app.models.repository.AsistenciaRepository;
 
 
@@ -41,6 +43,11 @@ public class AsistenciaServiceImpl implements AsistenciaService {
 	@Transactional
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public List<AsistenciaProjection_Lista> findByEvento(Long id_evento) {
+		return repository.findByEntrada_Venta_Evento_Id(id_evento);
 	}
 	
 }

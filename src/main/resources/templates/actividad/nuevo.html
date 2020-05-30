@@ -11,7 +11,7 @@
 	<div class="container">
 		<h1 class="text-secondary" th:text="${titulo}"></h1>
 
-		<form th:action="@{/actividad/nuevo}" th:object="${actividad}" method="post">
+		<form th:action="@{/actividad/nuevo/}+${id_evento}" th:object="${actividad}" method="post">
 			<div class="form-group">
 				<div class="form-group">
 					<label for="nombre">Nombre</label>

@@ -43,10 +43,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<td th:if="${entrada.transporte==null}">Propio</td>
 									<td><a class="btn btn-primary btn-xs col-md-12"
 										th:href="@{/entrada/show/}+${entrada.id}">Mostrar</a>
-									<td><a class="btn btn-danger btn-xs col-md-12"
-										th:href="@{/entrada/delete/}+${entrada.id}"
-										onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
-									</td>
+<!-- 									<td><a class="btn btn-danger btn-xs col-md-12" -->
+<!-- 										th:href="@{/entrada/delete/}+${entrada.venta.evento.id}+'/'+${entrada.id}" -->
+<!-- 										onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a> -->
+<!-- 									</td> -->
 								</tr>
 							</table>
 						</div>
