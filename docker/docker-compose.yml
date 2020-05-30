@@ -32,22 +32,22 @@ services:
 
 # ---- MICROSERVICIOS ----
 
-#  eventup-service:
-#    image: adlian25/eventup:0.0.1-SNAPSHOT
-#    restart: always
-#    depends_on:
-#     - mysql
-#    ports:
-#      - 80:80
-#    networks:
-#      monitoring:
-#        aliases:
-#          - eventup-service
-#    environment:
-#      # MONGODB
-#      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/eventup?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC
-#      # LOGGING
-#      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=OFF
-#      - LOGGING_LEVEL_ROOT=OFF
+  eventup-service:
+    image: adlian25/eventup:0.0.1-SNAPSHOT
+    restart: always
+    depends_on:
+     - mysql
+    ports:
+      - 80:80
+    networks:
+      monitoring:
+        aliases:
+          - eventup-service
+    environment:
+      # MONGODB
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/eventup?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC
+      # LOGGING
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=OFF
+      - LOGGING_LEVEL_ROOT=OFF
 networks:
   monitoring:
