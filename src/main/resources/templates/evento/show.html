@@ -40,7 +40,12 @@
             <div class="row">
                 <div class="col-md-12">
                 	<div class="row">
-	                    <h1 class="col-md-8">Localización del evento</h1><div th:if="${user != null}"><a th:if="${user.id==evento.usuario.id}" class="btn btn-primary btn-xs col-md-4" th:href="@{/transporte/nuevo/}">Añadir transporte</a></div>
+	                    <h1>Localización del evento</h1>
+	                    <div th:if="${user != null}">
+	                   		<a th:if="${user.id==evento.usuario.id}" class="btn btn-primary" th:href="@{/transporte/nuevo/}+${evento.id}">Añadir transporte</a>
+	                    	<a th:if="${user.id==evento.usuario.id}"class="btn btn-success" th:href="@{/transporte/listar/}+${evento.id}">Ver transportes</a>
+	                    	<a th:if="${user.id==evento.usuario.id}"class="btn btn-success" th:href="@{/actividad/listar/}+${evento.id}">Ver actividades</a>
+	                    </div>
                 	</div>
                     <hr>
                     <div id="mapaEvento" style="height: 600px;"></div>

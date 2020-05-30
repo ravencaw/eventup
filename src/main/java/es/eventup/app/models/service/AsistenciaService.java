@@ -7,10 +7,14 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.P
 import org.springframework.data.domain.Page;
 
 import es.eventup.app.models.entity.Asistencia;
+import es.eventup.app.models.projections.AsistenciaProjection;
+import es.eventup.app.models.projections.AsistenciaProjection_Lista;
 
 public interface AsistenciaService {
 	
 		public List<Asistencia> findAll();
+
+		public List<AsistenciaProjection_Lista> findByEvento(Long id_evento);
 
 		public void save(Asistencia entity);
 		

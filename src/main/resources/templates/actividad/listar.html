@@ -15,9 +15,8 @@
 				<th>Nombre</th>
 				<th>Descripción</th>
 				<th>Ponentes</th>
-				<th>Capacidad</th>
 				<th>Lugar</th>
-				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/actividad/nuevo}">Añadir</a></th>
+				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/actividad/nuevo/}+${id_evento}">Añadir</a></th>
 			</tr>
 			<tr th:each="actividad: ${actividades}">
 				<td th:text="${actividad.id}"></td>
@@ -26,10 +25,10 @@
 				<td th:text="${actividad.capacidad}"></td>
 				<td th:text="${actividad.lugar}"></td>
 				<td>
-					<a class="btn btn-success btn-xs col-md-12" th:href="@{/actividad/form/}+${actividad.id}">Editar</a>
+					<a class="btn btn-success btn-xs col-md-12" th:href="@{/actividad/form/}+${id_evento}+'/'+${actividad.id}">Editar</a>
 				</td>
 				<td>
-					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/actividad/delete/}+${actividad.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/actividad/delete/}+${id_evento}+'/'+${actividad.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				</td>
 			</tr>
 		</table>

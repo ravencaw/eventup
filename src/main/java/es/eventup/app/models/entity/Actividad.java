@@ -40,7 +40,7 @@ public class Actividad implements Serializable {
 	@NotNull
 	private String lugar;
 	
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Evento evento;
 
 	public Actividad() {

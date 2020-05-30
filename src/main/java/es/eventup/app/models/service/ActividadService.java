@@ -7,10 +7,13 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.P
 import org.springframework.data.domain.Page;
 
 import es.eventup.app.models.entity.Actividad;
+import es.eventup.app.models.projections.ActividadProjection;
 
 public interface ActividadService {
 	
 		public List<Actividad> findAll();
+
+		public List<ActividadProjection> FindByEvento(Long id);
 
 		public void save(Actividad entity);
 		

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<th:block th:include="layout/layout :: head">
-        </th:block>
+<th:block th:include="layout/layout :: head"></th:block>
+<meta charset="utf-8">
 </head>
 <body>
 	<header  th:replace="layout/layout :: header"></header>
@@ -17,7 +17,7 @@
 				<th>Blog</th>
 				<th>Usuario</th>
 			
-				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/valoracion/nuevo}">Añadir</a></th>
+				<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/valoracion/nuevo}">AÃ±adir</a></th>
 			</tr>
 			<tr th:each="valoracion: ${valoraciones}">
 				<td th:text="${valoracion.id}"></td>
@@ -30,7 +30,7 @@
 					<a class="btn btn-success btn-xs col-md-12" th:href="@{/valoracion/form/}+${valoracion.id}">Editar</a>
 				</td>
 				<td>
-					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/valoracion/delete/}+${valoracion.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+					<a class="btn btn-danger btn-xs col-md-12" th:href="@{/valoracion/delete/}+${valoracion.id}" onclick="return confirm('Â¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				</td>
 			</tr>
 		</table>

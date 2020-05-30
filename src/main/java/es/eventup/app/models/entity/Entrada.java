@@ -33,8 +33,7 @@ public class Entrada  implements java.io.Serializable {
 	@Column(name="id")
      private Long id;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_transporte", referencedColumnName = "id")
+	@ManyToOne(optional = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
      private Transporte transporte;
     
      @NotNull
@@ -42,11 +41,11 @@ public class Entrada  implements java.io.Serializable {
      private User usuario;
      
      @NotNull
-     @OneToOne(cascade = CascadeType.PERSIST)
+     @OneToOne(cascade = CascadeType.REMOVE)
      @JoinColumn(name = "id_venta", referencedColumnName = "id")
      private Venta venta;
      
-     @OneToOne(cascade = CascadeType.PERSIST)
+     @OneToOne(cascade = CascadeType.REMOVE)
      @JoinColumn(name = "id_asistencia", referencedColumnName = "id")
      private Asistencia asistencia;
      

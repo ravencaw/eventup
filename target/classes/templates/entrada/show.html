@@ -47,10 +47,14 @@
     </div>
     <div>
     <br>
-        <div class="container">
+        <div class="container" th:if="${entrada.transporte!=null}">
             <div class="row">
                 <div class="col-md-12">
                     <h1>Ruta de transporte</h1>
+                    <input type="hidden" id="latInicio" th:value="${entrada.transporte.latInicio}">
+                    <input type="hidden" id="lngInicio" th:value="${entrada.transporte.lngInicio}">
+                    <input type="hidden" id="latFin" th:value="${entrada.transporte.latFin}">
+                    <input type="hidden" id="lngFin" th:value="${entrada.transporte.lngFin}">
                     <hr>
                     <div id="map" style="height: 600px;"></div>
             </div>
@@ -60,14 +64,11 @@
 	<script type="text/javascript" th:inline="javascript">
 	
 		function initMap() {
-			/*<![CDATA[*/
+				var latInicio = $("#latInicio").val();
+				var lngInicio = $("#lngInicio").val();
+				var latFin = $("#latFin").val();
+				var lngFin = $("#lngFin").val();
 			
-			var latInicio = /*[[${entrada.transporte.latInicio}]]*/ 'default';
-			var lngInicio = /*[[${entrada.transporte.lngInicio}]]*/ 'default';
-			var latFin = /*[[${entrada.transporte.latFin}]]*/ 'default';
-			var lngFin = /*[[${entrada.transporte.lngFin}]]*/ 'default';
-			
-			/*]]>*/
 			
 			var directionsService = new google.maps.DirectionsService;
         	var directionsRenderer = new google.maps.DirectionsRenderer;
@@ -139,6 +140,6 @@
 		  }
 		
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX1Qy2dFMigK3r7pwgCBFC90exmctPt6g&callback=initMap"></script>
+    <script th:if="${entrada.transporte!=null}" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX1Qy2dFMigK3r7pwgCBFC90exmctPt6g&callback=initMap"></script>
 </body>
 </html>

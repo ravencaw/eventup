@@ -48,7 +48,7 @@ public class Venta implements Serializable{
 	
 	@NotNull
 	@ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private Evento evento;
+	Evento evento;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_entrada", referencedColumnName = "id")

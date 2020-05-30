@@ -25,9 +25,9 @@
 				<td th:text="${asistencia.fecha}"></td>
 				<td th:text="${asistencia.hora}"></td>
 				<td><a class="btn btn-success btn-xs col-md-12"
-					th:href="@{/asistencia/form/}+${asistencia.id}">Editar</a></td>
+					th:href="@{/asistencia/form/}+${id_evento}+'/'+${asistencia.id}">Editar</a></td>
 				<td><a class="btn btn-danger btn-xs col-md-12"
-					th:href="@{/asistencia/delete/}+${asistencia.id}"
+					th:href="@{/asistencia/delete/}+${id_evento}+'/'+${asistencia.id}"
 					onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				</td>
 			</tr>
