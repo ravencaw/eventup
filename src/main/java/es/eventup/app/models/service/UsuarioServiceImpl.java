@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.eventup.app.models.entity.User;
+import es.eventup.app.models.projections.UserProjection;
 import es.eventup.app.models.repository.UserRepository;
 
 @Service
@@ -42,6 +43,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Transactional
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public List<UserProjection> porProvincias(String provincia) {
+		return repository.findAllByProvincia(provincia, UserProjection.class);
+	}
+
+	@Override
+	public Optional<User> findByUsername(String username) {
+		return repository.findByUsername(username);
 	}
 	
 }
