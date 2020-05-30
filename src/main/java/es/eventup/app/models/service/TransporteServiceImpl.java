@@ -9,13 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import es.eventup.app.models.entity.Transporte;
+import es.eventup.app.models.projections.TransporteProjection;
 import es.eventup.app.models.repository.TransporteRepository;
 
 @Service
 public class TransporteServiceImpl implements TransporteService {
 
 	@Autowired
-	TransporteRepository repository;
+	TransporteRepository<Transporte, Long> repository;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -41,4 +42,14 @@ public class TransporteServiceImpl implements TransporteService {
 		repository.deleteById(id);
 	}
 	
+	@Override
+	public List<TransporteProjection> findByEvento(Long id) {
+		return repository.findByEvento_Id(id);
+	}
+
+	@Override
+	public Optional<TransporteProjection> find(Long id) {
+		return repository.Id(id);
+	}
+
 }

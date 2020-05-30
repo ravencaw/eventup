@@ -2,6 +2,7 @@ package es.eventup.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -72,11 +74,10 @@ public class Transporte implements Serializable{
 	@DateTimeFormat(pattern="HH:mm")
 	private Date horaLlegada;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id_entrada", referencedColumnName = "id")
-//	Entrada entrada;
+	@OneToMany(mappedBy = "transporte",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	Set<Entrada> entrada;
 	
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(optional = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Evento evento;
 	
 	
@@ -209,4 +210,16 @@ public class Transporte implements Serializable{
 	public void setHoraLlegada(Date horaLlegada) {
 		this.horaLlegada=horaLlegada;
 	}
+
+
+	public Set<Entrada> getEntrada() {
+		return entrada;
+	}
+
+
+	public void setEntrada(Set<Entrada> entrada) {
+		this.entrada = entrada;
+	}
+	
+	
 }

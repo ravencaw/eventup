@@ -12,7 +12,7 @@ public class LoginController {
 	public String login(Model model) {
 		model.addAttribute("tituloWeb", "Home");
 		model.addAttribute("titulo", "Home");
-		return "/login/login";
+		return "login/login";
 	}
 
 }

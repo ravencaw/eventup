@@ -19,7 +19,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             </ul>
         </div>
         <div class="page-content-wrapper">
-            <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars"></i></a>
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
 						<div class="container">
@@ -39,13 +39,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<td th:text="${entrada.usuario.nombre}+' '+${entrada.usuario.apellidos}"></td>
 									<td th:text="${entrada.numAsiento}"></td>
 									<td th:text="${entrada.tipo}"></td>
-									<td th:text="${entrada.transporte.tipo}"></td>
+									<td th:if="${entrada.transporte!=null}" th:text="${entrada.transporte.tipo}"></td>
+									<td th:if="${entrada.transporte==null}">Propio</td>
 									<td><a class="btn btn-primary btn-xs col-md-12"
 										th:href="@{/entrada/show/}+${entrada.id}">Mostrar</a>
-									<td><a class="btn btn-danger btn-xs col-md-12"
-										th:href="@{/entrada/delete/}+${entrada.id}"
-										onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
-									</td>
+<!-- 									<td><a class="btn btn-danger btn-xs col-md-12" -->
+<!-- 										th:href="@{/entrada/delete/}+${entrada.venta.evento.id}+'/'+${entrada.id}" -->
+<!-- 										onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a> -->
+<!-- 									</td> -->
 								</tr>
 							</table>
 						</div>

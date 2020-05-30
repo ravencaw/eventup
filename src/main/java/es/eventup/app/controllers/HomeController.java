@@ -12,6 +12,18 @@ public class HomeController {
 	public String listar(Model model) {
 		model.addAttribute("tituloWeb", "Home");
 		model.addAttribute("titulo", "Home");
-		return "/home";
+		return "home";
+	}
+	
+	@RequestMapping(value="/about", method=RequestMethod.GET)
+	public String about() {
+		
+		return "contacto/about";
+	}
+	
+	@RequestMapping(value="/enviar", method=RequestMethod.GET)
+	public String enviar() {
+		
+		return "contacto/enviar";
 	}
 }

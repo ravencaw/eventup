@@ -8,4 +8,6 @@ public interface UserProjection {
 	String getApellidos();
 	
 	String getDni();
+	
+	String getEmail();
 }

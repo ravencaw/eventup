@@ -3,26 +3,28 @@
 <head>
 <th:block th:include="layout/layout :: head"></th:block>
 <link rel="stylesheet" th:href="@{/css/login/styles.min.css}">
+<meta charset="utf-8">
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="login-card">
-		<img class="profile-img-card" th:src="@{/images/login/avatar_2x.png}">
+		<img class="img-fluid img-thumbnail bg-light" th:src="@{/images/layout/logo.png}">
 		<p class="profile-name-card"></p>
 		<form class="form-signin" th:action="@{/login}" method="post">
 			<span class="reauth-email"> </span>
-			<input class="form-control" type="text" id="inputEmail" required="" placeholder="Username" autofocus="" name="username">
-			<input class="form-control" type="password" id="inputPassword" required="" placeholder="Password" name="password">
+			<input class="form-control" type="text" id="inputEmail" required="" placeholder="Usuario" autofocus="" name="username">
+			<input class="form-control" type="password" id="inputPassword" required="" placeholder="Contraseña" name="password">
 			<div class="checkbox">
 				<div class="form-check">
 					<input class="form-check-input" type="checkbox" id="formCheck-1">
-					<label class="form-check-label" for="formCheck-1">Remember me</label>
+					<label class="form-check-label" for="formCheck-1">Recordar credenciales</label><br>
 				</div>
 			</div>
-			<button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Sign in</button>
+			<br>
+			<button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Acceder</button>
 		</form>
-		<a class="forgot-password" href="#">Forgot your password?</a>
-		<a class="nav-link" th:href="@{/usuario/nuevo}">Not registered? Sign in now!</a>
+		<a class="forgot-password" th:href="@{/contacto/enviar}">¿Olvidaste tu contraseña?</a><br>
+		<a class="forgot-password" th:href="@{/usuario/nuevo}">¡Registrate!</a>
 	</div>
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>

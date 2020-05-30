@@ -16,7 +16,7 @@
 				<th>Hora</th>
 				<th>Evento</th>
 				<th>Total</th>
-				<th colspan="2" style="text-align:center;">Acciones</th>
+				<th colspan="3" style="text-align:center;">Acciones</th>
 			</tr>
 			<tr th:each="venta: ${ventas}">
 				<td th:text="${venta.id}"></td>
@@ -25,10 +25,12 @@
 				<td th:text="${venta.evento.nombre}"></td>
 				<td th:text="${venta.total}+' €'"></td>
 				<td><a class="btn btn-danger btn-xs col-md-12"
-					th:href="@{/venta/delete/}+${venta.id}"
+					th:href="@{/venta/delete/}+${id_evento}+'/'+${venta.id}"
 					onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				<td><a class="btn btn-light btn-xs col-md-12"
-					th:href="@{/entrada/listar/}+${venta.id}">Ver entradas</a></td>
+					th:href="@{/entrada/listar/}+${id_evento}+'/'+${venta.id}">Ver entradas</a></td>
+				<td><a class="btn btn-success btn-xs col-md-12"
+					th:href="@{/venta/edit/}+${id_evento}+'/'+${venta.id}">Editar</a></td>
 			</tr>
 		</table>
 	</div>
