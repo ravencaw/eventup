@@ -28,7 +28,11 @@
 
 						<img class="card-img-top" th:src="@{/images/blogs/}+${blog.fotos}"
 							alt="Slide Image" height="450px">
-
+							<div class="d-flex justify-content-center">
+						<video width="720" height="480" controls >
+							<source th:src="@{/videos/}+${blog.videos}" type="video/mp4">
+						</video>
+						</div>
 					</div>
 					<br>
 					<div class="card">

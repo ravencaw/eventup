@@ -74,7 +74,7 @@ public class BlogController {
 
 	@RequestMapping(value = "/blog/nuevo/{id_evento}", method = RequestMethod.POST)
 	public String guardar(@PathVariable(name = "id_evento") Long id_evento, @Valid Blog blog, BindingResult result,
-			Model model, SessionStatus stat, @RequestParam("fotos") MultipartFile fotos) {
+			Model model, SessionStatus stat, @RequestParam("fotos") MultipartFile fotos,  @RequestParam("videos") MultipartFile videos) {
 
 		blog.setEvento(eventoService.findOne(id_evento).get());
 		Evento e = eventoService.findOne(id_evento).get();
@@ -110,6 +110,33 @@ public class BlogController {
 			}
 		
 		blog.setFotos(uuid + "." + fotos.getContentType().split("/")[1]);
+		}
+		if (!videos.isEmpty()) {
+			Path directoriovideos = Paths.get(".//src//main//resources//static//videos");
+			// String rootPath = directorioFotos.toFile().getAbsolutePath(); PETABA
+			String uuid = UUID.randomUUID().toString();
+			InputStream inputStream = null;
+			OutputStream outputStream = null;
+			File newFile = new File(directoriovideos.toString()+"/" + uuid + "." + videos.getContentType().split("/")[1]);
+
+			try {
+				inputStream = videos.getInputStream();
+
+				if (!newFile.exists()) {
+					newFile.createNewFile();
+				}
+				outputStream = new FileOutputStream(newFile);
+				int read = 0;
+				byte[] bytes = new byte[1024];
+
+				while ((read = inputStream.read(bytes)) != -1) {
+					outputStream.write(bytes, 0, read);
+				}
+			} catch (IOException a) {
+				a.printStackTrace();
+			}
+		
+		blog.setVideos(uuid + "." + videos.getContentType().split("/")[1]);
 		}
 		blogService.save(blog);
 		eventoService.save(e);
