@@ -35,69 +35,14 @@
 				            </div>
 				            
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
     <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                	<div class="row">
-	                    <h1 class="col-md-4">Localización del evento</h1>
-	                    <div class="col-md-8" th:if="${user != null}">
-	                   		<a th:if="${user.id==evento.usuario.id}" class="btn btn-primary col-md-3" th:href="@{/transporte/nuevo/}+${evento.id}">Añadir transporte</a>
-	                    	<a th:if="${user.id==evento.usuario.id}"class="btn btn-light col-md-3" th:href="@{/transporte/listar/}+${evento.id}">Ver transportes</a>
-	                    	<a th:if="${user.id==evento.usuario.id}" class="btn btn-light col-md-3" th:href="@{/actividad/listar/}+${evento.id}">Ver actividades</a>
-	                    	<a th:if="${user.id==evento.usuario.id && evento_pasado}" class="btn btn-primary col-md-2" th:href="@{/blog/nuevo}">Añadir Blog</a>
-	                    </div>
-                	</div>
-                    <hr>
-                    <div id="mapaEvento" style="height: 600px;"></div>
-                </div>
-        	</div>
-    	</div>
     	</div>
     <br>
 	<footer th:replace="layout/layout :: footer"></footer>
-	<script type="text/javascript">
-	
-		function initMapEvento() {
-			var latitud =  $("#latitud").val();
-			var longitud =  $("#longitud").val();
-			var direccion =  $("#direccion").val();
-			
-		    var latLng = new google.maps.LatLng(latitud, longitud);
-		    var map = new google.maps.Map(document.getElementById('mapaEvento'), {
-		        center: latLng,
-		        zoom: 20
-		    });
-		    console.log(map);
-		  
-		    var infowindow = new google.maps.InfoWindow({
-		        content: direccion
-		    });
-		    
-		      
-		    var marker = new google.maps.Marker({
-		        position: latLng,
-		        map: map,
-		        title: direccion
-		    });
-		  
-		    marker.addListener('click', function() {
-		        infowindow.open(map, marker);
-		    });
-		    
-		  
-		    marker.setMap(map);
-		  
-		    
-		    var infoWindow = new google.maps.InfoWindow;
-		      
-		  }
-		
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX1Qy2dFMigK3r7pwgCBFC90exmctPt6g&callback=initMapEvento"></script>
 </body>
 </html>

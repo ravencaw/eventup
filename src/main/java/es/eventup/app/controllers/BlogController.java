@@ -40,7 +40,7 @@ public class BlogController {
 		Blog blog = new Blog();
 		model.put("blog", blog);
 		model.put("tituloWeb", "Blog: Crear");
-		model.put("titulo", "Formulario de Blog");
+		model.put("titulo", "Añadir Blog");
 		return "blog/nuevo";
 	}
 	
