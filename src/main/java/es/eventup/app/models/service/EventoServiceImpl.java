@@ -73,4 +73,9 @@ public class EventoServiceImpl implements EventoService {
 		// TODO Auto-generated method stub
 		return repository.findByUsuario_Id(id);
 	}
+
+	@Override
+	public List<EventoProjection> findAllLimited() {
+		return repository.findAllProjectedByOrderByFechaDesc().subList(0, 3);
+	}
 }

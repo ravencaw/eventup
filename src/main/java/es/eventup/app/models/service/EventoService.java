@@ -25,4 +25,6 @@ public interface EventoService{
 	List<EventoProjection> findByCiudad(String ciudad);
 
 	List<EventoProjection> findByUser(Long id);
+	
+	List<EventoProjection> findAllLimited();
 }

@@ -19,5 +19,7 @@ public interface EventoProjection {
 	
 	Double getPrecio();
 	
+	String getFoto();
+	
 	UserProjection getUsuario();
 }
