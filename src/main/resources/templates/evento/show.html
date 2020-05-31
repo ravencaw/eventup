@@ -18,7 +18,7 @@
                         <div class="card-body">
                         
                             <h4 class="card-title" th:text="${evento.nombre}"></h4>
-                            <a class="btn btn-light  col-md-2 float-right" th:href="@{/blog/show/}+${evento.id}">Ver Blog</a>
+                            <a th:if="${evento.blog!=null && evento_pasado}" class="btn btn-light col-md-2 float-right" th:href="@{/blog/show/}+${evento.id}">Ver Blog</a>
 				            <h6 class="text-muted card-subtitle mb-2">Fecha: <b th:text="${evento.fecha}"></b> Hora: <b th:text="${evento.hora}"></b></h6>
 				            <p class="card-text" th:text="${evento.descripcion}">
 				            <h5>Precio: <b id="precio" th:text="${evento.precio}"></b> €</h5>
