@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="layout/layout :: head"></th:block>
+<meta charset="utf-8">
+<meta name="_csrf" th:content="@{_csrf.token}"/>
+<meta name="_csrf_header" th:content="@{_csrf.headerName}"/>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div>
+	<br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                    	<img class="card-img-top" th:src="${evento.foto}" alt="Foto del Evento" />
+                        <div class="card-body">
+                        
+                            <h4 class="card-title" th:text="${evento.nombre}"></h4>
+                            <a class="btn btn-light  col-md-2 float-right" th:href="@{/blog/show/}+${evento.id}">Ver Blog</a>
+				            <h6 class="text-muted card-subtitle mb-2">Fecha: <b th:text="${evento.fecha}"></b> Hora: <b th:text="${evento.hora}"></b></h6>
+				            <p class="card-text" th:text="${evento.descripcion}">
+				            <h5>Precio: <b id="precio" th:text="${evento.precio}"></b> €</h5>
+				            <input type="hidden" th:value="${evento.latitud}" id="latitud">
+				            <input type="hidden" th:value="${evento.longitud}" id="longitud">
+				            <input type="hidden" th:value="${evento.direccion}" id="direccion">
+				            <div  th:if="${user != null}">
+					            <div class="row  " th:if="${user.id==evento.usuario.id}">
+					            	<a class="btn btn-light col-md-2 " th:href="@{/venta/listar/}+${evento.id}">Ventas</a>
+					            	<a class="btn btn-light col-md-2" th:href="@{/asistencia/listar/}+${evento.id}">Asistencia</a>
+					            	<a class="btn btn-success col-md-2" th:href="@{/evento/form/}+${evento.id}">Editar</a>
+					            	<a class="btn btn-danger col-md-2" th:href="@{/evento/delete/}+${evento.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+					            </div>
+				            </div>
+				            
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    	</div>
+    <br>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

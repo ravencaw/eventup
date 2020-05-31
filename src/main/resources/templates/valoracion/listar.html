@@ -23,8 +23,8 @@
 				<td th:text="${valoracion.id}"></td>
 				<td th:text="${valoracion.comentario}"></td>
 				<td th:text="${valoracion.opinion}"></td>
-				<td th:text="${valoracion.idBlog}"></td>
-				<td th:text="${valoracion.idUsuario}"></td>
+				<td th:text="${valoracion.blog.id}"></td>
+				<td th:text="${valoracion.user.id}"></td>
 				
 				<td>
 					<a class="btn btn-success btn-xs col-md-12" th:href="@{/valoracion/form/}+${valoracion.id}">Editar</a>

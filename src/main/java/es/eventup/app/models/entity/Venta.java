@@ -35,35 +35,36 @@ public class Venta implements Serializable{
 	@Column(name="fecha")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	Date fecha;
+	private Date fecha;
 	
 	@NotNull
 	@Column(name="hora")
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="HH:mm:ss")
-	Date hora;
+	private Date hora;
 	
 	@NotNull
-	Double total;
+	private Double total;
 	
 	@NotNull
 	@ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	Evento evento;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id_entrada", referencedColumnName = "id")
-//	Entrada entrada;
+	@OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_entrada", referencedColumnName = "id")
+	private Entrada entrada;
 
 	public Venta() {
 
 	}
 
-	public Venta(@NotNull Date fecha, @NotNull Date hora, @NotNull Double total, @NotNull Evento evento) {
+	public Venta(@NotNull Date fecha, @NotNull Date hora, @NotNull Double total, @NotNull Evento evento, Venta venta) {
 		super();
 		this.fecha = fecha;
 		this.hora = hora;
 		this.total = total;
 		this.evento = evento;
+		this.entrada = entrada;
 	}
 
 	@PrePersist
@@ -112,6 +113,18 @@ public class Venta implements Serializable{
 
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+
+	public Entrada getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(Entrada entrada) {
+		this.entrada = entrada;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

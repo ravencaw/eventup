@@ -8,6 +8,7 @@ import java.io.OutputStream;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -121,17 +122,20 @@ public class EventoController {
 	@RequestMapping(value = "/evento/form/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model) {
 
-		Optional<Evento> cli = null;
-
+		Evento cli = null;
+		
 		if (id > 0) {
-			cli = service.findOne(id);
+			cli = service.findOne(id).get();
 		} else {
 			return "redirect:/evento/listar";
 		}
-
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
+		String fechaCambiada = format.format(cli.getFecha());
 		model.put("evento", cli);
 		model.put("tituloWeb", "Evento: Editar");
 		model.put("titulo", "Edicion de Evento");
+		model.put("fecha", fechaCambiada);
+		
 
 		return "evento/nuevo";
 	}
@@ -186,7 +190,7 @@ public class EventoController {
 			eventoEntity.setUsuario(session);
 
 			service.save(eventoEntity);
-			return "redirect:/evento/listar";
+			return "redirect:/perfil/misEventos";
 		}
 
 //		
