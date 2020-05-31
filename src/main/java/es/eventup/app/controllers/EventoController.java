@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -90,8 +91,17 @@ public class EventoController {
 	public String show(Model model, @PathVariable(name = "id") Long id, Authentication authentication) {
 
 		UserDetails userDetails = (authentication != null) ? (UserDetails) authentication.getPrincipal() : null;
-
+		
+		Evento e = service.findOne(id).get();
 		User usuario;
+		
+		boolean evento_pasado = false;
+		
+		Date fecha_actual = new Date();
+		
+		if(e.getFecha().compareTo(fecha_actual)<0) {
+			evento_pasado = true;
+		}
 
 		if (userDetails != null)
 			usuario = usuarioService.findByUsername(userDetails.getUsername()).get();
@@ -100,7 +110,8 @@ public class EventoController {
 
 		model.addAttribute("tituloWeb", "Evento: Show");
 		model.addAttribute("titulo", "Datos del evento");
-		model.addAttribute("evento", service.findOne(id).get());
+		model.addAttribute("evento_pasado", evento_pasado);
+		model.addAttribute("evento", e);
 		model.addAttribute("user", usuario);
 		return "evento/show";
 	}
