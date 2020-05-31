@@ -51,7 +51,7 @@ public class UsuarioController {
 		User usuario = new User();
 		model.put("usuario", usuario);
 		model.put("tituloWeb", "Registrate");
-		model.put("titulo", "Registrarse");
+		model.put("titulo", "Formulario de User");
 		return "usuario/nuevo";
 	}
 	
@@ -75,13 +75,14 @@ public class UsuarioController {
 	@RequestMapping(value="/perfil/miPerfil")
 	public String miPerfil(Map<String, Object> model, Authentication authentication) {
 		
-		User usuario = userService.findByUsername(authentication.getName()).get();
+		UserDetails userDetails = (authentication!=null)?(UserDetails) authentication.getPrincipal():null;
+		User usuario = userService.findByUsername(userDetails.getUsername()).get();
 		
 		model.put("usuario", usuario);
 		model.put("tituloWeb", "User: Editar");
 		model.put("titulo", "Edicion de User");
 		
-		return "perfil/miPerfil";
+		return "/perfil/miPerfil";
 	}
 	
 	@RequestMapping(value="/usuario/nuevo", method=RequestMethod.POST)
@@ -105,7 +106,7 @@ public class UsuarioController {
 		service.save(usuario);
 		
 		stat.setComplete();
-		return "redirect:/";
+		return "/perfil/miPerfil";
 	}
 	
 	@RequestMapping(value="/usuario/editar", method=RequestMethod.POST)
