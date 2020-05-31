@@ -10,40 +10,39 @@ import org.springframework.stereotype.Service;
 public class MailSend {
 
 	@Autowired
-	private JavaMailSender mailSender;
+    private JavaMailSender mailSender;
 
-	// Pasamos por parametro: destinatario, asunto y el mensaje
-	public void sendEmail(String to, String subject, String content) {
+    //Pasamos por parametro: destinatario, asunto y el mensaje
+    public void sendEmail(String to, String subject, String content) {
 
-		SimpleMailMessage email = new SimpleMailMessage();
+        SimpleMailMessage email = new SimpleMailMessage();
 
-		email.setTo(to);
-		email.setSubject(subject);
-		email.setText(content);
+        email.setTo(to);
+        email.setSubject(subject);
+        email.setText(content);
+       
+        mailSender.send(email);
+    }
+    //Pasamo es array con los correos para que se envia a todos como COPIA OCULTA
+    public void sendEmailCCO(String[] cco, String subject, String content) {
+    	
+        SimpleMailMessage email = new SimpleMailMessage();
 
-		mailSender.send(email);
-	}
+        email.setBcc(cco);
+        email.setSubject(subject);
+        email.setText(content);
+        
+        mailSender.send(email);
+    }
+    
+public void sendEmailEntradas(String[] cco, String subject, String content) {
+    	
+        SimpleMailMessage email = new SimpleMailMessage();
 
-	// Pasamo es array con los correos para que se envia a todos como COPIA OCULTA
-	public void sendEmailCCO(String[] cco, String subject, String content) {
-
-		SimpleMailMessage email = new SimpleMailMessage();
-
-		email.setBcc(cco);
-		email.setSubject(subject);
-		email.setText(content);
-
-		mailSender.send(email);
-	}
-
-	public void sendEmailEntradas(String[] cco, String subject, String content) {
-
-		SimpleMailMessage email = new SimpleMailMessage();
-
-		email.setBcc(cco);
-		email.setSubject(subject);
-		email.setText(content);
-		mailSender.send(email);
-	}
+        email.setBcc(cco);
+        email.setSubject(subject);
+        email.setText(content);
+        mailSender.send(email);
+    }
 
 }

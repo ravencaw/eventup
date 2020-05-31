@@ -2,242 +2,129 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <th:block th:include="layout/layout :: head"></th:block>
-<meta charset="utf-8">
-<link rel="stylesheet" th:href="@{/css/home/styles.min.css}">
-<script th:src="@{/js/home/script.min.js}"></script>
+        <meta charset="utf-8">
+        <link rel="stylesheet" th:href="@{/css/home/styles.min.css}">
+        <script th:src="@{/js/home/script.min.js}"></script>
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
-
-
-		<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-			<div class="col-md-6 px-0">
-				<h1 class="display-6 font-italic">Eventup, donde encontrarás
-					cualquier evento y sino crealo tu.</h1>
-				<p class="lead my-3"></p>
-
-			</div>
-		</div>
-
-
-
-	</div>
-	<section class="features-icons  text-center">
-		<h1 class="display-4">Nuestros Eventos</h1>
-		<br>
-		<div class="container">
-			<div class="card-deck">
-				<div class="card">
-					<img class="card-img-top" src="..." alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a wider card with supporting text
-							below as a natural lead-in to additional content. This content is
-							a little bit longer.</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">Last updated 3 mins ago</small>
-					</div>
+		<h1 th:text="${titulo}"></h1>
+		<div class="carousel slide" data-ride="carousel" id="carousel-1">
+			<div class="carousel-inner" role="listbox">
+				<div class="carousel-item active">
+					<img class="w-100 d-block"
+						th:src="@{/images/home/external-content.duckduckgo.com.jpg}"
+						alt="Slide Image">
 				</div>
-				<div class="card">
-					<img class="card-img-top" src="..." alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This card has supporting text below as a
-							natural lead-in to additional content.</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">Last updated 3 mins ago</small>
-					</div>
-				</div>
-				<div class="card">
-					<img class="card-img-top" src="..." alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a wider card with supporting text
-							below as a natural lead-in to additional content. This card has
-							even longer content than the first to show that equal height
-							action.</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">Last updated 3 mins ago</small>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br>
-	</section>
-
-	<!-- 	TARJETAS -->
-
-
-
-	<!--Carousel Wrapper-->
-	<section class="features-icons  aling-center">
-		<div id="multi-item-example"
-			class="carousel slide carousel-multi-item" data-ride="carousel">
-
-			<!--Controls-->
-			<div class="controls-top justify-content-center" style="height: 20px">
-				<a class="btn-floating" href="#multi-item-example" data-slide="prev">
-					<svg class="bi bi-arrow-left-circle-fill" width="1em" height="1em"
-						viewBox="0 0 16 16" fill="currentColor"
-						xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd"
-							d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.646 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L6.207 7.5H11a.5.5 0 0 1 0 1H6.207l2.147 2.146z" />
-</svg>
-				</a> <a class="btn-floating" href="#multi-item-example"
-					data-slide="next"> <svg class="bi bi-arrow-right-circle-fill"
-						width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-						xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd"
-							d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-8.354 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L9.793 7.5H5a.5.5 0 0 0 0 1h4.793l-2.147 2.146z" />
-</svg></i>
-				</a>
-
-			</div>
-			<!--/.Controls-->
-
-			<!--Indicators-->
-			<ol class="carousel-indicators">
-				<li data-target="#multi-item-example" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#multi-item-example" data-slide-to="1"></li>
-
-			</ol>
-			<!--/.Indicators-->
-
-			<!--Slides-->
-			<div class="carousel-inner center-block" role="listbox">
-
-				<!--First slide-->
-				<div class="carousel-item  active">
-				
-					<div th:each="evento: ${eventos}">
-						<div class="col-md-3" style="float: left">
-							<div class="card mb-2">
-								<img class="card-img-top" th:src="${evento.foto}"
-									th:alt="${evento.nombre}">
-								<div class="card-body">
-									<h4 class="card-title" th:text="${evento.nombre}"></h4>
-									<p class="card-text" th:text="${evento.descripcion}"></p>
-									<h6 class="card-title" th:text="${evento.ciudad}">Precio</h6>
-									<h6 class="card-title" th:text="${evento.precio}"></h6>
-									<a class="btn btn-primary"
-										th:href="@{/evento/show/}+${evento.id}">Ver Evento</a>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted" th:text="${evento.fecha}"></small>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-3" style="float: left">
-						<div class="card mb-2">
-							<img class="card-img-top"
-								src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
-								alt="Card image cap">
-							<div class="card-body">
-								<h4 class="card-title">Card title</h4>
-								<p class="card-text">Some quick example text to build on the
-									card title and make up the bulk of the card's content.</p>
-								<a class="btn btn-primary">Button</a>
-							</div>
-							<div class="card-footer">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3" style="float: left">
-						<div class="card mb-2">
-							<img class="card-img-top"
-								src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
-								alt="Card image cap">
-							<div class="card-body">
-								<h4 class="card-title">Card title</h4>
-								<p class="card-text">Some quick example text to build on the
-									card title and make up the bulk of the card's content.</p>
-								<a class="btn btn-primary">Button</a>
-							</div>
-							<div class="card-footer">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</div>
-						</div>
-					</div>
-
-
-
-
-
-				</div>
-				<!--/.First slide-->
-
-				<!--Second slide-->
 				<div class="carousel-item">
-					<div class="col-md-3" style="float: left">
-						<div class="card mb-2">
-							<img class="card-img-top"
-								src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
-								alt="Card image cap">
-							<div class="card-body">
-								<h4 class="card-title">Card title</h4>
-								<p class="card-text">Some quick example text to build on the
-									card title and make up the bulk of the card's content.</p>
-								<a class="btn btn-primary">Button</a>
-							</div>
-							<div class="card-footer">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3" style="float: left">
-						<div class="card mb-2">
-							<img class="card-img-top"
-								src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
-								alt="Card image cap">
-							<div class="card-body">
-								<h4 class="card-title">Card title</h4>
-								<p class="card-text">Some quick example text to build on the
-									card title and make up the bulk of the card's content.</p>
-								<a class="btn btn-primary">Button</a>
-							</div>
-							<div class="card-footer">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3" style="float: left">
-						<div class="card mb-2">
-							<img class="card-img-top"
-								src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
-								alt="Card image cap">
-							<div class="card-body">
-								<h4 class="card-title">Card title</h4>
-								<p class="card-text">Some quick example text to build on the
-									card title and make up the bulk of the card's content.</p>
-								<a class="btn btn-primary">Button</a>
-							</div>
-							<div class="card-footer">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</div>
-						</div>
-					</div>
-
-
+					<img class="w-100 d-block"
+						th:src="@{/images/home/external-content.duckduckgo.com2.jpg}"
+						alt="Slide Image">
 				</div>
-				<!--/.Second slide-->
-
-
-
+				<div class="carousel-item">
+					<img class="w-100 d-block"
+						th:src="@{/images/home/external-content.duckduckgo.com3.jpg}"
+						alt="Slide Image">
+				</div>
 			</div>
-			<!--/.Slides-->
-
+			<div>
+				<a class="carousel-control-prev" href="#carousel-1" role="button"
+					data-slide="prev"><span class="carousel-control-prev-icon"></span><span
+					class="sr-only">Previous</span></a><a class="carousel-control-next"
+					href="#carousel-1" role="button" data-slide="next"><span
+					class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a>
+			</div>
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-1" data-slide-to="1"></li>
+				<li data-target="#carousel-1" data-slide-to="2"></li>
+			</ol>
 		</div>
-		<!--/.Carousel Wrapper-->
-	</section>
+	</div>
+	<section class="features-icons bg-light text-center">
+	<br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-screen-desktop m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Nos adaptamos a ti</h3>
+                        <p class="lead mb-0">Eventup esta diseñado para adaptarse a tus necesidades, llevanos en tu smartphone, tablet o PC, nosotros nos amoldaremos ;)</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-layers m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Diseño robusto</h3>
+                        <p class="lead mb-0">Nuestro sistema provee a nuestros clientes de una forma segura para organizar y gestionar de manera segura todo lo relacionado con sus eventos. La satisfacción de nuestros clientes es nuestra mejor recompensa.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                        <div class="d-flex features-icons-icon"><i class="icon-check m-auto text-primary" data-bs-hover-animate="pulse"></i></div>
+                        <h3>Facil de utilizar</h3>
+                        <p class="lead mb-0">En Eventup creemos que para que algo sea bueno debe ser facil de usar, por ello hemos diseñado nuestro sistema para que no tengas ninguna dificultad desde el principio. A nadie le gusta tener que pelearse con una aplicación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </section>
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image:url(&quot;../images/home/bg-showcase-1.jpg&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Accede a los mejores eventos de tu ciudad</h2>
+                    <p class="lead mb-0">Eventup te proporcionará los eventos más cercanos a ti para que puedas estar al tanto de lo que se cuece por tu zona. El mejor plan está en tus manos.</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img" style="background-image:url(&quot;../images/home/bg-showcase-2.jpg&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Tus eventos más vivos</h2>
+                    <p class="lead mb-0">Comparte tus opiniones directamente con los creadores de los eventos a través de los blogs y habla con otros asistentes. Visualiza los videos y fotos realizados durante el evento ¡No te pierdas nada!</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image:url(&quot;../images/home/bg-showcase-3.jpg&quot;);"><span></span></div>
+                <div class="col-lg-6 my-auto order-lg-1 showcase-text">
+                    <h2>Te guiamos hasta tu destino</h2>
+                    <p class="lead mb-0">La integración de Google Maps en nuestro sistema nos permite conocer exactamente la localizacion de tus eventos. No te preocupes por nada, te ponemos en ruta.</p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </section>
+    <div class="team-clean">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">¿Quienes somos?</h2>
+                <p class="text-center">Semarad Software es una empresa dedicada al desarrollo web que provee soluciones para todo tipo de clientes y que posee años de experiencia en el sector.</p>
+            </div>
+            <div class="row people">
+                <div class="col-md-6 col-lg-4 item"><img class="rounded-circle" th:src="@{/images/home/1.jpg}">
+                    <h3 class="name">Sebastián Pedrosa Granados</h3>
+                    <p class="title">Software architect</p>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+                <div class="col-md-6 col-lg-4 item"><img class="rounded-circle" th:src="@{/images/home/2.jpg}">
+                    <h3 class="name">Maria del Carmen Lozano Espejo</h3>
+                    <p class="title">Project leader</p>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+                <div class="col-md-6 col-lg-4 item"><img class="rounded-circle" th:src="@{/images/home/3.jpg}">
+                    <h3 class="name">Adrián Casado García</h3>
+                    <p class="title">CEO &amp; Bussiness manager</p>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

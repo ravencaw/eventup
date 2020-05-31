@@ -3,20 +3,14 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
 <meta charset="utf-8">
-<title th:text="'Eventup -' + ${tituloWeb}"></title>
+<title th:text="'Spring Boot -' + ${tituloWeb}"></title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" th:href="@{/css/footer/styles.min.css}">
 <link rel="stylesheet" th:href="@{/css/header/styles.min.css}">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-
-<link rel="shortcut icon" th:href="@{/images/layout/logo-eventup.ico}" type="image/x-icon">
-<link rel="icon" th:href="@{/images/layout/logo-eventup.ico}" type="image/x-icon">
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
@@ -36,44 +30,31 @@
 </head>
 <body>
 	<header th:fragment="header">
-		<nav class="navbar navbar-light navbar-expand-md navigation-clean">
-			<div class="container">
-				<a class="navbar-brand" th:href="@{/}"> 
-				<img th:src="@{/images/layout/logo.png}" style="height:50px" alt="Logo Eventup"/> </a>
-				<button data-toggle="collapse" class="navbar-toggler"
-					data-target="#navcol-1">
-					<span class="sr-only">Toggle navigation</span><span
-						class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navcol-1">
-					<ul class="nav navbar-nav ml-auto">
-						<li class="nav-item" role="presentation"><a class="nav-link"
-							th:href="@{/evento/busqueda}">Eventos</a></li>
-						<li class="nav-item" role="presentation"><a class="nav-link"
-							th:href="@{/login}" sec:authorize="!isAuthenticated()">Iniciar
-								sesión</a></li>
-						<li class="nav-item dropdown" sec:authorize="isAuthenticated()"><a
-							class="dropdown-toggle nav-link" data-toggle="dropdown"
-							aria-expanded="false" href="#" sec:authentication="name"></a>
-							<div class="dropdown-menu" role="menu">
-								<a class="dropdown-item" role="presentation"
-									th:href="@{/perfil/miPerfil}">Mi perfil</a>
-								<form th:action="@{/logout}" method="post">
-									<input class="dropdown-item btn btn-light" type="submit"
-										value="Salir" />
-								</form>
-							</div></li>
-						<li class="nav-item" role="presentation"><a class="nav-link"
-							th:href="@{/contacto/enviar}">Contacto</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<hr>
+	<nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" th:href="@{/}">Eventup</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/evento/busqueda}">Eventos</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/login}" sec:authorize="!isAuthenticated()">Iniciar sesión</a></li>
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#" sec:authentication="name"></a>
+                        <div class="dropdown-menu" role="menu">
+	                        <a class="dropdown-item" role="presentation" th:href="@{/perfil/miPerfil}">Mi perfil</a>
+	                        <form th:action="@{/logout}" method="post">
+								<input class="dropdown-item btn btn-light" type="submit"
+									value="Salir" />
+							</form>
+                       	</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <hr>
 	</header>
 	<div class="container"></div>
 	<div class="footer-basic" th:fragment="footer">
-		<br>
+	<br>
 		<footer>
 			<div class="social">
 				<a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
@@ -82,13 +63,13 @@
 					class="icon ion-social-facebook"></i></a>
 			</div>
 			<ul class="list-inline">
-				<li class="list-inline-item"><a th:href="@{/}">Home</a></li>
-				<li class="list-inline-item"><a th:href="@{/contacto/enviar}">Contacto</a></li>
-				<li class="list-inline-item"><a th:href="@{/contacto/about}">About</a></li>
+				<li class="list-inline-item"><a href="#">Home</a></li>
+				<li class="list-inline-item"><a href="#">Services</a></li>
+				<li class="list-inline-item"><a href="#">About</a></li>
 				<li class="list-inline-item"><a href="#">Terms</a></li>
 				<li class="list-inline-item"><a href="#">Privacy Policy</a></li>
 			</ul>
-			<p class="copyright">Eventup © 2020 Proyecto Ficticio para la Universidad Pablo Olavide</p>
+			<p class="copyright">Eventup © 2020</p>
 		</footer>
 	</div>
 

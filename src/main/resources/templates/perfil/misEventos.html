@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <th:block th:include="layout/layout :: head"></th:block>
 <meta charset="utf-8">
-<meta name="_csrf" th:content="@{_csrf.token}" />
-<meta name="_csrf_header" th:content="@{_csrf.headerName}" />
+<meta name="_csrf" th:content="@{_csrf.token}"/>
+<meta name="_csrf_header" th:content="@{_csrf.headerName}"/>
 <link rel="stylesheet" th:href="@{/css/evento/monthly.css}">
 <script th:src="@{/js/evento/monthly.js}"></script>
 <script th:src="@{/js/evento/script.js}"></script>
@@ -15,23 +15,21 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div id="wrapper">
-		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
-				<li><a th:href="@{/perfil/miPerfil}">Mi perfil </a></li>
-				<li><a th:href="@{/perfil/misEntradas}">Mis entradas </a></li>
-				<li><a th:href="@{/perfil/misEventos}">Mis eventos </a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a
-					th:href="@{/usuario/listar}">Listado de usuarios </a></li>
-			</ul>
-		</div>
-		<div class="page-content-wrapper">
-			<div class="container-fluid">
-				<div class="col-md-10">
-					<a class="btn btn-primary col-md-4" th:href="@{/evento/nuevo}">Crear
-						nuevo Evento</a> <br>
-					<div id="mycalendar"></div>
-				</div>
-				<br>
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li> <a th:href="@{/perfil/miPerfil}">Mi perfil </a></li>
+                <li> <a th:href="@{/perfil/misEntradas}">Mis entradas </a></li>
+                <li> <a th:href="@{/perfil/misEventos}">Mis eventos </a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/usuario/listar}">Listado de usuarios </a></li>
+            </ul>
+        </div>
+        <div class="page-content-wrapper">
+            <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars"></i></a>
+						<div class="col-md-10">
+						<a class="btn btn-primary col-md-4" th:href="@{/evento/nuevo}">Crear nuevo Evento</a>
+						<br>
+							<div id="mycalendar"></div>
+						</div><br>
 			</div>
 		</div>
 	</div>
