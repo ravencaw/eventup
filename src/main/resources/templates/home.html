@@ -30,7 +30,7 @@
 			<div class="card-deck" >
 			
 			
-				<div class="card" th:each="evento: ${eventos}">
+				<div class="card" th:each="evento: ${eventos}" >
 					<img class="card-img-top" th:src="${evento.foto}" alt="Foto del Evento">
 					<div class="card-body">
 						<h5 class="card-title" th:text="${evento.nombre}"></h5>
