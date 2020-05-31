@@ -14,7 +14,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
+                    	<img class="card-img-top" th:src="${evento.foto}" alt="Foto del Evento" />
                         <div class="card-body">
+                        
                             <h4 class="card-title" th:text="${evento.nombre}"></h4>
 				            <h6 class="text-muted card-subtitle mb-2">Fecha: <b th:text="${evento.fecha}"></b> Hora: <b th:text="${evento.hora}"></b></h6>
 				            <p class="card-text" th:text="${evento.descripcion}">
@@ -40,12 +42,11 @@
             <div class="row">
                 <div class="col-md-12">
                 	<div class="row">
-	                    <h1>Localización del evento</h1>
-	                    <div th:if="${user != null}">
-	                   		<a th:if="${user.id==evento.usuario.id}" class="btn btn-primary" th:href="@{/transporte/nuevo/}+${evento.id}">Añadir transporte</a>
-	                    	<a th:if="${user.id==evento.usuario.id}"class="btn btn-success" th:href="@{/transporte/listar/}+${evento.id}">Ver transportes</a>
-	                    	<a th:if="${user.id==evento.usuario.id}"class="btn btn-success" th:href="@{/actividad/listar/}+${evento.id}">Ver actividades</a>
-	                    	<a th:if="${user.id==evento.usuario.id && evento_pasado}"class="btn btn-light" th:href="@{/blog/nuevo}">Añadir Blog</a>
+	                    <h1 class="col-md-6">Localización del evento</h1>
+	                    <div class="col-md-6" th:if="${user != null}">
+	                   		<a th:if="${user.id==evento.usuario.id}" class="btn btn-primary col-md-4" th:href="@{/transporte/nuevo/}+${evento.id}">Añadir transporte</a>
+	                    	<a th:if="${user.id==evento.usuario.id}"class="btn btn-success col-md-3" th:href="@{/transporte/listar/}+${evento.id}">Ver transportes</a>
+	                    	<a th:if="${user.id==evento.usuario.id}"class="btn btn-success col-md-3" th:href="@{/actividad/listar/}+${evento.id}">Ver actividades</a>
 	                    </div>
                 	</div>
                     <hr>

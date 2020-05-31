@@ -1,22 +1,28 @@
 package es.eventup.app.controllers;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.hibernate.result.Output;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.authentication.UserServiceBeanDefinitionParser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -34,18 +40,26 @@ import org.springframework.web.multipart.MultipartFile;
 import es.eventup.app.models.entity.Evento;
 import es.eventup.app.models.entity.EventoFormulario;
 import es.eventup.app.models.entity.User;
+import es.eventup.app.models.projections.UserProjection;
 import es.eventup.app.models.repository.UserRepository;
 import es.eventup.app.models.service.EventoService;
+import es.eventup.app.models.service.UsuarioService;
+import es.eventup.app.util.mail.MailSend;
 
 @Controller
 @SessionAttributes("evento")
 public class EventoController {
 
-	@Autowired
-	private EventoService service;
+	private final EventoService service;
 
-	@Autowired
-	private UserRepository userService;
+	private final UsuarioService usuarioService;
+	private final MailSend mailSend;
+
+	public EventoController(MailSend mailSend, EventoService service, UsuarioService usuarioService) {
+		this.mailSend = mailSend;
+		this.service = service;
+		this.usuarioService = usuarioService;
+	}
 
 	@RequestMapping(value = "/evento/listar", method = RequestMethod.GET)
 	public String listar(Model model) {
@@ -63,7 +77,7 @@ public class EventoController {
 		User usuario;
 
 		if (userDetails != null)
-			usuario = userService.findByUsername(userDetails.getUsername()).get();
+			usuario = usuarioService.findByUsername(userDetails.getUsername()).get();
 		else
 			usuario = null;
 
@@ -90,7 +104,7 @@ public class EventoController {
 		}
 
 		if (userDetails != null)
-			usuario = userService.findByUsername(userDetails.getUsername()).get();
+			usuario = usuarioService.findByUsername(userDetails.getUsername()).get();
 		else
 			usuario = null;
 
@@ -114,14 +128,14 @@ public class EventoController {
 		Evento evento = new Evento();
 		model.put("evento", evento);
 		model.put("tituloWeb", "Evento: Crear");
-		model.put("titulo", "Formulario de Evento");
+		model.put("titulo", "Nuevo Evento");
 		return "evento/nuevo";
 	}
 
 	@RequestMapping(value = "/evento/form/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model) {
 
-		Optional<Evento> cli = null;
+		Optional<Evento> cli = Optional.empty();
 
 		if (id > 0) {
 			cli = service.findOne(id);
@@ -129,7 +143,7 @@ public class EventoController {
 			return "redirect:/evento/listar";
 		}
 
-		model.put("evento", cli);
+		model.put("evento", cli.get());
 		model.put("tituloWeb", "Evento: Editar");
 		model.put("titulo", "Edicion de Evento");
 
@@ -138,42 +152,26 @@ public class EventoController {
 
 	@RequestMapping(value = "/evento/nuevo", method = RequestMethod.POST)
 	public String guardar(@Valid EventoFormulario evento, BindingResult result, Model model,
-			Authentication authentication, @RequestParam("foto") MultipartFile foto) {
+			Authentication authentication, @RequestParam("foto") MultipartFile foto, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "evento/nuevo";
 		}
 
 		if (!foto.isEmpty()) {
-			Path directorioFotos = Paths.get(".//src//main//resources//static//images//eventos");
-			// String rootPath = directorioFotos.toFile().getAbsolutePath(); PETABA
 			String uuid = UUID.randomUUID().toString();
-			InputStream inputStream = null;
-			OutputStream outputStream = null;
-			File newFile = new File(directorioFotos.toString()+"/" + uuid + "." + foto.getContentType().split("/")[1]);
-
 			try {
-				inputStream = foto.getInputStream();
 
-				if (!newFile.exists()) {
-					newFile.createNewFile();
-				}
-				outputStream = new FileOutputStream(newFile);
-				int read = 0;
-				byte[] bytes = new byte[1024];
-
-				while ((read = inputStream.read(bytes)) != -1) {
-					outputStream.write(bytes, 0, read);
-				}
+				saveImageFile(foto, null, request);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			String username = authentication.getName();
-			User session = userService.findByUsername(username).get();
+			User session = usuarioService.findByUsername(username).orElseGet(null);
 			Evento eventoEntity = new Evento();
 			eventoEntity.setNombre(evento.getNombre());
 			eventoEntity.setDescripcion(evento.getDescripcion());
-			eventoEntity.setFoto("/images/eventos/" + uuid + "." + foto.getContentType().split("/")[1]);
+			eventoEntity.setFoto("/images/home/" + uuid + "." + foto.getContentType().split("/")[1]);
 			eventoEntity.setOrganizador(evento.getOrganizador());
 			eventoEntity.setCiudad(evento.getCiudad());
 			eventoEntity.setDireccion(evento.getDireccion());
@@ -186,21 +184,39 @@ public class EventoController {
 			eventoEntity.setUsuario(session);
 
 			service.save(eventoEntity);
+
+			List<UserProjection> userProvincias = usuarioService.porProvincias(eventoEntity.getCiudad());
+			String[] cco = userProvincias.stream().map(u -> u.getEmail()).collect(Collectors.toList())
+					.toArray(new String[userProvincias.size()]);
+			String sujeto = "EVENTUP-EVENTO CREADO EN TU ZONA";
+			String contenido = "Se ha creado un evento en tu zona. Accede a nuestra aplicacion para verlo. Muchas gracias";
+			mailSend.sendEmailCCO(cco, sujeto, contenido);
+
 			return "redirect:/evento/listar";
 		}
 
-//		
-//
-//		User usuario = userService.findByUsername(userDetails.getUsername()).get();
-//
-//		evento.setUsuario(usuario);
-//		evento.setPrecio(Double.parseDouble(precio));
-//
-//		service.save(evento);
-//		stat.setComplete();
 		ObjectError errorFoto = new ObjectError("foto", "Error al subir la foto");
 		result.addError(errorFoto);
 		return "evento/nuevo";
+	}
+
+	public static void saveImageFile(MultipartFile foto, String name, HttpServletRequest request) throws IOException {
+
+		File dir = new File(".//src//main//resources//static//images//eventos");
+
+		String uuid = UUID.randomUUID().toString();
+
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+
+		File serverFile = new File(dir + "/" + uuid + "." + foto.getContentType().split("/")[1]);
+		BufferedOutputStream stream;
+
+		stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+		stream.write(foto.getBytes());
+		stream.close();
+
 	}
 
 	@RequestMapping(value = "/evento/delete/{id}")

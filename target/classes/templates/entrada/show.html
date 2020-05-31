@@ -68,24 +68,65 @@
 		</div>
 	</div>
 	<div>
-		<br>
-		<div class="container" th:if="${entrada.transporte!=null}">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Ruta de transporte</h1>
-					<input type="hidden" id="latInicio"
-						th:value="${entrada.transporte.latInicio}"> <input
-						type="hidden" id="lngInicio"
-						th:value="${entrada.transporte.lngInicio}"> <input
-						type="hidden" id="latFin" th:value="${entrada.transporte.latFin}">
-					<input type="hidden" id="lngFin"
-						th:value="${entrada.transporte.lngFin}">
-					<hr>
-					<div id="map" style="height: 600px;"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Datos de la entrada</h5>
+                            
+                        </div>
+                        <div class="card-body">
+                        	<h3 th:text="${entrada.venta.evento.nombre}"></h3><br>
+                        	<h6>Fecha: <b th:text="${entrada.venta.evento.fecha}"></b> Hora: <b th:text="${entrada.venta.evento.hora}"></b></h6>
+                            <p class="card-text" th:text="${entrada.venta.evento.descripcion}"></p><br>
+                            <h5 th:text="'Identificador: '+${entrada.id}"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Titular</h5>
+                        </div>
+                        <div class="card-body">
+                        	<h6>Nombre: <b th:text="${entrada.usuario.nombre}"></b>  Apellidos: <b th:text="${entrada.usuario.apellidos}"></b></h6>
+                            <h6>DNI/NIF: <b th:text="${entrada.usuario.dni}"></b></h6>
+                            <h6>Fecha de nacimiento: <b th:text="${entrada.usuario.fechaNac}"></b></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+    <br>
+        <div class="container" th:if="${entrada.transporte!=null}">
+       
+            <div class="row">
+             
+                <div class="col-md-12">
+                 <input type="submit" class="btn btn-primary btn-sm float-right" 
+                 th:href="@{/entrada/generar/}+${entrada.id}+${entrada.venta.evento.nombre}+${entrada.usuario.nombre}+${entrada.usuario.apellidos}+'.pdf'" value="Descargar Entrada">
+                    <h1>Ruta de transporte</h1>
+                    <input type="hidden" id="latInicio" th:value="${entrada.transporte.latInicio}">
+                    <input type="hidden" id="lngInicio" th:value="${entrada.transporte.lngInicio}">
+                    <input type="hidden" id="latFin" th:value="${entrada.transporte.latFin}">
+                    <input type="hidden" id="lngFin" th:value="${entrada.transporte.lngFin}">
+                    <hr>
+                    <div id="map" style="height: 600px;"></div>
+            </div>
+        </div>
+    </div>
 	<footer th:replace="layout/layout :: footer"></footer>
 	<script type="text/javascript" th:inline="javascript">
 		$(document).ready(function() {

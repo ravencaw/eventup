@@ -46,7 +46,7 @@ public class ActividadController {
 		model.put("actividad", actividad);
 		model.put("id_evento", id_evento);
 		model.put("tituloWeb", "Actividad: Crear");
-		model.put("titulo", "Formulario de Actividad");
+		model.put("titulo", "Nueva Actividad");
 		return "actividad/nuevo";
 	}
 	
