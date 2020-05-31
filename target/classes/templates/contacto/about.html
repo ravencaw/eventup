@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="layout/layout :: head">
+</th:block>
+<meta charset="utf-8">
+</head>
+<body>
+
+	<div class="container">
+		<h1 class="text-secondary" th:text=""></h1>
+
+		<div class="team-clean">
+			<div class="container">
+				<div class="intro">
+					<h2 class="text-center">¿Quienes somos?</h2>
+					<p class="text-center">Semarad Software es una empresa dedicada
+						al desarrollo web que provee soluciones para todo tipo de clientes
+						y que posee años de experiencia en el sector.</p>
+				</div>
+				<div class="row people">
+					<div class="col-md-6 col-lg-4 item">
+						<img class="rounded-circle" th:src="@{/images/home/1.jpg}">
+						<h3 class="name">Sebastián Pedrosa Granados</h3>
+						<p class="title">Software architect</p>
+						<p class="description">Aenean tortor est, vulputate quis leo
+							in, vehicula rhoncus lacus. Praesent aliquam in tellus eu
+							gravida. Aliquam varius finibus est, et interdum justo suscipit
+							id. Etiam dictum feugiat tellus, a semper massa.</p>
+						<div class="social">
+							<a href="#"><i class="fa fa-facebook-official"></i></a><a
+								href="#"><i class="fa fa-twitter"></i></a><a href="#"><i
+								class="fa fa-instagram"></i></a>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-4 item">
+						<img class="rounded-circle" th:src="@{/images/home/2.jpg}">
+						<h3 class="name">Maria del Carmen Lozano Espejo</h3>
+						<p class="title">Project leader</p>
+						<p class="description">Aenean tortor est, vulputate quis leo
+							in, vehicula rhoncus lacus. Praesent aliquam in tellus eu
+							gravida. Aliquam varius finibus est, et interdum justo suscipit
+							id. Etiam dictum feugiat tellus, a semper massa.</p>
+						<div class="social">
+							<a href="#"><i class="fa fa-facebook-official"></i></a><a
+								href="#"><i class="fa fa-twitter"></i></a><a href="#"><i
+								class="fa fa-instagram"></i></a>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-4 item">
+						<img class="rounded-circle" th:src="@{/images/home/3.jpg}">
+						<h3 class="name">Adrián Casado García</h3>
+						<p class="title">CEO &amp; Bussiness manager</p>
+						<p class="description">Aenean tortor est, vulputate quis leo
+							in, vehicula rhoncus lacus. Praesent aliquam in tellus eu
+							gravida. Aliquam varius finibus est, et interdum justo suscipit
+							id. Etiam dictum feugiat tellus, a semper massa.</p>
+						<div class="social">
+							<a href="#"><i class="fa fa-facebook-official"></i></a><a
+								href="#"><i class="fa fa-twitter"></i></a><a href="#"><i
+								class="fa fa-instagram"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -54,7 +54,7 @@ public class TransporteController {
 		model.put("transporte", transporte);
 		model.put("id_evento", id_evento);
 		model.put("tituloWeb", "Registrelo");
-		model.put("titulo", "Formulario de Transporte");
+		model.put("titulo", "Añadir Transporte");
 		return "transporte/nuevo";
 	}
 	
