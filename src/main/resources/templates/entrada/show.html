@@ -24,7 +24,7 @@
 								<h5 class="mb-0">Datos de la entrada</h5>
 							</div>
 							<div class="card-body">
-								<h3 th:text="${entrada.venta.evento.nombre}"></h3>
+								<h3 id="evento_nombre" th:text="${entrada.venta.evento.nombre}"></h3>
 								<br>
 								<h6>
 									Fecha: <b th:text="${entrada.venta.evento.fecha}"></b> Hora: <b
@@ -94,7 +94,9 @@
 			var header = $("meta[name='_csrf_header']").attr("content");
 
 			var doc = new jsPDF();
-
+			
+			var evento_nombre = $("#evento_nombre").text();
+			evento_nombre = evento_nombre.trim();
 			specialElementHandlers = {
 				// element with id of "bypass" - jQuery style selector
 				'#bypassme' : function(element, renderer) {
@@ -110,7 +112,7 @@
 				});
 				doc.setFontSize(20);
 				doc.setFont("arial");
-				doc.save('entrada.pdf');
+				doc.save('entrada'+evento_nombre+'.pdf');
 			});
 		});
 
