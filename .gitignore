@@ -20,3 +20,7 @@ target/classes/es/eventup/app/EventupApplication.class
 target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 
 target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+
+target/
+
+docker/mysql-data/
