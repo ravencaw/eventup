@@ -43,11 +43,11 @@ public class Blog implements Serializable{
 	@Column(name="videos")
 	private String videos;
 	
-	@OneToMany(mappedBy = "blog",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "blog",  cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private Set<Valoracion> valoracion;
 	
 	@NotNull
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Evento evento;
 
 	public Blog() {

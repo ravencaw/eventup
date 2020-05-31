@@ -49,7 +49,7 @@
 	                   		<a th:if="${user.id==evento.usuario.id}" class="btn btn-primary col-md-3" th:href="@{/transporte/nuevo/}+${evento.id}">Añadir transporte</a>
 	                    	<a th:if="${user.id==evento.usuario.id}"class="btn btn-light col-md-3" th:href="@{/transporte/listar/}+${evento.id}">Ver transportes</a>
 	                    	<a th:if="${user.id==evento.usuario.id}" class="btn btn-light col-md-3" th:href="@{/actividad/listar/}+${evento.id}">Ver actividades</a>
-	                    	<a th:if="${user.id==evento.usuario.id && evento_pasado}" class="btn btn-primary col-md-2" th:href="@{/blog/nuevo}">Añadir Blog</a>
+	                    	<a th:if="${user.id==evento.usuario.id && evento_pasado}" class="btn btn-primary col-md-2" th:href="@{/blog/nuevo/}+${evento.id}">Añadir Blog</a>
 	                    </div>
                 	</div>
                     <hr>
