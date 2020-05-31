@@ -25,4 +25,5 @@ public interface EventoRepository<T, PK extends Serializable>  extends JpaReposi
 	
 	List<EventoProjection> findByNombreContainingOrderByFechaDesc(String nombre);
 	
+	List<EventoProjection> findAllProjectedByOrderByFechaDesc();
 }

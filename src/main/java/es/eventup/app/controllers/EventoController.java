@@ -160,7 +160,7 @@ public class EventoController {
 			Evento eventoEntity = new Evento();
 			eventoEntity.setNombre(evento.getNombre());
 			eventoEntity.setDescripcion(evento.getDescripcion());
-			eventoEntity.setFoto("/images/home/" + uuid + "." + foto.getContentType().split("/")[1]);
+			eventoEntity.setFoto(uuid + "." + foto.getContentType().split("/")[1]);
 			eventoEntity.setOrganizador(evento.getOrganizador());
 			eventoEntity.setCiudad(evento.getCiudad());
 			eventoEntity.setDireccion(evento.getDireccion());
