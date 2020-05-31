@@ -1,34 +1,32 @@
 package es.eventup.app.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
+import es.eventup.app.models.entity.Evento;
+import es.eventup.app.models.projections.EventoProjection;
 import es.eventup.app.models.service.EventoService;
-import es.eventup.app.models.service.UsuarioService;
-import es.eventup.app.util.mail.MailSend;
 
 @Controller
-@SessionAttributes("evento")
-
 public class HomeController {
 	
-	private final EventoService serviceEvento;
-	
-	public HomeController( EventoService serviceEvento) {
-
-		this.serviceEvento = serviceEvento;
-	}
-	
+	@Autowired
+	EventoService eventoService;
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String listar(Model model) {
+		
+		List<EventoProjection> eventos = eventoService.findAllLimited();
+		
+		model.addAttribute("eventos", eventos);
 		model.addAttribute("tituloWeb", "Home");
 		model.addAttribute("titulo", "Home");
-		model.addAttribute("eventos", serviceEvento.findAll());
 		return "home";
 	}
 	
