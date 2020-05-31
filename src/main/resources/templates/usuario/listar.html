@@ -3,8 +3,7 @@
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <th:block th:include="layout/layout :: head"></th:block>
-<link rel="stylesheet" th:href="@{/css/back/styles.min.css}">
-<script th:src="@{/js/back/script.min.js}"></script>
+<meta charset="utf-8">
 </head>
 <body>
 	<header  th:replace="layout/layout :: header"></header>
@@ -31,7 +30,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<th>Nombre</th>
 									<th>Apellidos</th>
 									<th>Fecha de nacimiento</th>
-									<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/usuario/nuevo}">Añadir</a></th>
+									<th colspan="2"><a class="btn btn-primary col-md-12" th:href="@{/usuario/nuevo}">AÃ±adir</a></th>
 								</tr>
 								<tr th:each="usuario: ${usuarios}">
 									<td th:text="${usuario.username}"></td>
@@ -43,7 +42,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 										<a class="btn btn-success btn-xs col-md-12" th:href="@{/usuario/form/}+${usuario.id}">Editar</a>
 									</td>
 									<td>
-										<a class="btn btn-danger btn-xs col-md-12" th:href="@{/usuario/delete/}+${usuario.id}" onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+										<a class="btn btn-danger btn-xs col-md-12" th:href="@{/usuario/delete/}+${usuario.id}" onclick="return confirm('Â¿Seguro que desea eliminar el registro?');">Eliminar</a>
 									</td>
 								</tr>
 							</table>
