@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<th:block th:include="layout/layout :: head">
-</th:block>
+<head th:replace="layout/layout :: head">
+<meta charset="utf-8">
+<meta name="_csrf" th:content="@{_csrf.token}"/>
+<meta name="_csrf_header" th:content="@{_csrf.headerName}"/>
+<script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
 <meta charset="utf-8">
 </head>
 
@@ -14,7 +17,7 @@
 
 		<form th:action="@{/actividad/nuevo/}+${id_evento}"
 			th:object="${actividad}" method="post">
-			<div class="form-group conten col-md-12">
+			<div class="form-group conten ">
 				<div class="form-group">
 					<div class="form-group col-md-6 float-left">
 						<label for="nombre">Nombre</label> <input type="text"

@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="layout/layout :: head">
+<meta charset="utf-8">
+<meta name="_csrf" th:content="@{_csrf.token}" />
+<meta name="_csrf_header" th:content="@{_csrf.headerName}" />
 <script type="text/javascript" th:src="@{/js/nuevo.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap-datepicker.js}"></script>
 <meta charset="utf-8">
 </head>
 
 <body>
-	<header  th:replace="layout/layout :: header"></header>
+	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
 		<h1 class="text-secondary" th:text="${titulo}"></h1>
 
-		<form th:action="@{/blog/nuevo}" th:object="${blog}" method="post">
+		<form th:action="@{/blog/nuevo/}+${id_evento}" th:object="${blog}"
+			method="post" enctype="multipart/form-data">
 			<div class="form-group">
-<!--				<div class="form-group">
-					<label for="nombre">Nombre</label>
-					 <input type="text" class="form-control" id="nombre" placeholder="Introduzca el nombre de la actividad aquí:" th:field="*{nombre}" th:errorclass="'form-control alert-danger'">
-					 <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
-				</div> -->
+
 				<div class="form-group">
-					<label for="id">id</label> 
-					<input type="text" class="form-control" id="id" placeholder="Introduzca la descripción aquí:" th:field="*{id}" th:errorclass="'form-control alert-danger'">
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></small>
+					<label for="fotos">Foto</label> <input type="file" name="fotos"
+						class="form-control"
+						th:errorclass="form-control alert alert-danger"
+						accept="image/x-png,image/x-jpg,image/x-jpeg"> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('fotos')}"
+						th:errors="*{fotos}"></small>
 				</div>
-				<div class="form-group">
-					<label for="fotos">fotos</label> 
-					<input type="text" class="form-control" id="fotos" placeholder="Introduzca los fotos aquí: " th:field="*{fotos}" th:errorclass="'form-control alert-danger'">
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('fotos')}" th:errors="*{fotos}"></small>
+								<div class="form-group">
+					<label for="videos">Foto</label> <input type="file" name="videos"
+						class="form-control"
+						th:errorclass="form-control alert alert-danger"
+						accept="video/x-mp4"> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('videos')}"
+						th:errors="*{videos}"></small>
 				</div>
-				<div class="form-group">
-					<label for="videos">videos</label> 
-					<input type="text" class="form-control" id="videos" placeholder="Introduzca los videos aquí: " th:field="*{videos}" th:errorclass="'form-control alert-danger'">
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('videos')}" th:errors="*{videos}"></small>
-				</div>
-				
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="videos">videos</label> <input type="text" -->
+<!-- 						class="form-control" id="videos" -->
+<!-- 						placeholder="Introduzca los videos aquí: " th:field="*{videos}" -->
+<!-- 						th:errorclass="'form-control alert-danger'"> <small -->
+<!-- 						class="form-text text-danger" -->
+<!-- 						th:if="${#fields.hasErrors('videos')}" th:errors="*{videos}"></small> -->
+<!-- 				</div> -->
+
 				<hr>
-				<input type="submit" class="btn btn-primary" value="Add new">
+				<input type="submit" class="btn btn-primary" value="Añadir">
 			</div>
 		</form>
 

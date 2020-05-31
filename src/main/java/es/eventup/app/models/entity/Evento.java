@@ -297,6 +297,26 @@ public class Evento implements Serializable{
 	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
+
+
+	public Blog getBlog() {
+		return blog;
+	}
+
+
+	public void setBlog(Blog blog) {
+		this.blog = blog;
+	}
+
+
+	public Set<Mensaje> getMensaje() {
+		return mensaje;
+	}
+
+
+	public void setMensaje(Set<Mensaje> mensaje) {
+		this.mensaje = mensaje;
+	}
 	
 	
 	

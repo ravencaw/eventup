@@ -42,5 +42,10 @@ INSERT INTO asistencias(id_entrada, fecha, hora) VALUES(2, '2020-05-21', '17:15'
 INSERT INTO asistencias(id_entrada, fecha, hora) VALUES(2, '2020-05-21', '17:15');
 
 
+INSERT INTO `blog` (`id`, `fotos`, `videos`, `evento_id`) VALUES (NULL, 'asdasd', 'asdasd', '2');
+INSERT INTO `blog` (`id`, `fotos`, `videos`, `evento_id`) VALUES (NULL, 'otro', 'asdasd', '1');
+
+INSERT INTO `valoracion` (`id`, `comentario`, `opinion`, `blog_id`, `user_id`) VALUES (NULL, 'jobñasdjblñasdjbklñasd', '1', '1', '1'), (NULL, 'asdlmojasdmladsldasojlmk', '0', '1', '2');
+
 UPDATE entradas SET id_asistencia = 1 WHERE id = 1;
 UPDATE entradas SET id_asistencia = 2 WHERE id = 2;

@@ -11,8 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,11 +45,12 @@ public class Blog implements Serializable{
 	@Column(name="videos")
 	private String videos;
 	
-	@OneToMany(mappedBy = "blog",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "blog",  cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private Set<Valoracion> valoracion;
 	
-	@NotNull
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "evento", referencedColumnName = "id")
 	private Evento evento;
 
 	public Blog() {
