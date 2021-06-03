@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="layout/layout :: head"></th:block>
+<meta charset="utf-8">
+</head>
+<body>
+	<header  th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+		<form th:action="@{/entrada/edit/}+${id_venta}+'/'+${entrada.id}" method="post">
+			<div class="form-group">
+				<label for="fecha" >Numero de asiento</label>
+				<input class="form-control" type="text" name="num_asiento" th:value="${entrada.numAsiento}">
+			</div>
+			<div class="form-group">
+				<label for="hora" >Tipo de entrada</label>
+				<input class="form-control" type="text" name="tipo" th:value="${entrada.tipo}">
+			</div>
+			<input class="btn btn-primary btn-xs" type="submit" value="Enviar">
+		</form>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

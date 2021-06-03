@@ -16,7 +16,9 @@
 				<th>Titular</th>
 				<th>Fecha</th>
 				<th>Hora</th>
-				<th colspan="2"><a class="btn btn-primary col-md-12"
+				<th></th>
+				<th></th>
+				<th ><a class="btn btn-primary col-md-12"
 					th:href="@{/asistencia/nuevo/}+${id_evento}">Añadir</a></th>
 			</tr>
 			<tr th:each="asistencia: ${asistencias}">
@@ -25,11 +27,14 @@
 				<td th:text="${asistencia.fecha}"></td>
 				<td th:text="${asistencia.hora}"></td>
 				<td><a class="btn btn-success btn-xs col-md-12"
-					th:href="@{/asistencia/form/}+${asistencia.id}">Editar</a></td>
+					th:href="@{/asistencia/form/}+${id_evento}+'/'+${asistencia.id}">Editar</a></td>
 				<td><a class="btn btn-danger btn-xs col-md-12"
-					th:href="@{/asistencia/delete/}+${asistencia.id}"
+					th:href="@{/asistencia/delete/}+${id_evento}+'/'+${asistencia.id}"
 					onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				</td>
+				<td><a class="btn btn-success btn-xs col-md-12"
+					th:href="@{/asistencia/generar/}+${asistencia.entrada.usuario.nombre}+${asistencia.entrada.usuario.apellidos}+${asistencia.entrada.usuario.dni}+'.pdf'">Descargar</a></td>
+				
 			</tr>
 		</table>
 	</div>

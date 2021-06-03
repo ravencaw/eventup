@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="layout/layout :: head"></th:block>
+<meta charset="utf-8">
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="display-4" th:text="'Blog de '+${blog.evento.nombre}">HOLA</h2>
+
+					<a th:href="@{/blog/form/}+${blog.id}" class="btn btn-success">Editar</a>
+					<a th:href="@{/blog/delete/}+${blog.id}" class="btn btn-danger"
+						onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+
+					<div class="card-img-top" height="350px">
+
+						<img class="card-img-top" th:src="@{/images/blogs/}+${blog.fotos}"
+							alt="Slide Image" height="450px">
+							<div class="d-flex justify-content-center">
+						<video width="720" height="480" controls >
+							<source th:src="@{/videos/}+${blog.videos}" type="video/mp4">
+						</video>
+						</div>
+					</div>
+					<br>
+					<div class="card">
+
+						<div class="card-body">
+
+							<h6 class="text-muted card-subtitle mb-2">
+								Fecha: <b th:text="${blog.evento.fecha}"></b> Hora: <b
+									th:text="${blog.evento.hora}"></b>
+							</h6>
+							<p class="card-text" th:text="${blog.evento.descripcion}">
+							<h5>
+								Precio: <b id="precio" th:text="${blog.evento.precio}"></b> €
+							</h5>
+
+						</div>
+					</div>
+					<br>
+					<div class="card">
+						<div class="card-body">
+
+							<h4 class="card-title">Valoración</h4>
+							<div th:if="${user != null}">
+
+								<a th:href="@{/valoracion/nuevo/}+${blog.id}"
+									class="btn btn-primary">Añadir</a>
+
+							</div>
+							<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+								<table class="table table-bordered table-striped mb-0">
+
+
+									<tr th:each="valoracion : ${blog.valoracion}">
+										<td>
+											<div class="card">
+												<div class="card-body">
+													<h4 class="card-title"
+														th:text="${valoracion.user.username}"></h4>
+													<p class="card-text" th:text="${valoracion.comentario}">Some
+														quick example text to build on the card title and make up
+														the bulk of the card's content.</p>
+													<div class="row  " th:if="${user.id==valoracion.user.id}">
+														<a th:href="@{/valoracion/form/}+${valoracion.id}"
+															class="btn btn-success">Editar</a> <a
+															th:href="@{/valoracion/delete/}+${valoracion.id}"
+															class="btn btn-danger"
+															onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<br>
+	</div>
+	<br>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

@@ -12,6 +12,8 @@ public interface VentaProjection {
 	
 	Date getHora();
 	
+	Double getTotal();
+	
 	EventoProjection getEvento();
 
 }

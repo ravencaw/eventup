@@ -25,30 +25,30 @@ public class Actividad implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty
+	@NotNull
 	private String nombre;
 
-	@NotEmpty
+	@NotNull
 	private String descripcion;
 
-	@NotEmpty
+	@NotNull
 	private String ponentes;
 
 	@NotNull
 	private Integer capacidad;
 
-	@NotEmpty
+	@NotNull
 	private String lugar;
 	
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	Evento evento;
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private Evento evento;
 
 	public Actividad() {
 		super();
 	}
 
-	public Actividad(Long id, @NotEmpty String nombre, @NotEmpty String descripcion, @NotEmpty String ponentes,
-			@NotNull Integer capacidad, @NotEmpty String lugar, Evento evento) {
+	public Actividad(Long id, @NotNull String nombre, @NotNull String descripcion, @NotNull String ponentes,
+			@NotNull Integer capacidad, @NotNull String lugar, Evento evento) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

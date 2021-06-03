@@ -49,4 +49,33 @@ public class EventoServiceImpl implements EventoService {
 		// TODO Auto-generated method stub
 		return repository.findAllProjectedBy();
 	}
+
+	@Override
+	public List<EventoProjection> findByNombreAndCiudad(String nombre, String ciudad) {
+		// TODO Auto-generated method stub
+		return repository.findByNombreContainingAndCiudadContainingOrderByFechaDesc(nombre, ciudad);
+	}
+
+	@Override
+	public List<EventoProjection> findByNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return repository.findByNombreContainingOrderByFechaDesc(nombre);
+	}
+
+	@Override
+	public List<EventoProjection> findByCiudad(String ciudad) {
+		// TODO Auto-generated method stub
+		return repository.findByCiudadContainingOrderByFechaDesc(ciudad);
+	}
+
+	@Override
+	public List<EventoProjection> findByUser(Long id) {
+		// TODO Auto-generated method stub
+		return repository.findByUsuario_Id(id);
+	}
+
+	@Override
+	public List<EventoProjection> findAllLimited() {
+		return repository.findAllProjectedByOrderByFechaDesc().subList(0, 3);
+	}
 }

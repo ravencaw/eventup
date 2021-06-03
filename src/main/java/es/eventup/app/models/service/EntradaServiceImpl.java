@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.eventup.app.models.entity.Entrada;
 import es.eventup.app.models.projections.EntradaProjection;
+import es.eventup.app.models.projections.EntradaProjection_Lista;
 import es.eventup.app.models.repository.EntradaRepository;
 
 
@@ -48,6 +49,22 @@ public class EntradaServiceImpl implements EntradaService {
 	public Optional<EntradaProjection> findByUserAndEvento(String dni, Long id) {
 		// TODO Auto-generated method stub
 		return repository.findByUsuario_DniAndVenta_Evento_Id(dni, id);
+	}
+
+	@Override
+	public List<Entrada> findByUsuario(Long id) {
+		// TODO Auto-generated method stub
+		return repository.findByUsuario_Id(id);
+	}
+
+	@Override
+	public List<EntradaProjection_Lista> findByVenta(Long id) {
+		return repository.findByVenta_Id(id);
+	}
+
+	@Override
+	public List<Entrada> findByTransporte(Long id) {
+		return repository.findByTransporte_Id(id);
 	}
 	
 }

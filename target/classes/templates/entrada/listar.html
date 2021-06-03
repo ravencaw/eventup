@@ -16,16 +16,25 @@
 				<th>Asiento</th>
 				<th>Tipo</th>
 				<th>Transporte</th>
-				<th style="text-align:center">Acciones</th>
+				<th colspan="4" style="text-align:center">Acciones</th>
 			</tr>
 			<tr th:each="entrada: ${entradas}">
 				<td th:text="${entrada.id}"></td>
 				<td th:text="${entrada.usuario.nombre}+' '+${entrada.usuario.apellidos}"></td>
 				<td th:text="${entrada.numAsiento}"></td>
 				<td th:text="${entrada.tipo}"></td>
-				<td th:text="${entrada.transporte.tipo}"></td>
+				<td th:if="${entrada.transporte!=null}" th:text="${entrada.transporte.tipo}"></td>
+				<td th:if="${entrada.transporte==null}">Propio</td>
+				<td><a class="btn btn-primary btn-xs col-md-12"
+					th:href="@{/entrada/show/}+${entrada.id}">Mostrar</a>
 				<td><a class="btn btn-danger btn-xs col-md-12"
-					th:href="@{/entrada/delete/}+${entrada.id}"
+					th:href="@{/entrada/generar/}+${entrada.usuario.nombre}+${entrada.usuario.apellidos}+${entrada.id}+.pdf">Descargar PDF</a>
+				</td>
+				<td><a class="btn btn-success btn-xs col-md-12"
+					th:href="@{/entrada/form/}+${id_venta}+'/'+${entrada.id}">Editar</a>
+				</td>
+				<td><a class="btn btn-danger btn-xs col-md-12"
+					th:href="@{/entrada/delete/}+${id_venta}+'/'+${entrada.id}"
 					onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a>
 				</td>
 			</tr>

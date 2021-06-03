@@ -16,4 +16,10 @@ public interface EventoProjection {
 	String getCiudad();
 	
 	String getDescripcion();
+	
+	Double getPrecio();
+	
+	String getFoto();
+	
+	UserProjection getUsuario();
 }

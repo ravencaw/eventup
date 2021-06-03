@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="layout/layout :: head"></th:block>
+<meta charset="utf-8">
+<meta name="_csrf" th:content="@{_csrf.token}"/>
+<meta name="_csrf_header" th:content="@{_csrf.headerName}"/>
+<link rel="stylesheet" th:href="@{/css/evento/busqueda.min.css}">
+<script th:src="@{/js/evento/busqueda.js}"></script>
+<meta charset="utf-8">
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="search-form">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            	<span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input class="form-control" id="patron" type="text" placeholder="Burcar evento...">
+                            <div class="input-group-append">
+                            	<div th:if="${user != null}">
+	                            	<input class="form-control" id="ciudad" type="text" placeholder="Ciudad" th:value="${user.localidad}">
+                            	</div>
+                            	<div th:if="${user == null}">
+                            		<input class="form-control" id="ciudad" type="text" placeholder="Ciudad">
+                            	</div>
+                            </div>
+                            <div class="input-group-append">
+                            	<button class="btn btn-light" id="busqueda" type="button">Buscar </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="busqueda_div"></div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

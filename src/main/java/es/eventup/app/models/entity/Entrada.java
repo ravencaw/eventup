@@ -33,24 +33,25 @@ public class Entrada  implements java.io.Serializable {
 	@Column(name="id")
      private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_transporte", referencedColumnName = "id")
+	@ManyToOne(optional = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
      private Transporte transporte;
+    
      @NotNull
-     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
      private User usuario;
+     
      @NotNull
-
-     @OneToOne(cascade = CascadeType.ALL)
+     @OneToOne(cascade = CascadeType.REMOVE)
      @JoinColumn(name = "id_venta", referencedColumnName = "id")
      private Venta venta;
      
-     @OneToOne(cascade = CascadeType.ALL)
+     @OneToOne(cascade = CascadeType.REMOVE)
      @JoinColumn(name = "id_asistencia", referencedColumnName = "id")
-     Asistencia asistencia;
+     private Asistencia asistencia;
      
      @Column(name="num_asiento")
      private String numAsiento;
+     
      @NotNull
      private String tipo;
      

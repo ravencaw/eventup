@@ -11,7 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,74 +38,85 @@ public class Evento implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	Long id;
-	
-	@NotEmpty
-	@Column(name="nombre")
-	String nombre;
-	
-	@NotEmpty
-	@Column(name="descripcion")
-	String descripcion;
-	
-	@Column(name="foto")
-	String foto;
+	private Long id;
 	
 	@NotNull
-	@NotEmpty
+	@Column(name="nombre")
+	private String nombre;
+	
+	@NotNull
+	@Column(name="descripcion")
+	private String descripcion;
+	
+	@Column(name="foto")
+	private String foto;
+	
+	@NotNull
 	@Column(name="organizador")
-	String organizador;
+	private String organizador;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="ciudad")
-	String ciudad;
+	private String ciudad;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="direccion")
-	String direccion;
+	private String direccion;
 	
 	@Column(name="latitud")
-	String latitud;
+	private String latitud;
 	
 	@Column(name="longitud")
-	String longitud;
+	private String longitud;
 	
 	@NotNull
 	@Column(name="fecha")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	Date fecha;
+	private Date fecha;
 	
 	@NotNull
 	@Column(name="hora")
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="HH:mm")
-	Date hora;
+	private Date hora;
 	
 	@NotNull
 	@Column(name="precio")
-	Double precio;
+	private Double precio;
 	
 	@Column(name="cantidad_entradas")
-	Integer cantidadEntradas;
+	private Integer cantidadEntradas;
 	
 	@OneToMany(mappedBy = "evento",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	Set<Actividad> actividad;
+	private Set<Actividad> actividad;
 	
 	@OneToMany(mappedBy = "evento",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	Set<Venta> venta;
+	private Set<Venta> venta;
 	
 	@OneToMany(mappedBy = "evento",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	Set<Transporte> transporte;
+	private Set<Transporte> transporte;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "blog", referencedColumnName = "id")
+    private Blog blog;
+	
+	@OneToMany(mappedBy = "evento",  cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private Set<Mensaje> mensaje;
+	
+	@NotNull
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private User usuario;
 
 	public Evento() {
 
 	}
 	
-	public Evento(@NotEmpty String nombre, @NotEmpty String descripcion, String foto,
-			@NotNull @NotEmpty String organizador, @NotEmpty String ciudad, @NotEmpty String direccion, String latitud,
+	
+	public Evento(@NotNull String nombre, @NotNull String descripcion, String foto,
+			@NotNull @NotNull String organizador, @NotNull String ciudad, @NotNull String direccion, String latitud,
 			String longitud, @NotNull Date fecha, @NotNull Date hora, @NotNull Double precio, Integer cantidadEntradas,
-			Set<Actividad> actividad, Set<Venta> venta, Set<Transporte> transporte) {
+			Set<Actividad> actividad, Set<Venta> venta, Set<Transporte> transporte, @NotNull User usuario,Blog blog) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -119,7 +133,10 @@ public class Evento implements Serializable{
 		this.actividad = actividad;
 		this.venta = venta;
 		this.transporte = transporte;
+		this.usuario = usuario;
+		this.blog = blog;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -269,6 +286,36 @@ public class Evento implements Serializable{
 
 	public void setTransporte(Set<Transporte> transporte) {
 		this.transporte = transporte;
+	}
+
+
+	public User getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public Blog getBlog() {
+		return blog;
+	}
+
+
+	public void setBlog(Blog blog) {
+		this.blog = blog;
+	}
+
+
+	public Set<Mensaje> getMensaje() {
+		return mensaje;
+	}
+
+
+	public void setMensaje(Set<Mensaje> mensaje) {
+		this.mensaje = mensaje;
 	}
 	
 	

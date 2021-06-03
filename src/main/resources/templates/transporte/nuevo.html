@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <th:block th:include="layout/layout :: head">
-        </th:block>
+</th:block>
+<meta charset="utf-8">
 </head>
 
 <body>
@@ -10,87 +11,198 @@
 	<div class="container">
 		<h1 class="text-secondary" th:text="${titulo}"></h1>
 
-		<form th:action="@{/transporte/nuevo}" th:object="${transporte}"
-			method="post">
-			<div class="form-group">
+		<form th:action="@{/transporte/nuevo/}+${id_evento}"
+			th:object="${transporte}" method="post">
+			<div class="form-group conten col-md-12">
+
 				<div class="form-group">
-					<label for="empresa">Empresa</label> <input type="text"
-						class="form-control" id="empresa"
-						placeholder="Introduzca la empresa:" th:field="*{empresa}"
-						th:errorclass="'form-control alert-danger'"> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></small>
+					<div class="form-group col-md-6 float-left">
+						<label for="empresa">Empresa</label> <input type="text"
+							class="form-control" id="empresa"
+							placeholder="Introduzca la empresa:" th:field="*{empresa}"
+							th:errorclass="'form-control alert-danger'"> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></small>
+					</div>
+					<div class="form-group col-md-6 float-left">
+						<label for="capacidad">Capacidad</label> <input type="number"
+							class="form-control" id="capacidad"
+							placeholder="Introduzca la capacidad:" th:field="*{capacidad}"
+							th:errorclass="'form-control alert-danger'"> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('capacidad')}"
+							th:errors="*{capacidad}"></small>
+					</div>
 				</div>
 				<div class="form-group">
-					<label for="capacidad">Capacidad</label> <input type="number"
-						class="form-control" id="capacidad"
-						placeholder="Introduzca la capacidad:" th:field="*{capacidad}"
-						th:errorclass="'form-control alert-danger'"> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('capacidad')}" th:errors="*{capacidad}"></small>
-				</div>
-				<div class="form-group">
-					<label for="coordenadaInicio">Coordenada de Inicio</label> <input
-						type="text" class="form-control" id="coordenadaInicio"
-						placeholder="Introduzca el inicio: "
-						th:field="*{coordenadaInicio}"
-						th:errorclass="'form-control alert-danger'"> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('coordenadaInicio')}"
-						th:errors="*{coordenadaInicio}"></small>
-				</div>
-				<div class="form-group">
-					<label for="coordenadaFinal">Coordenada de Fin</label> <input
-						type="number" class="form-control" id="coordenadaFinal"
-						placeholder="Seleccione el final" th:field="*{coordenadaFinal}"
-						th:errorclass="'form-control alert-danger'"> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('coordenadaFinal')}"
-						th:errors="*{coordenadaFinal}"></small>
+				<label for="provinciaInicio">Inicio del recorrido</label>
+					<div class="form-group">
+						
+						<div class="form-group col-md-4 float-left">
+							<input type="text" class="form-control" id="proviciaInicio"
+								placeholder="Introduzca la provincia de origen">
+						</div>
+						<div class="form-group col-md-4 float-left">
+							<input type="text" class="form-control" id="localidadInicio"
+								placeholder="Introduzca la localidad de origen">
+
+						</div>
+						<div class="form-group col-md-4 float-left">
+							<input type="text" class="form-control" id="direccionInicio"
+								placeholder="Introduzca la direccion de origen">
+						</div>
+						<input type="hidden" class="form-control" id="latInicio"
+							th:field="*{latInicio}"> <input type="hidden"
+							class="form-control" id="lngInicio" th:field="*{lngInicio}">
+
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="precio">Precio</label> <input type="number"
-						class="form-control" id="precio"
-						placeholder="Introduzca el precio:" th:field="*{precio}"
-						th:errorclass="'form-control alert-danger'"> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
+				<label for="proviciaFin">Fin
+							del recorrido</label>
+					<div class="form-group">
+						
+						<div class="form-group col-md-4 float-left">
+							<input type="text" class="form-control" id="proviciaFin"
+								placeholder="Introduzca la provincia de destino">
+						</div>
+						<div class="form-group col-md-4 float-left">
+							<input type="text" class="form-control" id="localidadFin"
+								placeholder="Introduzca la localidad de destino">
+						</div>
+						<div class="form-group col-md-4 float-left">
+							<input type="text" class="form-control" id="direccionFin"
+								placeholder="Introduzca la direccion de destino">
+						</div>
+						<input type="hidden" class="form-control" id="latFin"
+							th:field="*{latFin}"> <input type="hidden"
+							class="form-control" id="lngFin" th:field="*{lngFin}">
+					</div>
 				</div>
-
 				<div class="form-group">
-					<label for="tipo">Tipo</label> <input type="text"
-						class="form-control" id="tipo"
-						placeholder="Introduzca el tipo de transporte:" th:field="*{tipo}"
-						th:errorclass="'form-control alert-danger'"> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('tipo')}"
-						th:errors="*{tipo}"></small>
-				</div>
+					<div class="form-group col-md-6 float-left">
+						<label for="precio">Precio</label> <input type="number"
+							class="form-control" id="precio"
+							placeholder="Introduzca el precio:" th:field="*{precio}"
+							th:errorclass="'form-control alert-danger'"> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
+					</div>
 
+					<div class="form-group col-md-6 float-left">
+						<label for="tipo">Tipo</label> <input type="text"
+							class="form-control" id="tipo"
+							placeholder="Introduzca el tipo de transporte:"
+							th:field="*{tipo}" th:errorclass="'form-control alert-danger'">
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></small>
+					</div>
+				</div>
 				<div class="form-group">
-					<label for="horaSalida">Hora de salida</label> <input type="text"
-						class="form-control" id="horaSalida"
-						placeholder="Introduzca la hora de salida" th:field="*{horaSalida}"
-						th:errorclass="'form-control alert-danger'"> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('horaSalida')}"
-						th:errors="*{horaSalida}"></small>
-				</div>
+					<div class="form-group col-md-6 float-left">
+						<label for="horaSalida">Hora de salida</label> <input type="text"
+							class="form-control" id="horaSalida"
+							placeholder="Introduzca la hora de salida"
+							th:field="*{horaSalida}"
+							th:errorclass="'form-control alert-danger'"> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('horaSalida')}"
+							th:errors="*{horaSalida}"></small>
+					</div>
 
-				<div class="form-group">
-					<label for="horaLlegada">Hora de llegada</label> <input type="text"
-						class="form-control" id="horaLlegada"
-						placeholder="Introduzca la hora de llegada" th:field="*{horaLlegada}"
-						th:errorclass="'form-control alert-danger'"> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('horaLlegada')}"
-						th:errors="*{horaLlegada}"></small>
+					<div class="form-group col-md-6 float-left">
+						<label for="horaLlegada">Hora de llegada</label> <input
+							type="text" class="form-control" id="horaLlegada"
+							placeholder="Introduzca la hora de llegada"
+							th:field="*{horaLlegada}"
+							th:errorclass="'form-control alert-danger'"> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('horaLlegada')}"
+							th:errors="*{horaLlegada}"></small>
+					</div>
 				</div>
-
 				<hr>
-				<input type="submit" class="btn btn-primary" value="Add new">
+				<div class="form-group col-md-3 ">
+					<input type="submit" class="btn btn-primary" value="Añadir">
+				</div>
 			</div>
 		</form>
-
 	</div>
+
 	<footer th:replace="layout/layout :: footer"></footer>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// 			var token = $("meta[name='_csrf']").attr("content");
+			// 			var header = $("meta[name='_csrf_header']").attr("content");
+			// 			$(document).ajaxSend(function(e, xhr, options) {
+			// 				xhr.setRequestHeader(header, token);
+			// 			});
+
+			$("#proviciaInicio").on("change", geolocateIncio);
+			$("#localidadInicio").on("change", geolocateIncio);
+			$("#direccionInicio").on("change", geolocateIncio);
+
+			$("#proviciaFin").on("change", geolocateFin);
+			$("#localidadFin").on("change", geolocateFin);
+			$("#direccionFin").on("change", geolocateFin);
+
+		});
+
+		function geolocateIncio() {
+			var ciudad = $("#localidadInicio").val();
+			var direccion = $("#direccionInicio").val();
+			var provincia = $("#proviciaInicio").val();
+			$
+					.ajax({
+						type : "get",
+						url : "https://maps.googleapis.com/maps/api/geocode/json?address="
+								+ direccion
+								+ "+"
+								+ ciudad
+								+ "+"
+								+ provincia
+								+ "&key=AIzaSyBX1Qy2dFMigK3r7pwgCBFC90exmctPt6g",
+						datatype : "application/json; charset=utf-8",
+						success : function(localizacion) {
+							console.log(localizacion);
+
+							$("#latInicio")
+									.val(
+											localizacion.results[0].geometry.location.lat);
+							$("#lngInicio")
+									.val(
+											localizacion.results[0].geometry.location.lng);
+						}
+					});
+		}
+		function geolocateFin() {
+			var ciudad = $("#localidadFin").val();
+			var direccion = $("#direccionFin").val();
+			var provincia = $("#proviciaFin").val();
+			$
+					.ajax({
+						type : "get",
+						url : "https://maps.googleapis.com/maps/api/geocode/json?address="
+								+ direccion
+								+ "+"
+								+ ciudad
+								+ "+"
+								+ provincia
+								+ "&key=AIzaSyBX1Qy2dFMigK3r7pwgCBFC90exmctPt6g",
+						datatype : "application/json; charset=utf-8",
+						success : function(localizacion) {
+							console.log(localizacion);
+
+							$("#latFin")
+									.val(
+											localizacion.results[0].geometry.location.lat);
+							$("#lngFin")
+									.val(
+											localizacion.results[0].geometry.location.lng);
+						}
+					});
+		}
+	</script>
 </body>
 </html>

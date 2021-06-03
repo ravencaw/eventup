@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.eventup.app.models.entity.Actividad;
+import es.eventup.app.models.projections.ActividadProjection;
 import es.eventup.app.models.repository.ActividadRepository;
 
 
@@ -44,6 +45,11 @@ public class ActividadServiceImpl implements ActividadService {
 	@Transactional
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public List<ActividadProjection> FindByEvento(Long id) {
+		return repository.findByEvento_Id(id);
 	}
 	
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<th:block th:include="layout/layout :: head"></th:block>
+<link rel="stylesheet" th:href="@{/css/back/styles.min.css}">
+<script th:src="@{/js/back/script.min.js}"></script>
+<meta charset="utf-8">
+</head>
+<body>
+	<header  th:replace="layout/layout :: header"></header>
+	<div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li> <a th:href="@{/perfil/miPerfil}">Mi perfil </a></li>
+                <li> <a th:href="@{/perfil/misEntradas}">Mis entradas </a></li>
+                <li> <a th:href="@{/perfil/misEventos}">Mis eventos </a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/usuario/listar}">Listado de usuarios </a></li>
+            </ul>
+        </div>
+        <div class="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+						<div class="container">
+							<h1 class="text-secondary" th:text="${titulo}"></h1>
+							<hr>
+							<table class="table table-striped">
+								<tr>
+									<th>Id</th>
+									<th>Usuario</th>
+									<th>Asiento</th>
+									<th>Tipo</th>
+									<th>Transporte</th>
+									<th colspan="2" style="text-align:center">Acciones</th>
+								</tr>
+								<tr th:each="entrada: ${entradas}">
+									<td th:text="${entrada.id}"></td>
+									<td th:text="${entrada.usuario.nombre}+' '+${entrada.usuario.apellidos}"></td>
+									<td th:text="${entrada.numAsiento}"></td>
+									<td th:text="${entrada.tipo}"></td>
+									<td th:if="${entrada.transporte!=null}" th:text="${entrada.transporte.tipo}"></td>
+									<td th:if="${entrada.transporte==null}">Propio</td>
+									<td><a class="btn btn-primary btn-xs col-md-12"
+										th:href="@{/entrada/show/}+${entrada.id}">Mostrar</a>
+<!-- 									<td><a class="btn btn-danger btn-xs col-md-12" -->
+<!-- 										th:href="@{/entrada/delete/}+${entrada.venta.evento.id}+'/'+${entrada.id}" -->
+<!-- 										onclick="return confirm('¿Seguro que desea eliminar el registro?');">Eliminar</a> -->
+<!-- 									</td> -->
+								</tr>
+							</table>
+						</div>
+						</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+	<footer th:replace="layout/layout :: footer"></footer>
+    </div>
+</body>
+</html>
